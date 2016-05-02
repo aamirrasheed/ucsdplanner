@@ -1,0 +1,260 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+select, input {
+  outline: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans";
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+p {
+  padding-left: 0.5em;
+}
+
+th {
+  font-weight: 400;
+}
+
+#app {
+  margin: auto;
+  margin-top: 10%;
+  width: 960px;
+  height: 540px;
+}
+
+.col {
+  float: left;
+  display: block;
+  padding: 10px;
+  height: 100%;
+}
+
+.col-25 {width: 25%;}
+.col-40 {width: 40%;}
+.col-50 {width: 50%;}
+.col-60 {width: 60%;}
+.col-75 {width: 75%;}
+.col-100 {width: 100%;}
+
+.big {
+  font-size: 2em;
+}
+
+.dept {
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.num {
+  font-size: 0.85em;
+}
+
+.title {
+  font-size: 0.5em;
+  width: 100%;
+  display: inline-block;
+  font-variant: small-caps;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#term, #search {
+  font: inherit;
+  font-size: 0.9em;
+  width: 100%;
+  border: 1px solid #aaa;
+}
+
+#term select {
+  font: inherit;
+	display: inline-block;
+  width: 100%;
+  padding: 0.5em;
+  padding-right: 40px;
+  background-color: transparent;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+  border: none;
+}
+
+#term {
+  position: relative;
+}
+
+#term:after {
+  content: '>';
+  -webkit-transform: rotate(90deg) scale(0.5, 1);
+  -moz-transform: rotate(90deg) scale(0.5, 1);
+  -ms-transform: rotate(90deg) scale(0.5, 1);
+  transform: rotate(90deg) scale(0.5, 1);
+  right: 0px;
+  top: 5px;
+  border-bottom: 1px solid #aaa;
+  position: absolute;
+  pointer-events: none;
+  width: 40px;
+  padding: 0 0 5px 0;
+  text-indent: 15px;
+}
+
+#search {
+  position: relative;
+  padding: 0.5em;
+  margin: 1em 0;
+}
+
+#courses {
+  list-style: none;
+  height: 445px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: 1px solid #aaa;
+}
+
+#courses li {
+  cursor: default;
+  font-size: 1.3em;
+  padding: 0.7em 0.5em 0.5em 0.5em;
+  line-height: 0.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+#courses li:hover {
+  background-color: #f7f7f7;
+}
+
+#courses li:active,
+#courses li.selected {
+  background-color: #eee;
+}
+
+#course-details {
+  position: relative;
+  padding: 0.2em 0;
+  font-size: 2em;
+  line-height: 0.5em;
+}
+
+#course-units {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+}
+
+#tabview {
+  margin-top: 1em;
+  width: 100%;
+}
+
+#tabs {
+  position: relative;
+  z-index: 2;
+}
+
+#tabs > li {
+  display: inline-block;
+  border: 1px solid #aaa;
+  border-width: 1px 1px 0px 1px;
+  width: 100px;
+  text-align: center;
+  padding: 2px 0;
+  cursor: pointer;
+}
+
+#tabs > li.selected {
+  font-weight: 400;
+  background-color: #fff;
+}
+      
+#tab_content {
+  position: relative;
+  top: -1px;
+  border: 1px solid #aaa;
+  height: 451px;
+  overflow: scroll;
+  font-size: 0.9em;
+  z-index: 1;
+}
+
+#tab_content .col {
+  padding: 1em;
+}
+
+#sections {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+#sections .subsection > td:first-of-type {
+  border: none;
+}
+
+#sections tr > td:last-of-type {
+  border-right-width: 1px;
+}
+
+#sections .section > td:first-of-type,
+#sections .subsection > td:nth-of-type(2) {
+  border-left-width: 1px;
+}
+
+#sections tbody::after {
+  content: '';
+  display: block;
+  height: 1em;
+}
+
+#sections tbody tr:first-of-type {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+#sections tbody tr:first-of-type:active {
+  background-color: #eee;
+}
+
+#sections th,
+#sections td {
+  padding: 0.5em;
+}
+
+#sections .section > td:first-of-type {
+  color: #aaa;
+  -webkit-transition: transform 200ms ease-out;
+}
+
+#sections .section:hover > td:first-of-type {
+  color: #888;
+}
+
+#sections .section:active > td:first-of-type {
+  color: #555;
+}
+
+#sections .section.expanded > td:first-of-type {
+  -webkit-transform: rotate(90deg);
+}
+
+#sections td {
+  border-width: 1px 0px;
+  border-style: solid;
+  border-color: #ccc;
+/*  border: 1px solid #ccc;*/
+}
