@@ -1,8 +1,9 @@
 import requests 
-import urllib.parse as parse
 from bs4 import BeautifulSoup
 import json
 import re
+import csv
+from datetime import datetime
 
 # POST url to get all departments teaching courses in a specified quarter
 GET_DEPT_URL = "https://act.ucsd.edu/scheduleOfClasses/department-list.json"
@@ -11,7 +12,27 @@ GET_DEPT_URL = "https://act.ucsd.edu/scheduleOfClasses/department-list.json"
 SoC_URL = "https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudentResult.htm"
 
 # All not-class parameters to use in the POST request.
-DEFAULT_PARAMETERS = "xsoc_term=&loggedIn=false&tabNum=tabs-subschedOption1=true&_schedOption1=on&_schedOption11=on&_schedOption12=on&schedOption2=true&_schedOption2=on&_schedOption4=on&_schedOption5=on&_schedOption3=on&_schedOption7=on&_schedOption8=on&_schedOption13=on&_schedOption10=on&_schedOption9=on&schDay=M&_schDay=on&schDay=T&_schDay=on&schDay=W&_schDay=on&schDay=R&_schDay=on&schDay=F&_schDay=on&schDay=S&_schDay=on&schStartTime=12%3A00&schStartAmPm=0&schEndTime=12%3A00&schEndAmPm=0&_selectedDepartments=1&schedOption1Dept=true&_schedOption1Dept=on&_schedOption11Dept=on&_schedOption12Dept=on&schedOption2Dept=true&_schedOption2Dept=on&_schedOption4Dept=on&_schedOption5Dept=on&_schedOption3Dept=on&_schedOption7Dept=on&_schedOption8Dept=on&_schedOption13Dept=on&_schedOption10Dept=on&_schedOption9Dept=on&schDayDept=M&_schDayDept=on&schDayDept=T&_schDayDept=on&schDayDept=W&_schDayDept=on&schDayDept=R&_schDayDept=on&schDayDept=F&_schDayDept=on&schDayDept=S&_schDayDept=on&schStartTimeDept=12%3A00&schStartAmPmDept=0&schEndTimeDept=12%3A00&schEndAmPmDept=0&courses=&sections=&instructorType=begin&instructor=&titleType=contain&title=&_hideFullSec=on&_showPopup=off"
+
+data = {
+"loggedIn": "false",
+"tabNum": "tabs-dept",
+"schedOption1": "true",
+"schedOption2": "true",
+"schDay": ["M", "T", "W", "R", "F", "S"],
+"schStartTime": "12:00",
+"schStartAmPm": "0",
+"schEndTime": "12:00",
+"schEndAmPm": "0",
+"schedOption1Dept": "true",
+"schedOption2Dept": "true",
+"schDayDept": ["M", "T", "W", "R", "F", "S"],
+"schStartTimeDept": "12:00",
+"schStartAmPmDept": "0",
+"schEndTimeDept": "12:00",
+"schEndAmPmDept": "0",
+"instructorType": "begin",
+"titleType": "contain"
+}
 
 # Fields grabbed from each course section
 SECTION_FIELDS = ["Id", "Type", "Code", "Days", "Time", "Building", "Room", "Professor", "SeatsOpen", "TotalSeats"]
@@ -40,7 +61,7 @@ def getSoCPage(departments, pagenumber, term="SP16"):
     Returns HTML for a page in the schedule of classes
     """
     
-    args = dict(parse.parse_qsl(DEFAULT_PARAMETERS))
+    args = data
     args["selectedTerm"] = term
     args["selectedDepartments"] = departments
     args["page"] = pagenumber
@@ -55,7 +76,7 @@ def stripTag(tag):
 
     for string in tag.stripped_strings:
         return string
-    return "N/A"
+    return ""
 
 def getExamOrSection(tr, fieldnames, initCol):
     """
@@ -78,7 +99,7 @@ def getExamOrSection(tr, fieldnames, initCol):
 
 
 
-def parsePage(html, term="SP16"):
+def parsePage(html, ID, term="SP16"):
     """
     Parses a list of course Dicts extracted from the provided HTML, as well as the
     corresponding sections and exams.
@@ -86,6 +107,14 @@ def parsePage(html, term="SP16"):
 
     soup = BeautifulSoup(html, "html.parser")
     course_titles = soup.find_all("td", class_="crsheader", colspan="5")
+
+    epoch = datetime.utcfromtimestamp(0)
+    dt = int((datetime.utcnow() - epoch).total_seconds() * 1000.0)
+    
+    courses = []
+    sections = []
+    exams = []
+
     for course in course_titles:
         course_dict = {}
 
@@ -95,8 +124,9 @@ def parsePage(html, term="SP16"):
         course_dict["Title"] = course.find("span", class_="boldtxt").string.strip()
         course_dict["Code"] = dept + num
         course_dict["Term"] = term
-
-        print(course_dict)
+        course_dict["ID"] = ID
+        ID += 1
+        courses.append(course_dict)
 
         tr = course.parent.next_sibling.next_sibling
         while(tr):
@@ -105,24 +135,53 @@ def parsePage(html, term="SP16"):
 
             elif "sectxt" in tr['class']:
                 section_dict = getExamOrSection(tr, SECTION_FIELDS, SECTION_INIT_COL)
-                print(section_dict)
+                section_dict["ID"] = ID
+                section_dict["datetime"] = dt
+                sections.append(section_dict)
 
             elif "nonenrtxt" in tr['class']:
                 exam_dict = getExamOrSection(tr, EXAM_FIELDS, EXAM_INIT_COL)
-                print(exam_dict)
+                exam_dict["ID"] = ID
+                exams.append(exam_dict)
 
             else:
                 break
 
             tr = tr.find_next_sibling("tr")
 
+    return (courses, sections, exams)
 
-
-depts = getDepartments()
+depts = getDepartments("FA16")
 page = 1
-html = getSoCPage(depts, page)
-while "Exception Report" not in html:
+html = getSoCPage(depts, page, "FA16")
+all_courses = []
+all_sections = []
+all_exams = []
+
+ID = 0
+
+while "Exception report" not in html:
     print(page)
-    parsePage(html)
+    courses, sections, exams = parsePage(html, ID, "FA16")
+    ID += len(courses)
+    all_courses += courses
+    all_sections += sections
+    all_exams += exams
+
     page += 1
-    html = getSoCPage(depts, page)
+    html = getSoCPage(depts, page, "FA16")
+
+f = open("courses.csv", "w")
+csv_courses = csv.DictWriter(f, fieldnames = ["Title", "Code", "Term", "ID"])
+csv_courses.writeheader()
+csv_courses.writerows(all_courses)
+
+f = open("sections.csv", "a")
+csv_sections = csv.DictWriter(f, fieldnames = SECTION_FIELDS + ["ID", "datetime"])
+csv_sections.writeheader()
+csv_sections.writerows(all_sections)
+
+f = open("exams.csv", "w")
+csv_exams = csv.DictWriter(f, fieldnames = EXAM_FIELDS + ["ID"])
+csv_exams.writeheader()
+csv_exams.writerows(all_exams)
