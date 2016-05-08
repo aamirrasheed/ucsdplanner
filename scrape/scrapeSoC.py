@@ -4,6 +4,7 @@ import json
 import re
 import csv
 from datetime import datetime
+import time
 
 # POST url to get all departments teaching courses in a specified quarter
 GET_DEPT_URL = "https://act.ucsd.edu/scheduleOfClasses/department-list.json"
@@ -66,7 +67,12 @@ def getSoCPage(departments, pagenumber, term="SP16"):
     args["selectedDepartments"] = departments
     args["page"] = pagenumber
 
+    
     r = requests.post(SoC_URL, args)
+    while r.status_code != requests.codes.ok: 
+        time.sleep(5)
+        r = requests.post(SoC_URL, args)
+ 
     return r.text
 
 def stripTag(tag):
@@ -98,7 +104,6 @@ def getExamOrSection(tr, fieldnames, initCol):
     return section_dict
 
 
-
 def parsePage(html, ID, term="SP16"):
     """
     Parses a list of course Dicts extracted from the provided HTML, as well as the
@@ -122,10 +127,9 @@ def parsePage(html, ID, term="SP16"):
         num = course.find_previous_sibling("td", class_="crsheader").string
 
         course_dict["Title"] = course.find("span", class_="boldtxt").string.strip()
-        course_dict["Code"] = dept + num
-        course_dict["Term"] = term
+        course_dict["Code"] = dept.strip() + num.strip()
+        course_dict["Term"] = term.strip()
         course_dict["ID"] = ID
-        ID += 1
         courses.append(course_dict)
 
         tr = course.parent.next_sibling.next_sibling
@@ -148,18 +152,19 @@ def parsePage(html, ID, term="SP16"):
                 break
 
             tr = tr.find_next_sibling("tr")
+        ID += 1
 
     return (courses, sections, exams)
 
 depts = getDepartments("FA16")
 page = 1
-html = getSoCPage(depts, page, "FA16")
 all_courses = []
 all_sections = []
 all_exams = []
-
 ID = 0
 
+html = getSoCPage(depts, page, "FA16")
+   
 while "Exception report" not in html:
     print(page)
     courses, sections, exams = parsePage(html, ID, "FA16")
@@ -169,7 +174,10 @@ while "Exception report" not in html:
     all_exams += exams
 
     page += 1
-    html = getSoCPage(depts, page, "FA16")
+    try:
+	html = getSoCPage(depts, page, "FA16")
+    except Exception:
+	break
 
 f = open("courses.csv", "w")
 csv_courses = csv.DictWriter(f, fieldnames = ["Title", "Code", "Term", "ID"])
