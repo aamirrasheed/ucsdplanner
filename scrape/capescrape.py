@@ -4,9 +4,13 @@ import urllib2
 import mechanize
 import cookielib
 import json
+import requests
+import re
 
 BASE_URL="https://cape.ucsd.edu/responses/Results.aspx?Name=&CourseNumber="
 DEPARTMENT_LIST_URL="https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudent.htm"
+
+DB_URL = "https://ucsdplanner-api.azure-mobile.net/api/"
 
 # ========================================
 # Purpose: Starts virtual browser
@@ -144,79 +148,120 @@ def get_cape_data_for_dept(dept, br):
 		working_col = working_col.next_sibling
 		graderec = working_col.span.contents[0]
 
+                
+                # Get ids for tables before posting
+                ln, fn = instructor.split(", ")
+                instructor = fn.strip() + " " + ln.strip()
+                
+                r = requests.get(DB_URL + "term/" + term)
+                terms = json.loads(r.text)
+                
+                if terms == []:
+                    pass #r = requests.post(DB_URL, parseTerm(term))
+                # Ensure that terms are unique
+                assert len(terms) <= 1
+                #term_id = terms[0]["id"] 
+
+                r = requests.get(DB_URL + "catalog/" + course)
+                courses = json.loads(r.text)
+                if len(courses) == 0:
+                    row = row.next_sibling
+                    continue
+
+                assert len(courses) == 1
+                catalog_id = courses[0]["id"]
+
 		# enter data into dictionary
 		entry = {
 			'instructor': instructor,
-			'course': course,
-			'term': term,
+			'catalog_id': catalog_id,
+                        #'term_id': term_id,
+                        'term': term,
 			'enroll': enroll,
-			'evals': evals,
-			'rcmndclass': rcmndclass,
-			'rcmndinstr': rcmndinstr,
-			'hrsperwk': hrsperwk,
-			'gradeexp': gradeexp,
-			'graderec': graderec
+			'cape_num_evals': evals,
+                        #'rcmndclass': rcmndclass,
+			'cape_rec_prof': rcmndinstr,
+			'cape_study_hrs': hrsperwk,
+                        #'gradeexp': gradeexp,
+			'cape_prof_gpa': graderec
 		}
 		
 		# add entry to list
 		cape_data.append(entry)
-
+                print(entry)
 		row = row.next_sibling
 		# Debug
 		# row_num = row_num + 1;
 		# print row_num
 	return cape_data
 
-# initialize virtual browser
-br = get_virtual_browser()
+def parseTerm(term):
+    terms = {
+            "FA":"Fall",
+            "WI":"Winter",
+            "SP":"Spring",
+            "S1":"Summer Session 1",
+            "S2":"Summer Session 2"
+    }
+    split = re.match(r"([A-Z]+)([0-9]+)", term)
+    out = {}
+    out["term_name"] = term
+    out["quarter"] = terms[split.group(1)]
+    out["year"] = "20" + split.group(2)
+    return out
 
-print 'started browser'
 
-# Debug Only
-# cape_data = get_cape_data_for_dept("CSE", br)
-# print cape_data
+if __name__ == "__main__":
+    # initialize virtual browser
+    br = get_virtual_browser()
 
-# ========================================
-# data structure to hold all of the capes
-# format:
-#
-# capes_by_departments {
-#	'dept1': [ 
-#		{
-# 			'instructor': string,
-#			'course': string,
-# 			'term': string,
-# 			'enroll': strin,
-#			'evals': string,
-#			'rcmndclass': string,
-#			'rcmndinstr': string,
-#			'hrsperweek': string,
-#			'gradeexp': string,
-#			'graderec': string
-#		},
-#		{
-#			...
-#		},
-#		....
-#	]
-#	'dept2': [
-#		... 
-#	]
-#   ...
-# }
-#
-# ===========================================
-# dict to hold ALL the cape data
-capes_by_departments = {}
+    print 'started browser'
 
-# get list of departments
-departments = get_departments(br)
+    # Debug Only
+    # cape_data = get_cape_data_for_dept("CSE", br)
+    # print cape_data
 
-# get capes for each department
-for dept in departments:
- 	cape_data = get_cape_data_for_dept(dept, br)
- 	capes_by_departments[dept] = cape_data
+    # ========================================
+    # data structure to hold all of the capes
+    # format:
+    #
+    # capes_by_departments {
+    #	'dept1': [ 
+    #		{
+    # 			'instructor': string,
+    #			'course': string,
+    # 			'term': string,
+    # 			'enroll': strin,
+    #			'evals': string,
+    #			'rcmndclass': string,
+    #			'rcmndinstr': string,
+    #			'hrsperweek': string,
+    #			'gradeexp': string,
+    #			'graderec': string
+    #		},
+    #		{
+    #			...
+    #		},
+    #		....
+    #	]
+    #	'dept2': [
+    #		... 
+    #	]
+    #   ...
+    # }
+    #
+    # ===========================================
+    # dict to hold ALL the cape data
+    capes_by_departments = {}
 
-# output to fat ass json file
-with open('cape_data.json', 'w') as fp:
-    json.dump(capes_by_departments, fp)
+    # get list of departments
+    departments = get_departments(br)
+
+    # get capes for each department
+    for dept in departments:
+            cape_data = get_cape_data_for_dept(dept, br)
+            capes_by_departments[dept] = cape_data
+
+    # output to fat ass json file
+    with open('cape_data.json', 'w') as fp:
+        json.dump(capes_by_departments, fp)

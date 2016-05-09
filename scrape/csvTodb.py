@@ -27,5 +27,4 @@ with open("courses.csv", "r") as f_courses, \
     for course in courses:
         `
 
-
     
