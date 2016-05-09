@@ -1,126 +1,171 @@
 window.addEventListener("load", function ()  {
-  var app = {
+  $ = document.querySelectorAll.bind(document);;
+  
+  api = {
+    catalog: "https://ucsdplanner-api.azure-mobile.net/api/catalog",
+    terms: "https://ucsdplanner-api.azure-mobile.net/api/term"
+  }
+  
+  app = {
     search: "",
-    terms: ["Catalog", "Winter 2016", "Spring 2016"],
-    courses: [{
-      dept: "DEPT",
-      num: "100",
-      title: "this is a really long test title that is going to overflow",
-      sections: [812345, 812346, 812347]
-    }],
     tab: 0,
-    course: {
-      dept: "DEPT",
-      num: "100",
-      title: "class title goes here",
-      description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      prereqs: "none",
-      gpa: 4.2,
-      workload: 69,
-      units: "69",
-      seats: "420/1337",
-      sections: [{
-        section: "A00",
-        id: 812345,
-        type: "LE",
-        days: "TuTh",
-        time: "12:00p-1:20p",
-        location: "WLH 2005",
-        professor: "your mother",
-        seats: "0/100",
-        waitlist: 200,
-        expanded: 0,
-        subsections: [{
-          section: "A01",
-          id: "",
-          type: "DI",
-          days: "W",
-          time: "12:00p-1:20p",
-          location: "WLH 2005",
-          professor: "your mother",
-          seats: "",
-          waitlist: ""
-        }]
-      },{
-        section: "B00",
-        id: 812345,
-        type: "LE",
-        days: "TuTh",
-        time: "12:00p-1:20p",
-        location: "WLH 2005",
-        professor: "your mother",
-        seats: "0/100",
-        waitlist: 200,
-        expanded: 0,
-        subsections: [{
-          section: "B01",
-          id: 812345,
-          type: "LE",
-          days: "TuTh",
-          time: "12:00p-1:20p",
-          location: "WLH 2005",
-          professor: "your mother",
-          seats: "0/100",
-          waitlist: 200
-        }]
-      }]
+    term: "catalog",
+    terms: [],
+    course: {},
+    courses: [],
+    is_loading: true,
+    show_catalog: true,
+    move_selected: function (e, dir) {
+      cur = $("#courses li.selected")[0];
+      if (!cur) return;
+      e.preventDefault();
+      $("#courses")[0].scrollTop += 
+        (dir ? 1 : -1) * cur.offsetHeight;
+      var next = dir ? cur.nextSibling : cur.previousSibling;
+      if (next) next.click();
+    },
+    select_course: function (e, rv) {
+      app.course = rv.course;
     },
     select_tab: function (e) {
-      app.tab = e.target.value;
+      app.tab = (app.term == 0) ? 0 : e.target.value;
+    },
+    select_term: function (e, rv) {
+      app.show_catalog = app.term == "catalog";
+      load_courses(app.term);
+      app.tab = 0;
     },
     toggle_expand: function (e, rv) {
       rv.section.expanded ^= 1;
     }
   }
   
+  courses = {}
+  
+  document.addEventListener("keydown", function (e) {
+    switch (e.which) {
+      case 38: app.move_selected(e, 0); break;
+      case 40: app.move_selected(e, 1); break;
+    }
+  });
+  
+  var container = document.body;
+  setup_rivets();
+  rivets.bind(container, {
+    app: app
+  });
+  
+  load_terms();
+  load_courses("catalog");
+  $("#app")[0].style.display = "";
+});
+
+function setup_rivets () {
   rivets.formatters.search = function (arr, val) {
-    // split the search into terms
     var terms = val.toLowerCase().split(" ");
   
-    // filter the array
     return arr.filter(function (course) {
-      // return results that match all of the search terms
       return terms.every(function (term) {
-        return (
-          ~course.dept.toLowerCase().indexOf(term) ||
-          ~course.num.toLowerCase().indexOf(term) ||
-          ~course.sections.join(" ").indexOf(term)
-        );
+        var combined = (course.course_id||"")
+          + " " + (course.course_name||"");
+        return ~combined.toLowerCase().indexOf(term);
       });
     });
+  }
+  
+  rivets.formatters.grab = function (str, i) {
+    var n = /(.+?) ([0-9].*)/.exec(str);
+    if (!n) return;
+    return n[i+1];
   }
   
   rivets.formatters.eq = function (a, b) {
     return a == b;
   }
   
-  rivets.formatters.length = function (arr) {
+  rivets.formatters.ne = function (a, b) {
+    return a != b;
+  }
+  
+  rivets.formatters.def = function (val) {
+    return val != undefined;
+  }
+  
+  rivets.formatters.len = function (arr) {
+    if (!arr) return;
     return arr.length;
   }
   
+  rivets.formatters.case = function (val, c) {
+    if (!val) return;
+    if (c == "upper") return val.toUpperCase();
+    if (c == "lower") return val.toLowerCase();
+    return val;
+  }
+  
   rivets.formatters.letter = function (gpa) {
-    return gpa < 1.0
-    ? "F"  : gpa < 1.3
-    ? "D"  : gpa < 1.7
-    ? "D+" : gpa < 2.0
-    ? "C-" : gpa < 2.3
-    ? "C"  : gpa < 2.7
-    ? "C+" : gpa < 3.0
-    ? "B-" : gpa < 3.3
-    ? "B"  : gpa < 3.7
-    ? "B+" : gpa < 4.0
-    ? "A-" : "A";
+    if (gpa == undefined) return;
+    return gpa < 1.0 ? "F" : gpa < 1.3
+      ? "D"  : gpa < 1.7 ? "D+" : gpa < 2.0
+      ? "C-" : gpa < 2.3 ? "C"  : gpa < 2.7
+      ? "C+" : gpa < 3.0 ? "B-" : gpa < 3.3
+      ? "B"  : gpa < 3.7 ? "B+" : gpa < 4.0
+      ? "A-" : "A";
   }
   
   rivets.formatters.fixed = function (val, n) {
+    if (val == undefined) return;
     return parseFloat(val).toFixed(n);
   }
+}
+
+function course_sort (a, b) {
+  var a = /(.+?) ([0-9]+(.*))/.exec(a.course_id);
+  var b = /(.+?) ([0-9]+(.*))/.exec(b.course_id);
+  var anum = parseInt(a[2]);
+  var bnum = parseInt(b[2]);
   
-  var container = document.querySelector("#app");
+  return a[1] < b[1]
+    ? -1 : a[1] > b[1]
+    ?  1 : anum < bnum
+    ? -1 : anum > bnum
+    ?  1 : a[3] < b[3]
+    ? -1 : 1;
+}
+
+function load_courses (id) {
+  if (courses[id]) {
+    app.courses = courses[id];
+    $("#courses li")[0].click();
+    return;
+  }
   
-  rivets.bind(container, {
-    app: app
-  });
+  var url = id == "catalog"
+    ? api.catalog
+    : api.terms + "/" + id;
   
-  container.style.display = "";
-});
+  app.is_loading = true;
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function (e) {
+    courses[id] = JSON.parse(e.target.response);
+    courses[id].sort(course_sort);
+    app.courses = courses[id];
+    
+    // select first course
+    $("#courses li")[0].click();
+    app.is_loading = false;
+  }
+  xhr.open("GET", url);
+  xhr.send();
+}
+
+function load_terms () {
+  if (app.terms.length > 1) return;
+  
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function (e) {
+    app.terms = JSON.parse(e.target.response);
+  }
+  xhr.open("GET", api.terms);
+  xhr.send();
+}

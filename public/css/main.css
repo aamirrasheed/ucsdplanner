@@ -80,15 +80,15 @@ th {
 
 #term select {
   font: inherit;
-	display: inline-block;
+  display: inline-block;
   width: 100%;
   padding: 0.5em;
   padding-right: 40px;
   background-color: transparent;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
   border: none;
 }
 
@@ -181,6 +181,12 @@ th {
   font-weight: 400;
   background-color: #fff;
 }
+
+#tabs > li.greyed {
+  color: #ddd;
+  border-color: #ddd !important;
+  cursor: default;
+}
       
 #tab_content {
   position: relative;
@@ -256,5 +262,5 @@ th {
   border-width: 1px 0px;
   border-style: solid;
   border-color: #ccc;
-/*  border: 1px solid #ccc;*/
+  /*  border: 1px solid #ccc;*/
 }
