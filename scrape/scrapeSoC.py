@@ -69,16 +69,19 @@ def getSoCPage(departments, pagenumber, term="SP16"):
 
     
     r = requests.post(SoC_URL, args)
-    while r.status_code != requests.codes.ok: 
-        time.sleep(5)
-        r = requests.post(SoC_URL, args)
- 
+    r.raise_for_status
     return r.text
 
-def stripTag(tag):
+def stripTag(tag, field):
     """
     Returns the first string within the given HTML tag
     """
+    if field == "SeatsOpen":
+        out = ""
+        for string in tag.stripped_strings:
+            out += string + " "
+        return out
+
 
     for string in tag.stripped_strings:
         return string
@@ -97,9 +100,11 @@ def getExamOrSection(tr, fieldnames, initCol):
     while j < len(fields):
         numcols = 1 if fields[j].get("colspan") is None else int(fields[j]["colspan"])
         for k in range(i, min(i + numcols, len(fieldnames))):
-            section_dict[fieldnames[k]] = stripTag(fields[j])
+            section_dict[fieldnames[k]] = stripTag(fields[j], fieldnames[k])
         i += numcols
         j += 1
+    if j == initCol + 1:
+        return None
 
     return section_dict
 
@@ -139,12 +144,27 @@ def parsePage(html, ID, term="SP16"):
 
             elif "sectxt" in tr['class']:
                 section_dict = getExamOrSection(tr, SECTION_FIELDS, SECTION_INIT_COL)
+                if section_dict is None:
+                    tr = tr.find_next_sibling("tr")
+                    continue
                 section_dict["ID"] = ID
                 section_dict["datetime"] = dt
                 sections.append(section_dict)
 
             elif "nonenrtxt" in tr['class']:
                 exam_dict = getExamOrSection(tr, EXAM_FIELDS, EXAM_INIT_COL)
+                # GDI SE department
+                if exam_dict is None:
+                    tr = tr.find_next_sibling("tr")
+                    continue
+                if exam_dict["Type"] == "LE":
+                    exam_dict = getExamOrSection(tr, EXAM_FIELDS, SECTION_INIT_COL)
+                    ID =- ID 
+                    section_dict["ID"] = ID
+                    section_dict["datetime"] = dt
+                    sections.append(section_dict)
+                    tr = tr.find_next_sibling("tr")
+                    continue
                 exam_dict["ID"] = ID
                 exams.append(exam_dict)
 

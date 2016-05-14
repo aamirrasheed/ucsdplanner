@@ -12,6 +12,7 @@ GET_DEPT_URL = "https://act.ucsd.edu/scheduleOfClasses/department-list.json"
 RATINGS_URL = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid='
 DB_URL = "https://ucsdplanner-api.azure-mobile.net/api/"
 RMP_SEARCH = "http://search.mtvnservices.com/typeahead/suggest/?solrformat=true&rows=10&q={fname}+{lname}&defType=edismax&qf=teacherfullname_t%5E1000+autosuggest&bf=pow(total_number_of_ratings_i%2C1.7)&sort=score+desc&siteName=rmp&group=on&group.field=content_type_s&group.limit=20&schoolid_s=1079"
+COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili pepper
 
 # ========================================
 # Purpose: Gets soup for a website
@@ -99,6 +100,7 @@ def get_cape_data_for_dept(dept):
 		# get rcmndinstr
 		working_col = working_col.next_sibling
 		rcmndinstr = working_col.span.contents[0]
+                rcmndinstr = rcmndinstr.split("%")[0]
 
 		# get hrsperwk
 		working_col = working_col.next_sibling
@@ -111,6 +113,9 @@ def get_cape_data_for_dept(dept):
 		# get graderec
 		working_col = working_col.next_sibling
 		graderec = working_col.span.contents[0]
+                extract = re.match("[A-F][+-]? \(([0-9]\.[0-9]+)\)", graderec)
+                if extract is not None:
+                    graderec = extract.group(1)
 
                 
                 # reformat instructor names
@@ -121,18 +126,11 @@ def get_cape_data_for_dept(dept):
                 lname = ln
                 fname = names[1].split(" ")[0]
                 
-                prof_id = get_RMP_prof(fname, lname) 
+                r = requests.get(DB_URL + "/professor/" + instructor)
+                print instructor
+                print r.text
+                prof_id = make_RMP_prof(fname, lname, instructor) if r.text == "[]" else json.loads(r.text)[0]["id"]
                 
-                # TODO: Update to match new term-binding when possible 
-                # Get or make term 
-                r = requests.get(DB_URL + "term/" + term)
-                terms = json.loads(r.text)
-                if terms == []:
-                    pass #r = requests.post(DB_URL, parseTerm(term))
-                if len(terms) > 1:
-                    print "ERROR: Duplicate Terms: " + str(terms) 
-                #term_id = terms[0]["id"] 
-
                 r = requests.get(DB_URL + "catalog/" + course)
                 courses = json.loads(r.text)
 
@@ -149,25 +147,29 @@ def get_cape_data_for_dept(dept):
 		entry = {
 			'professor_id': prof_id,
 			'catalog_id': catalog_id,
-                        #'term_id': term_id,
                         'term': term,
-			'enroll': enroll,
-			'cape_num_evals': evals,
+			'enroll': int(enroll),
+			'cape_num_evals': int(evals),
                         #'rcmndclass': rcmndclass,
-			'cape_rec_prof': rcmndinstr,
-			'cape_study_hrs': hrsperwk,
+			'cape_rec_prof': format_float(rcmndinstr),
+			'cape_study_hrs': format_float(hrsperwk),
                         #'gradeexp': gradeexp,
-			'cape_prof_gpa': graderec
+			'cape_prof_gpa': format_float(graderec)
 		}
 		
-                # TODO: uncomment posting to DB
-                #r = requests.post(DB_URL + "/cape", entry)
+                r = requests.post(DB_URL + "/cape", entry)
+                r.raise_for_status()
+
 		# add entry to list
-		cape_data.append(entry)
 		row = row.next_sibling
 	return cape_data
 
-def parseTerm(term):
+def format_float(fstring):
+    if fstring == "N/A":
+        return -1
+    return int(float(fstring) * 100)
+
+def parse_term(term):
     terms = {
             "FA":"Fall",
             "WI":"Winter",
@@ -182,36 +184,39 @@ def parseTerm(term):
     out["year"] = "20" + split.group(2)
     return out
 
-def get_RMP_prof(fname, lname):
-    r = requests.get(RMP_SEARCH.format(fname = fname, lname = lname))
+def make_RMP_prof(fname, lname, cape_name):
+    professor = {}
+    professor['name'] = cape_name
+    professor['rmp_overall'] = 0
+    professor['rmp_helpful'] = 0
+    professor['rmp_clarity'] = 0
+    professor['rmp_easiness'] = 0
+    professor['rmp_hot'] = 0
 
+    r = requests.get(RMP_SEARCH.format(fname = fname, lname = lname))
     profs = json.loads(r.text)["grouped"]["content_type_s"]["groups"]
+
     if len(profs) == 0:
-        return 0
+        r = requests.post(DB_URL + "professor", professor)
+        return json.loads(r.text)[0]["id"]
+    
     profs = profs[0]["doclist"]["docs"]
 
     profs = list(filter(lambda x: x["schoolname_s"] == "University of California San Diego" , profs))
 
     if len(profs) == 0:
-        return 0
+        r = requests.post(DB_URL + "professor", professor)
+        return json.loads(r.text)[0]["id"]
+
     else:
         tid = profs[0]["pk_id"]
-        r = requests.get(RATINGS_URL + tid)
+        r = requests.get(RATINGS_URL + str(tid))
 
-        soup = BeautifulSoup(req.text, "html.parser")
+        soup = BeautifulSoup(r.text, "html.parser")
         header = soup.find("div", "left-breakdown")
 
-        professor = {}
         # if header is None, then there are no ratings for prof
-        if header == None:
-            professor['name'] = prof['name']
-            professor['rmp_overall'] = None
-            professor['rmp_helpful'] = None
-            professor['rmp_clarity'] = None
-            professor['rmp_easiness'] = None
-            professor['rmp_hot'] = None
-
-        else:
+        if header != None:
             overall_rating = soup.find("div", "grade").string
             chili_figure = [grade.figure for grade in soup.findAll("div", "grade")]
             chili_figure = chili_figure[2].img.get('src')
@@ -222,15 +227,15 @@ def get_RMP_prof(fname, lname):
             easiness = ratings[2].string
 
             # dictionary of prof ratings to be put in data
-            professor['name'] = prof['name']
+            professor['name'] = cape_name
             professor['rmp_overall'] = overall_rating
             professor['rmp_helpful'] = helpfulness
             professor['rmp_clarity'] = clarity
             professor['rmp_easiness'] = easiness
             professor['rmp_hot'] = 1 if chili_figure != COLD_CHILI_PIC else 0
 
-        r.post(DB_URL + "professor", professor)
-        return json.loads(r.text)["id"]
+        r = requests.post(DB_URL + "professor", professor)
+        return json.loads(r.text)[0]["id"]
 
 if __name__ == "__main__":
     # Debug Only
@@ -278,7 +283,3 @@ if __name__ == "__main__":
     for dept in departments:
             cape_data = get_cape_data_for_dept(dept)
             capes_by_departments[dept] = cape_data
-            print "{} of {}".format(gotten, attempts)
-    # output to fat ass json file
-    with open('cape_data.json', 'w') as fp:
-        json.dump(capes_by_departments, fp)

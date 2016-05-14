@@ -73,9 +73,8 @@ with open("courses.csv", "r") as f_courses, \
 
         course_sections = sections_dict[course["ID"]]
         lecture_id = None
-        prev_lecture_code = None
         for meeting in course_sections:
-            if meeting["Type"] not in AUX_TYPES and meeting["Code"] != prev_lecture_code:
+            if meeting["Type"] not in AUX_TYPES:
                 section = {}
                 section["course_id"] = meeting["Id"]
                 section["section_name"] = meeting["Code"]
@@ -101,11 +100,8 @@ with open("courses.csv", "r") as f_courses, \
                 
                 r = requests.post(DB_URL + "/section", section)
                 lecture_id = json.loads(r.text)[0]["section_id"]
-                prev_lecture_code = meeting["Code"]
-
             else:
                 discussion = {}
-                assert lecture_id is not None
                 discussion["section_id"] = lecture_id
                 discussion["type"] = meetings["Type"]
                 discussion["disc_days"] = meetings["Days"]
@@ -117,17 +113,8 @@ with open("courses.csv", "r") as f_courses, \
                 discussion["disc_waitlist"] = parse_seats(meetings["SeatsOpen"][1])
 
                 r = requests.post(DB_URL + "/discussions", section)
+                lecture_id = json.loads(r.text)[0]["section_id"]
                 
-
-        course_exams = exams_dict[course["ID"]]
-        for exam in course_exams:
-            exam_data = {}
-            exam_data["section_id"] = lecture_id
-            exam_data["exam_type"] = exam["Type"]
-            exam_data["exam_start_time"] = exam["Time"].split("-")[0] if exam["Time"] != "TBA" else "TBA"
-            exam_data["exam_end_time"] = exam["Time"].split("-")[1] if exam["Time"] != "TBA" else "TBA"
-            exam_data["exam_location"] = exam["Building"] + " " + exam["Room"]
-            exam_data["exam_date"] = exam["Date"]
 
 
 def make_RMP_prof(fname, lname, cape_name):
