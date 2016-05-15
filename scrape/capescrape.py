@@ -27,7 +27,7 @@ def get_soup(url):
 # Purpose: Gets list of UCSD departments
 # ======================================== 
 def get_departments():
-        return ['AIP', 'ANBI', 'ANAR', 'ANTH', 'ANSC', 'AESE', 'BENG', 'BNFO', 'BIEB', 'BICD', 'BIPN', 'BIBC', 'BGGN', 'BGSE', 'BILD', 'BIMM', 'BISP', 'BIOM', 'CENG', 'CHEM', 'CHIN', 'CLAS', 'CLIN', 'COGS', 'COMM', 'COGR', 'CSE', 'ICAM', 'CONT', 'CGS', 'CAT', 'TDCH', 'TDHD', 'TDMV', 'TDTR', 'DOC', 'ECON', 'EAP', 'EDS', 'ERC', 'ECE', 'ENG', 'ENVR', 'ESYS', 'ETHN', 'EXPR', 'FPMU', 'FILM', 'HITO', 'HIAF', 'HIEA', 'HIEU', 'HILA', 'HISC', 'HINE', 'HIUS', 'HIGR', 'HILD', 'HDP', 'HUM', 'INTL', 'IRCO', 'IRGN', 'IRLA', 'JAPN', 'JUDA', 'LATI', 'LAWS', 'LISL', 'LIAB', 'LIFR', 'LIGN', 'LIGM', 'LIHL', 'LIIT', 'LIPO', 'LISP', 'LTCH', 'LTCO', 'LTCS', 'LTEU', 'LTFR', 'LTGM', 'LTGK', 'LTIT', 'LTKO', 'LTLA', 'LTRU', 'LTSP', 'LTTH', 'LTWR', 'LTEN', 'LTWL', 'LTEA', 'MMW', 'MBC', 'MATS', 'MATH', 'MSED', 'MAE', 'MUIR', 'MCWP', 'MUS', 'NANO', 'PHAR', 'SPPS', 'PHIL', 'PHYS', 'POLI', 'PSYC', 'MGT', 'RELI', 'REV', 'SDCC', 'SIOC', 'SIOG', 'SIOB', 'SIO', 'SXTH', 'SOCG', 'SOCE', 'SOCI', 'SE', 'TDAC', 'TDDE', 'TDDR', 'TDGE', 'TDGR', 'TDHT', 'TDPW', 'TDPR', 'TWS', 'TMC', 'USP', 'VIS', 'WARR', 'WCWP']
+    return 'AIP', 'ANBI', 'ANAR', 'ANTH', 'ANSC', 'AESE', 'BENG', 'BNFO', 'BIEB', 'BICD', 'BIPN', 'BIBC', 'BGGN', 'BGSE', 'BILD', 'BIMM', 'BISP', 'BIOM', 'CENG', 'CHEM', 'CHIN', 'CLAS', 'CLIN', 'COGS', 'COMM', 'COGR', 'CSE', 'ICAM', 'CONT', 'CGS', 'CAT', 'TDCH', 'TDHD', 'TDMV', 'TDTR', 'DOC', 'ECON', 'EAP', 'EDS', 'ERC', 'ECE', 'ENG', 'ENVR', 'ESYS', 'ETHN', 'EXPR', 'FPMU', 'FILM', 'HITO', 'HIAF', 'HIEA', 'HIEU', 'HILA', 'HISC', 'HINE', 'HIUS', 'HIGR', 'HILD', 'HDP', 'HUM', 'INTL', 'IRCO', 'IRGN', 'IRLA', 'JAPN', 'JUDA', 'LATI', 'LAWS', 'LISL', 'LIAB', 'LIFR', 'LIGN', 'LIGM', 'LIHL', 'LIIT', 'LIPO', 'LISP', 'LTCH', 'LTCO', 'LTCS', 'LTEU', 'LTFR', 'LTGM', 'LTGK', 'LTIT', 'LTKO', 'LTLA', 'LTRU', 'LTSP', 'LTTH', 'LTWR', 'LTEN', 'LTWL', 'LTEA', 'MMW', 'MBC', 'MATS', 'MATH', 'MSED', 'MAE', 'MUIR', 'MCWP', 'MUS', 'NANO', 'PHAR', 'SPPS', 'PHIL', 'PHYS', 'POLI', 'PSYC', 'MGT', 'RELI', 'REV', 'SDCC', 'SIOC', 'SIOG', 'SIOB', 'SIO', 'SXTH', 'SOCG', 'SOCE', 'SOCI', 'SE', 'TDAC', 'TDDE', 'TDDR', 'TDGE', 'TDGR', 'TDHT', 'TDPW', 'TDPR', 'TWS', 'TMC', 'USP', 'VIS', 'WARR', 'WCWP']
 
 
 # ========================================
@@ -119,6 +119,9 @@ def get_cape_data_for_dept(dept):
 
                 
                 # reformat instructor names
+                if instructor.strip() == "": # ECE 108
+                    row = row.next_sibling
+                    continue
                 names = instructor.split(", ")
                 ln = names[0]
                 fn = " ".join(names[1:])
@@ -128,7 +131,6 @@ def get_cape_data_for_dept(dept):
                 
                 r = requests.get(DB_URL + "/professor/" + instructor)
                 print instructor
-                print r.text
                 prof_id = make_RMP_prof(fname, lname, instructor) if r.text == "[]" else json.loads(r.text)[0]["id"]
                 
                 r = requests.get(DB_URL + "catalog/" + course)
@@ -146,7 +148,7 @@ def get_cape_data_for_dept(dept):
 		# enter data into dictionary
 		entry = {
 			'professor_id': prof_id,
-			'catalog_id': catalog_id,
+			'course_id': catalog_id,
                         'term': term,
 			'enroll': int(enroll),
 			'cape_num_evals': int(evals),
@@ -157,8 +159,9 @@ def get_cape_data_for_dept(dept):
 			'cape_prof_gpa': format_float(graderec)
 		}
 		
-                r = requests.post(DB_URL + "/cape", entry)
-                r.raise_for_status()
+                r = requests.get(DB_URL + "/cape/" + prof_id + "/" + catalog_id + "/" + term)
+                if r.text == "[]":
+                    r = requests.post(DB_URL + "/cape", entry)
 
 		# add entry to list
 		row = row.next_sibling
@@ -192,6 +195,7 @@ def make_RMP_prof(fname, lname, cape_name):
     professor['rmp_clarity'] = 0
     professor['rmp_easiness'] = 0
     professor['rmp_hot'] = 0
+    professor["rmp_tid"] = 0
 
     r = requests.get(RMP_SEARCH.format(fname = fname, lname = lname))
     profs = json.loads(r.text)["grouped"]["content_type_s"]["groups"]
@@ -233,6 +237,7 @@ def make_RMP_prof(fname, lname, cape_name):
             professor['rmp_clarity'] = clarity
             professor['rmp_easiness'] = easiness
             professor['rmp_hot'] = 1 if chili_figure != COLD_CHILI_PIC else 0
+            professor["rmp_tid"] = tid
 
         r = requests.post(DB_URL + "professor", professor)
         return json.loads(r.text)[0]["id"]
