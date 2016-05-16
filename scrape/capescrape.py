@@ -18,10 +18,10 @@ COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili 
 # Purpose: Gets soup for a website
 # ======================================== 
 def get_soup(url):
-        r = requests.get(url, headers={"User-agent":'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1'})
-	html = r.text
-	soup = BeautifulSoup(html, "html.parser");
-	return soup
+    r = requests.get(url, headers={"User-agent":'Mozilla'})
+    html = r.text
+    soup = BeautifulSoup(html, "html.parser");
+    return soup
 
 # ========================================
 # Purpose: Gets list of UCSD departments
@@ -35,137 +35,136 @@ def get_departments():
 # 		   specified department
 # ======================================== 
 def get_cape_data_for_dept(dept):
-	# gets soup
-	soup = get_soup(BASE_URL+dept)
-	row = None
+    # gets soup
+    soup = get_soup(BASE_URL+dept)
+    row = None
 
-	# gets container with row
-	test_row = soup.find('table',{'id': 'ctl00_ContentPlaceHolder1_gvCAPEs'})
-	
-	# check if row has valid data
-	if test_row.tbody is not None:
-		row = test_row.tbody.tr
-		print 'Getting CAPE data for ' + dept
-	else:
-		print 'No CAPE data for ' + dept
-		return None
+    # gets container with row
+    test_row = soup.find('table',{'id': 'ctl00_ContentPlaceHolder1_gvCAPEs'})
+    
+    # check if row has valid data
+    if test_row.tbody is not None:
+        row = test_row.tbody.tr
+        print 'Getting CAPE data for ' + dept
+    else:
+        print 'No CAPE data for ' + dept
+        return None
 
-	# list of rows, each row is a dictionary representing data from each column 
-	# for that row
-	cape_data = []
-	row_num = 0
+    # list of rows, each row is a dictionary representing data from each column 
+    # for that row
+    cape_data = []
+    row_num = 0
 
-	# iterate through each row of the CAPES for the department, filling up list with 
-	# one row at a time
-	while isinstance(row, bs4.element.Tag):
-	# Debug Only
-	# while row_num == 0:
-		# declare variables to record
-		instructor = None
-		course = None
-		term = None
-		enroll = None
-		evals = None
-		rcmndclass = None
-		rcmndinstr = None
-		hrsperwk = None
-		gradeexp = None
-		graderec = None
+    # iterate through each row of the CAPES for the department, filling up list with 
+    # one row at a time
+    while isinstance(row, bs4.element.Tag):
+    # Debug Only
+    # while row_num == 0:
+        # declare variables to record
+        instructor = None
+        course = None
+        term = None
+        enroll = None
+        evals = None
+        rcmndclass = None
+        rcmndinstr = None
+        hrsperwk = None
+        gradeexp = None
+        graderec = None
 
-		# get instructor
-		working_col = row.td
-		instructor = working_col.contents[0]
+        # get instructor
+        working_col = row.td
+        instructor = working_col.contents[0]
 
-		# get course
-		working_col = working_col.next_sibling
-		course_info = working_col.a.contents[0].split('-')
-		course = course_info[0][:-1]
+        # get course
+        working_col = working_col.next_sibling
+        course_info = working_col.a.contents[0].split('-')
+        course = course_info[0][:-1]
 
-		# get term
-		working_col = working_col.next_sibling
-		term = working_col.contents[0]
+        # get term
+        working_col = working_col.next_sibling
+        term = working_col.contents[0]
 
-		# get enroll
-		working_col = working_col.next_sibling
-		enroll = working_col.contents[0]
+        # get enroll
+        working_col = working_col.next_sibling
+        enroll = working_col.contents[0]
 
-		# get evals
-		working_col = working_col.next_sibling
-		evals = working_col.span.contents[0]
+        # get evals
+        working_col = working_col.next_sibling
+        evals = working_col.span.contents[0]
 
-		# get rcmndclass
-		working_col = working_col.next_sibling
-		rcmndclass = working_col.span.contents[0]
+        # get rcmndclass
+        working_col = working_col.next_sibling
+        rcmndclass = working_col.span.contents[0]
 
-		# get rcmndinstr
-		working_col = working_col.next_sibling
-		rcmndinstr = working_col.span.contents[0]
-                rcmndinstr = rcmndinstr.split("%")[0]
+        # get rcmndinstr
+        working_col = working_col.next_sibling
+        rcmndinstr = working_col.span.contents[0]
+        rcmndinstr = rcmndinstr.split("%")[0]
 
-		# get hrsperwk
-		working_col = working_col.next_sibling
-		hrsperwk = working_col.span.contents[0]
+        # get hrsperwk
+        working_col = working_col.next_sibling
+        hrsperwk = working_col.span.contents[0]
 
-		# get gradeexp
-		working_col = working_col.next_sibling
-		gradeexp = working_col.span.contents[0]
+        # get gradeexp
+        working_col = working_col.next_sibling
+        gradeexp = working_col.span.contents[0]
 
-		# get graderec
-		working_col = working_col.next_sibling
-		graderec = working_col.span.contents[0]
-                extract = re.match("[A-F][+-]? \(([0-9]\.[0-9]+)\)", graderec)
-                if extract is not None:
-                    graderec = extract.group(1)
+        # get graderec
+        working_col = working_col.next_sibling
+        graderec = working_col.span.contents[0]
+        extract = re.match("[A-F][+-]? \(([0-9]\.[0-9]+)\)", graderec)
+        if extract is not None:
+            graderec = extract.group(1)
 
-                
-                # reformat instructor names
-                if instructor.strip() == "": # ECE 108
-                    row = row.next_sibling
-                    continue
-                names = instructor.split(", ")
-                ln = names[0]
-                fn = " ".join(names[1:])
-                instructor = fn.strip() + " " + ln.strip()
-                lname = ln
-                fname = names[1].split(" ")[0]
-                
-                r = requests.get(DB_URL + "/professor/" + instructor)
-                print instructor
-                prof_id = make_RMP_prof(fname, lname, instructor) if r.text == "[]" else json.loads(r.text)[0]["id"]
-                
-                r = requests.get(DB_URL + "catalog/" + course)
-                courses = json.loads(r.text)
+        # reformat instructor names
+        if instructor.strip() == "": # ECE 108
+            row = row.next_sibling
+            continue
+        names = instructor.split(", ")
+        ln = names[0]
+        fn = " ".join(names[1:])
+        instructor = fn.strip() + " " + ln.strip()
+        lname = ln
+        fname = names[1].split(" ")[0]
+        
+        r = requests.get(DB_URL + "/professor/" + instructor)
+        print instructor
+        prof_id = make_RMP_prof(fname, lname, instructor) if r.text == "[]" else json.loads(r.text)[0]["id"]
+        
+        r = requests.get(DB_URL + "catalog/" + course)
+        courses = json.loads(r.text)
 
-                if len(courses) == 0:
-                    print"WARNING: Could not find course: " + course
-                    row = row.next_sibling
-                    continue
+        if len(courses) == 0:
+            print "WARNING: Could not find course: " + course
+            row = row.next_sibling
+            continue
 
-                if len(courses) > 1:
-                    print "ERROR: Duplicate Courses: " + str(courses) 
-                catalog_id = courses[0]["id"]
+        if len(courses) > 1:
+            print "ERROR: Duplicate Courses: " + str(courses) 
+        catalog_id = courses[0]["id"]
 
-		# enter data into dictionary
-		entry = {
-			'professor_id': prof_id,
-			'course_id': catalog_id,
-                        'term': term,
-			'enroll': int(enroll),
-			'cape_num_evals': int(evals),
-                        #'rcmndclass': rcmndclass,
-			'cape_rec_prof': format_float(rcmndinstr),
-			'cape_study_hrs': format_float(hrsperwk),
-                        #'gradeexp': gradeexp,
-			'cape_prof_gpa': format_float(graderec)
-		}
-		
-                r = requests.get(DB_URL + "/cape/" + prof_id + "/" + catalog_id + "/" + term)
-                if r.text == "[]":
-                    r = requests.post(DB_URL + "/cape", entry)
+        # enter data into dictionary
+        entry = {
+            'professor_id': prof_id,
+            'course_id': catalog_id,
+            'term': term,
+            'enroll': int(enroll),
+            'cape_num_evals': int(evals),
+            #'rcmndclass': rcmndclass,
+            'cape_rec_prof': format_float(rcmndinstr),
+            'cape_study_hrs': format_float(hrsperwk),
+            #'gradeexp': gradeexp,
+            'cape_prof_gpa': format_float(graderec)
+        }
+        
+        r = requests.get(DB_URL + "/cape/" + prof_id + "/" + catalog_id + "/" + term)
+        if r.text == "[]":
+            r = requests.post(DB_URL + "/cape", entry)
 
-		# add entry to list
-		row = row.next_sibling
-	return cape_data
+        # add entry to list
+        row = row.next_sibling
+    return cape_data
 
 def format_float(fstring):
     if fstring == "N/A":

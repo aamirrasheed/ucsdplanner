@@ -20,7 +20,11 @@ def parse_seats(string):
         return int(string), 0
 
 # TERM stuff
-DB_URL = "https://ucsdplanner-api.azure-mobile.net/api" 
+RATINGS_URL = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid='
+DB_URL = "https://ucsdplanner-api.azure-mobile.net/api"
+RMP_SEARCH = "http://search.mtvnservices.com/typeahead/suggest/?solrformat=true&rows=10&q={fname}+{lname}&defType=edismax&qf=teacherfullname_t%5E1000+autosuggest&bf=pow(total_number_of_ratings_i%2C1.7)&sort=score+desc&siteName=rmp&group=on&group.field=content_type_s&group.limit=20&schoolid_s=1079"
+COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili pepper
+
 
 term_data = {
     "term_name":"FA16",
@@ -48,22 +52,22 @@ with open("courses.csv", "r") as f_courses, \
     exams_dict = {key:[x for x in exams if x["ID"] == str(key)] for key in range(len(courses))}
 
     for course in courses:
-
         course_dict = {}
 
         course_name = split_course_name(course["Code"])
         r = requests.get(DB_URL + "/catalog/" + course_name)
-        if r.text = "[]"
+        if r.text == "[]":
             print "ERROR: Could not find course: " + course_name
             continue
 
-        catalog_course_id = json.loads(r.text)["catalog_id"]
+        catalog_course_id = json.loads(r.text)[0]["id"]
 
-        r = requests,get(DB_URL "/courses/" + catalog_course_id + "/" + term_id)
+        r = requests.get(DB_URL + "/courses/" + catalog_course_id + "/" + term_id)
 
         course_id = None
         if r.text != "[]":
-            course_id = json.loads(r.text)["course_id"]
+            print(r.text)
+            course_id = json.loads(r.text)["id"]
         else:
             course_dict["term_id"] = term_id
             course_dict["course_name"] = course_name
@@ -129,6 +133,8 @@ with open("courses.csv", "r") as f_courses, \
             exam_data["exam_location"] = exam["Building"] + " " + exam["Room"]
             exam_data["exam_date"] = exam["Date"]
 
+            r = requests.post(DB_URL + "/exams", section)
+
 
 def make_RMP_prof(fname, lname, cape_name):
     professor = {}
@@ -148,7 +154,7 @@ def make_RMP_prof(fname, lname, cape_name):
     
     profs = profs[0]["doclist"]["docs"]
 
-    profs = list(filter(lambda x: x["schoolname_s"] == "University of California San Diego" , profs))
+    profs = list(filter(lambda x: x["schoolname_s"] == "University of California San Diego", profs))
 
     if len(profs) == 0:
         r = requests.post(DB_URL + "professor", professor)
