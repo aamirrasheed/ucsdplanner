@@ -13,7 +13,6 @@ GET_DEPT_URL = "https://act.ucsd.edu/scheduleOfClasses/department-list.json"
 SoC_URL = "https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudentResult.htm"
 
 # All not-class parameters to use in the POST request.
-
 data = {
 "loggedIn": "false",
 "tabNum": "tabs-dept",
@@ -37,11 +36,13 @@ data = {
 
 # Fields grabbed from each course section
 SECTION_FIELDS = ["Id", "Type", "Code", "Days", "Time", "Building", "Room", "Professor", "SeatsOpen", "TotalSeats"]
+
 # First nonempty column in table for course entries
 SECTION_INIT_COL = 2
 
 # Fields grabbed from each exam section
 EXAM_FIELDS = ["Id", "Type", "Date", "Days", "Time", "Building", "Room", "Professor", "SeatsOpen", "TotalSeats"]
+
 # First nonempty column in table for exam entries
 EXAM_INIT_COL = 1
 
@@ -158,8 +159,7 @@ def parsePage(html, ID, term="SP16"):
                     tr = tr.find_next_sibling("tr")
                     continue
                 if exam_dict["Type"] == "LE":
-                    exam_dict = getExamOrSection(tr, EXAM_FIELDS, SECTION_INIT_COL)
-                    ID =- ID 
+                    section_dict = getExamOrSection(tr, SECTION_FIELDS, EXAM_INIT_COL)
                     section_dict["ID"] = ID
                     section_dict["datetime"] = dt
                     sections.append(section_dict)

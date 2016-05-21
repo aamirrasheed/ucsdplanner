@@ -1,4 +1,324 @@
 Title,Code,Term,ID
+Directed Group Study,AAS198,FA16,0
+Academic Internship Program,AIP197,FA16,1
+Academic Intrnshp Prog-Foreign,AIP197F,FA16,2
+Public Service Minor Internshp,AIP197P,FA16,3
+AIP: Special Programs,AIP197T,FA16,4
+Spec Topics/Anth Archaeology,ANAR100,FA16,5
+"Pharaohs,Mummies,Pyramds:Egypt",ANAR144,FA16,6
+Immortal Life/Henrietta Lacks,ANBI120,FA16,7
+The Evolution of Human Diet,ANBI141,FA16,8
+"Evolution, Behavior, Ecology",ANBI148,FA16,9
+Biological&Cult Persptv/Intell,ANBI159,FA16,10
+Language and Culture,ANSC118,FA16,11
+Psychological Anthropology,ANSC121,FA16,12
+"Language, Law, Social Justice",ANSC131,FA16,13
+Humanitarian Aid,ANSC155,FA16,14
+Critical Military Studies,ANSC176,FA16,15
+Labor's Relations,ANSC180,FA16,16
+Animal Affairs,ANSC181,FA16,17
+Human Origins,ANTH2,FA16,18
+Race and Racisms,ANTH21,FA16,19
+Debating Multiculturalism,ANTH23,FA16,20
+Debating Multiculturalism,ANTH23,FA16,21
+Freshman Seminar,ANTH87,FA16,22
+Foundations/Social Complexity,ANTH101,FA16,23
+Honors Studies in Anthropology,ANTH196A,FA16,24
+Intro Computer Prog & MATLAB,BENG2,FA16,25
+Freshman Seminar,BENG87,FA16,26
+Freshman Seminar,BENG87,FA16,27
+Freshman Seminar,BENG87,FA16,28
+Foundation of Biomechanics,BENG110,FA16,29
+Design Develop.in Biomechanics,BENG119A,FA16,-28
+Biosystems and Control,BENG122A,FA16,-27
+Design Dev Bioinformatics BENG,BENG126A,FA16,28
+Design Dev.Genetc Circuit BENG,BENG128A,FA16,29
+Design Develp.Cell System BENG,BENG129A,FA16,30
+Measurements/Stats/Probability,BENG134,FA16,31
+Biomedical Signals & Systems,BENG135,FA16,-30
+Design Develpmt Molecular BENG,BENG139A,FA16,31
+Biomedical Optics and Imaging,BENG141,FA16,32
+Design Develpmnt in Neural Eng,BENG147A,FA16,39
+Design Developmnt Cardiac BENG,BENG148A,FA16,40
+Bioreactor Engineering,BENG161A,FA16,41
+Biotechnology Laboratory,BENG162,FA16,42
+Cell and Tissue Engineering,BENG166A,FA16,43
+Design Develop.Bioinstrumntatn,BENG179A,FA16,44
+Applied Genomic Technologies,BENG183,FA16,45
+BENG Design Project:Developmnt,BENG187B,FA16,46
+Senior Sem I: Professnl Issues,BENG191,FA16,47
+Clinical Bioengineering,BENG193,FA16,48
+Structural Biochemistry,BIBC100,FA16,49
+Metabolic Biochemistry,BIBC102,FA16,50
+Metabolic Biochemistry,BIBC102,FA16,51
+Biochemical Techniques,BIBC103,FA16,52
+Biochemical Techniques,BIBC103,FA16,53
+Adv Topics-Biochemistry,BIBC194,FA16,54
+Genetics,BICD100,FA16,55
+Genetics,BICD100,FA16,56
+Cell Biology,BICD110,FA16,57
+AIDS Science and Society,BICD136,FA16,58
+Biostatistics,BIEB100,FA16,59
+Intro Eclgy/Organisms&Habitats,BIEB102,FA16,60
+Ecology Laboratory,BIEB121,FA16,61
+Plant Ecology,BIEB126,FA16,62
+The Cell,BILD1,FA16,63
+The Cell,BILD1,FA16,64
+Multicellular Life,BILD2,FA16,65
+Multicellular Life,BILD2,FA16,66
+Organismic&Evolutionary Biol,BILD3,FA16,67
+Organismic&Evolutionary Biol,BILD3,FA16,68
+Organismic&Evolutionary Biol,BILD3,FA16,69
+Introductory Biology Lab,BILD4,FA16,70
+Introductory Biology Lab,BILD4,FA16,71
+Introductory Biology Lab,BILD4,FA16,72
+Fundamental Concepts/Modrn Bio,BILD10,FA16,73
+Freshman Seminar,BILD87,FA16,74
+Freshman Seminar,BILD87,FA16,75
+Biology: Honors Seminar,BILD96,FA16,76
+Molecular Biology,BIMM100,FA16,77
+Molecular Biology,BIMM100,FA16,78
+Recombinant DNA Techniques,BIMM101,FA16,79
+Recombinant DNA Techniques,BIMM101,FA16,80
+Recombinant DNA Techniques,BIMM101,FA16,81
+Recombinant DNA Techniques,BIMM101,FA16,82
+Recombinant DNA Techniques,BIMM101,FA16,83
+Recombinant DNA Techniques,BIMM101,FA16,84
+Molecular Basis/Human Disease,BIMM110,FA16,85
+Circadian Rhythms-Bio Clocks,BIMM116,FA16,86
+Laboratory in Microbiology,BIMM121,FA16,87
+Laboratory in Microbiology,BIMM121,FA16,88
+Medical Microbiology,BIMM124,FA16,89
+Quantitative Principles in Bio,BIMM140,FA16,90
+Genomics Research Initiative,BIMM171,FA16,91
+Genomics Research Init Lab I,BIMM171A,FA16,92
+Adv Topics-Molecular Bio,BIMM194,FA16,93
+Human Physiology I,BIPN100,FA16,94
+Human Physiology I,BIPN100,FA16,95
+Human Physiology I,BIPN100,FA16,96
+Animal Physiology Lab,BIPN105,FA16,97
+Cellular Neurobiology,BIPN140,FA16,98
+Cellular Basis Learning&Memory,BIPN148,FA16,99
+Adv Topics in Modern Biology,BISP194,FA16,100
+Instructional Apprentice: Biol,BISP195,FA16,101
+Instructional Apprentice: Biol,BISP195,FA16,102
+Instructional Apprentice: Biol,BISP195,FA16,103
+"Culture, Art & Technology I",CAT1,FA16,104
+"Culture, Art & Technology I",CAT1,FA16,105
+"Culture, Art & Technology I",CAT1,FA16,106
+"Culture, Art & Technology I",CAT1,FA16,107
+"Culture, Art & Technology I",CAT1,FA16,108
+Sixth College Practicum,CAT124,FA16,109
+Sixth College Practicum,CAT124,FA16,110
+Sixth College Practicum,CAT124,FA16,111
+Public Rhetoric & Pract Commun,CAT125,FA16,112
+Public Rhetoric & Pract Commun,CAT125,FA16,113
+Pblc Rhetoric Prct Comm Online,CAT125R,FA16,114
+Directed Group Studies,CAT198,FA16,115
+Intro/CGS: Social Movements,CGS2A,FA16,116
+Freshman Seminar,CGS87,FA16,117
+Conceptlzg Gender:Theory&Methd,CGS100,FA16,118
+Topics in Critical Gender Stds,CGS102,FA16,119
+Topics in Critical Gender Stds,CGS102,FA16,120
+Labor's Relations,CGS180,FA16,121
+Honors Seminar,CGS190,FA16,122
+Scope of Chem and Biochem,CHEM1,FA16,123
+Basic Chemistry,CHEM4,FA16,124
+General Chemistry I,CHEM6A,FA16,125
+General Chemistry I,CHEM6A,FA16,126
+General Chemistry I,CHEM6A,FA16,127
+General Chemistry I,CHEM6A,FA16,128
+General Chemistry I,CHEM6A,FA16,129
+General Chemistry I,CHEM6A,FA16,130
+General Chemistry I,CHEM6A,FA16,131
+General Chemistry I,CHEM6A,FA16,132
+Honors General Chemistry I,CHEM6AH,FA16,133
+General Chemistry II,CHEM6B,FA16,134
+General Chemistry  III,CHEM6C,FA16,135
+General Chemistry Laboratory,CHEM7L,FA16,136
+General Chemistry Laboratory,CHEM7L,FA16,137
+The Periodic Table,CHEM11,FA16,138
+Freshman Seminar,CHEM87,FA16,139
+Introductn to Teaching Science,CHEM96,FA16,140
+Analytical Chemistry Lab,CHEM100A,FA16,141
+Instrumental Chemistry Lab,CHEM100B,FA16,142
+Physical Chemistry Laboratory,CHEM105A,FA16,143
+Protein Biochemistry Lab,CHEM108,FA16,144
+Biochemical Structure&Function,CHEM114A,FA16,145
+Molecular & Cellular Biochem,CHEM114D,FA16,146
+Inorganic Chemistry I,CHEM120A,FA16,147
+Physical Chem: Thermodynamics,CHEM127,FA16,148
+Chem Physics: Quantum Mech,CHEM130,FA16,149
+Organic Chemistry I,CHEM140A,FA16,150
+Organic Chemistry I,CHEM140A,FA16,151
+Organic Chemistry I,CHEM140A,FA16,152
+Organic Chemistry I,CHEM140A,FA16,153
+Organic Chemistry II,CHEM140B,FA16,154
+Organic Chemistry II,CHEM140B,FA16,155
+Organic Chemistry III,CHEM140C,FA16,156
+Organic Chemistry Laboratory,CHEM143A,FA16,157
+Organic Chemistry Laboratory,CHEM143C,FA16,158
+Molecular Design & Synthesis,CHEM143D,FA16,159
+Synthetic Methods/Organic Chem,CHEM152,FA16,160
+Mechanisms/Organic Reactions,CHEM154,FA16,161
+Environmental Chemistry II,CHEM172,FA16,162
+Sr Seminar in Chem & Biochem,CHEM192,FA16,163
+Methods of Teaching Chemistry,CHEM195,FA16,164
+First Yr Chinese/Dialect Spk I,CHIN10AD,FA16,165
+First Yr Chinese/Dialect Spk I,CHIN10AD,FA16,166
+First Yr Chinese/Mandarin I,CHIN10AM,FA16,167
+First Yr Chinese/Non-Native I,CHIN10AN,FA16,168
+First Yr Chinese/Non-Native I,CHIN10AN,FA16,169
+First Yr Chinese/Non-Native I,CHIN10AN,FA16,170
+Second Yr Chinese-Dialect SpkI,CHIN20AD,FA16,171
+Second Yr Chinese-Mandarin I,CHIN20AM,FA16,172
+Second Yr Chinese/Non-Native I,CHIN20AN,FA16,173
+Second Yr Chinese/Non-Native I,CHIN20AN,FA16,174
+Third Yr Chinese/Heritage SpkI,CHIN100AM,FA16,175
+Third Yr Chinese/Non-Native I,CHIN100AN,FA16,176
+Business Chinese,CHIN165A,FA16,177
+Business Chinese,CHIN165A,FA16,178
+Medical Chinese I,CHIN169A,FA16,179
+Intro/Classical Chinese-Adv I,CHIN182A,FA16,180
+Readngs/Chinese Cult & Society,CHIN185A,FA16,181
+"Read/Chinese Econ,Pol,TradeI",CHIN186A,FA16,182
+Dir Honors Thesis in CLAS A,CLAS196A,FA16,183
+Introduction to Cognitive Sci,COGS1,FA16,184
+Hands-On Computing,COGS8,FA16,185
+Introduction to Data Science,COGS9,FA16,186
+Minds & Brains,COGS11,FA16,187
+Intro. to Research Methods,COGS14A,FA16,188
+Intro. to Statistical Analysis,COGS14B,FA16,189
+Uncensored Intro. to Language,COGS15,FA16,190
+Neurobiology of Cognition,COGS17,FA16,191
+Freshman Seminar,COGS87,FA16,192
+Freshman Seminar,COGS87,FA16,193
+Independent Study,COGS99,FA16,194
+Sensation and Perception,COGS101A,FA16,195
+Distributed Cognition,COGS102A,FA16,196
+Neuroanatomy and Physiology,COGS107A,FA16,197
+Modeling & Data Analysis,COGS109,FA16,198
+Natural Computation II,COGS118B,FA16,199
+Programming/Experimental Res.,COGS119,FA16,200
+Interaction Design,COGS120,FA16,201
+Language Development,COGS156,FA16,202
+Seminar on Special Topics,COGS160,FA16,203
+Seminar on Special Topics,COGS160,FA16,204
+Seminar on Special Topics,COGS160,FA16,205
+"Drugs: Brain, Mind and Culture",COGS174,FA16,206
+Alternate States/Consciousness,COGS175,FA16,207
+Electrophysiology of Cognition,COGS179,FA16,208
+Usability & Info. Architecture,COGS187A,FA16,209
+Projects in Cognitive Science,COGS190A,FA16,210
+Projects in Cognitive Science,COGS190A,FA16,211
+Projects in Cognitive Science,COGS190A,FA16,212
+Instructional Apprenticeship,COGS195,FA16,213
+Instructional Apprenticeship,COGS195,FA16,214
+Instructional Apprenticeship,COGS195,FA16,215
+Instructional Apprenticeship,COGS195,FA16,216
+Instructional Apprenticeship,COGS195,FA16,217
+Instructional Apprenticeship,COGS195,FA16,218
+Instructional Apprenticeship,COGS195,FA16,219
+Instructional Apprenticeship,COGS195,FA16,220
+Instructional Apprenticeship,COGS195,FA16,221
+Instructional Apprenticeship,COGS195,FA16,222
+Instructional Apprenticeship,COGS195,FA16,223
+Introduction to Communication,COMM10,FA16,224
+Situated Practices,COMM100A,FA16,225
+Intro Audio-Vis Media Practice,COMM101,FA16,226
+MPL:Sound Prductn & Manipulatn,COMM101N,FA16,227
+Media & Community Practicum,COMM102C,FA16,228
+MMPP: Practicum in Child Dev,COMM102D,FA16,229
+CT: Computer Game Studies,COMM105G,FA16,230
+CI : Internet Industry,COMM106I,FA16,231
+Visual Culture,COMM107,FA16,232
+MC: American News Media,COMM109N,FA16,233
+CCP:Folklore and Communication,COMM111F,FA16,234
+CCP: Popular Culture,COMM111G,FA16,235
+CSI: Gender and Science,COMM114G,FA16,236
+AMP: News Media Workshop,COMM120N,FA16,237
+AMP: Digital Media Pedagogy,COMM120P,FA16,238
+"Adv Topics-Comm, Poli & Socty",COMM132,FA16,239
+"Adv Topics-Comm, Poli & Socty",COMM132,FA16,240
+"Adv Topics-Comm, Poli & Socty",COMM132,FA16,241
+Adv Topics-Cultural Production,COMM146,FA16,242
+The Info Age: Fact & Fiction,COMM151,FA16,243
+"Latino Space, Place & Culture",COMM155,FA16,244
+Rep/Israeli/Pal Conflict,COMM158,FA16,245
+Biography & Life Stories,COMM170,FA16,246
+Culture Domination & Resistnce,COMM177,FA16,247
+Junior Seminar in Comm,COMM190,FA16,248
+Junior Seminar in Comm,COMM190,FA16,249
+Junior Seminar in Comm,COMM190,FA16,250
+Advanced Topics/General Comm,COMM193,FA16,251
+Research Seminar/Washington DC,COMM194,FA16,252
+Directed Group Study/Comm,COMM198,FA16,253
+Directed Group Study/Comm,COMM198,FA16,254
+Directed Group Study/Comm,COMM198,FA16,255
+Directed Group Study/Comm,COMM198,FA16,256
+Directed Group Study/Comm,COMM198,FA16,257
+Directed Group Study/Comm,COMM198,FA16,258
+Directed Group Study/Comm,COMM198,FA16,259
+Directed Group Study/Comm,COMM198,FA16,260
+Directed Group Study/Comm,COMM198,FA16,261
+Directed Group Study/Comm,COMM198,FA16,262
+Directed Group Study/Comm,COMM198,FA16,263
+Directed Group Study/Comm,COMM198,FA16,264
+Directed Group Study/Comm,COMM198,FA16,265
+Directed Group Study/Comm,COMM198,FA16,266
+Directed Group Study/Comm,COMM198,FA16,267
+Directed Group Study/Comm,COMM198,FA16,268
+Directed Group Study/Comm,COMM198,FA16,269
+Directed Group Study/Comm,COMM198,FA16,270
+Directed Group Study/Comm,COMM198,FA16,271
+Directed Group Study/Comm,COMM198,FA16,272
+Directed Group Study/Comm,COMM198,FA16,273
+Directed Group Study/Comm,COMM198,FA16,274
+Directed Group Study/Comm,COMM198,FA16,275
+Directed Group Study/Comm,COMM198,FA16,276
+Directed Group Study/Comm,COMM198,FA16,277
+Directed Group Study/Comm,COMM198,FA16,278
+Directed Group Study/Comm,COMM198,FA16,279
+College Acad Mentor Program,CONT150A,FA16,280
+CAMP Field Study,CONT150B,FA16,281
+Fluency/Information Technology,CSE3,FA16,282
+Fluency/Information Technology,CSE3,FA16,283
+Introduction to Programming I,CSE5A,FA16,284
+Intro/Computer Sci: Java (I),CSE8A,FA16,285
+Intro/Computer Sci: Java (I),CSE8A,FA16,286
+Intro/Computer Sci: Java (I),CSE8A,FA16,287
+Intro/Computer Sci. Java (II),CSE8B,FA16,288
+Intr/Computer Sci&Obj-Ori:Java,CSE11,FA16,289
+Intr/Computer Sci&Obj-Ori:Java,CSE11,FA16,290
+Basic Data Struct & OO Design,CSE12,FA16,291
+Basic Data Struct & OO Design,CSE12,FA16,292
+Basic Data Struct & OO Design,CSE12,FA16,293
+Software Tools&Techniques Lab,CSE15L,FA16,294
+Software Tools&Techniques Lab,CSE15L,FA16,295
+Software Tools&Techniques Lab,CSE15L,FA16,296
+Intro/Discrete Mathematics,CSE20,FA16,297
+Intro/Discrete Mathematics,CSE20,FA16,298
+Math/Algorithm&Systems Analys,CSE21,FA16,299
+Math/Algorithm&Systems Analys,CSE21,FA16,300
+Computer Organiz&Systms Progrm,CSE30,FA16,301
+Computer Organiz&Systms Progrm,CSE30,FA16,302
+Freshman Seminar,CSE87,FA16,303
+Freshman Seminar,CSE87,FA16,304
+Tutor Apprentice,CSE95,FA16,305
+Advanced Data Structures,CSE100,FA16,306
+Advanced Data Structures,CSE100,FA16,307
+Advanced Data Structures,CSE100,FA16,308
+Design & Analysis of Algorithm,CSE101,FA16,309
+Design & Analysis of Algorithm,CSE101,FA16,310
+Practical Intro/Prob & Stats,CSE103,FA16,311
+Intro/Theory of Computation,CSE105,FA16,312
+Intro/Theory of Computation,CSE105,FA16,313
+Intro/Theory of Computation,CSE105,FA16,314
+Software Engineering,CSE110,FA16,315
+Software Engineering,CSE110,FA16,316
+Ubiquitous Computing,CSE118,FA16,317
+Princ/Computer Operating Systm,CSE120,FA16,318
+Princ/Computer Operating Systm,CSE120,FA16,319
 Computer Networks,CSE123,FA16,320
 Computer Networks,CSE123,FA16,321
 Intro to Computer Security,CSE127,FA16,322
@@ -169,15 +489,15 @@ Advanced Practicum I,FPMU180A,FA16,486
 Intro to Human Development,HDP1,FA16,487
 Senior Seminar,HDP150,FA16,488
 Exper Proj/Human Dev. Research,HDP181,FA16,489
-Field Resrch/Human Development,HDP191,FA16,490
-Field Resrch/Human Development,HDP191,FA16,491
-Adv Resrch/Human Development,HDP193,FA16,492
-Honors Thesis,HDP194A,FA16,493
-Instructionl Apprentice in HDP,HDP195,FA16,494
-Modern Africa Since 1880,HIAF111,FA16,495
-Hist.&Cultures/Korean Diaspora,HIEA152,FA16,496
-Greece in the Classical Age,HIEU101,FA16,497
-Euro Intellct Hist: 1780-1870,HIEU142,FA16,498
+Field Resrch/Human Development,HDP191,FA16,-488
+Field Resrch/Human Development,HDP191,FA16,-487
+Adv Resrch/Human Development,HDP193,FA16,-486
+Honors Thesis,HDP194A,FA16,-485
+Instructionl Apprentice in HDP,HDP195,FA16,-484
+Modern Africa Since 1880,HIAF111,FA16,-483
+Hist.&Cultures/Korean Diaspora,HIEA152,FA16,-482
+Greece in the Classical Age,HIEU101,FA16,-481
+Euro Intellct Hist: 1780-1870,HIEU142,FA16,-480
 How Women Changed Europe,HIEU148,FA16,499
 How Women Changed Europe,HIEU148,FA16,500
 Mod German/Bismarck to Hitler,HIEU154,FA16,501
@@ -472,41 +792,41 @@ Capstone Course for Writing,LTWR194,FA16,789
 Apprentice Teaching,LTWR195,FA16,790
 Apprentice Teaching,LTWR195,FA16,791
 Intro to Aerospace Engineering,MAE2,FA16,792
-Intro/Engineering Graphcs&Desn,MAE3,FA16,793
-Intro/Engineering Graphcs&Desn,MAE3,FA16,794
-Quantitative Computer Skills,MAE5,FA16,795
-MATLAB Program for Engr Analys,MAE8,FA16,796
-Elements of Materials Science,MAE20,FA16,797
+Intro/Engineering Graphcs&Desn,MAE3,FA16,-791
+Intro/Engineering Graphcs&Desn,MAE3,FA16,-790
+Quantitative Computer Skills,MAE5,FA16,-789
+MATLAB Program for Engr Analys,MAE8,FA16,-788
+Elements of Materials Science,MAE20,FA16,-787
 Introductory Fluid Mechanics,MAE101A,FA16,798
-Heat Transfer,MAE101C,FA16,799
-Aerodynamics,MAE104,FA16,800
-Intro To Mathematical Physics,MAE105,FA16,801
-Intro To Mathematical Physics,MAE105,FA16,802
-Intro To Mathematical Physics,MAE105,FA16,803
-Computational Methods/Engineer,MAE107,FA16,804
-Computational Methods/Engineer,MAE107,FA16,805
-Thermodynamics,MAE110A,FA16,806
-Flow & Transport/Environment,MAE122,FA16,807
+Heat Transfer,MAE101C,FA16,-797
+Aerodynamics,MAE104,FA16,798
+Intro To Mathematical Physics,MAE105,FA16,-797
+Intro To Mathematical Physics,MAE105,FA16,-796
+Intro To Mathematical Physics,MAE105,FA16,-795
+Computational Methods/Engineer,MAE107,FA16,796
+Computational Methods/Engineer,MAE107,FA16,797
+Thermodynamics,MAE110A,FA16,798
+Flow & Transport/Environment,MAE122,FA16,-797
 Mechanics I: Statics,MAE130A,FA16,808
-Mechanics III: Vibrations,MAE130C,FA16,809
-Solid Mechanics I,MAE131A,FA16,810
-Linear Circuits,MAE140,FA16,811
-Embedded Control & Robotics,MAE144,FA16,812
-Computer-Aided Analysis&Design,MAE150,FA16,813
-Fund. Prin./Mechanical Desgn I,MAE156A,FA16,814
-Experimental Techniques,MAE170,FA16,815
-Experimental Techniques,MAE170,FA16,816
-Space Mission Analysis/Design,MAE181,FA16,817
+Mechanics III: Vibrations,MAE130C,FA16,-807
+Solid Mechanics I,MAE131A,FA16,808
+Linear Circuits,MAE140,FA16,-807
+Embedded Control & Robotics,MAE144,FA16,808
+Computer-Aided Analysis&Design,MAE150,FA16,809
+Fund. Prin./Mechanical Desgn I,MAE156A,FA16,810
+Experimental Techniques,MAE170,FA16,811
+Experimental Techniques,MAE170,FA16,812
+Space Mission Analysis/Design,MAE181,FA16,813
 Directed Group Study,MAE198,FA16,818
 Precalculus,MATH3C,FA16,819
-Precalculus,MATH3C,FA16,820
-Pre-calculus for Sci & Engn,MATH4C,FA16,821
-Calculus I,MATH10A,FA16,822
-Calculus I,MATH10A,FA16,823
-Calculus I,MATH10A,FA16,824
-Calculus II,MATH10B,FA16,825
-Calculus II,MATH10B,FA16,826
-Calculus III,MATH10C,FA16,827
+Precalculus,MATH3C,FA16,-818
+Pre-calculus for Sci & Engn,MATH4C,FA16,819
+Calculus I,MATH10A,FA16,-818
+Calculus I,MATH10A,FA16,-817
+Calculus I,MATH10A,FA16,-816
+Calculus II,MATH10B,FA16,-815
+Calculus II,MATH10B,FA16,-814
+Calculus III,MATH10C,FA16,-813
 Calculus III,MATH10C,FA16,828
 Calculus-Based Prob & Stats,MATH11,FA16,829
 Calculus-Based Prob & Stats,MATH11,FA16,830
@@ -666,15 +986,15 @@ Wind Ensemble,MUS95L,FA16,983
 World Music Ensembles,MUS95W,FA16,984
 World Music Ensembles,MUS95W,FA16,985
 Music Theory and Practice I,MUS101A,FA16,986
-Music Theory and Practice IV,MUS102A,FA16,987
-Seminar in Composition I,MUS103A,FA16,988
-Honors Seminar in Composition,MUS103D,FA16,989
-Music of The 20th Century,MUS114,FA16,990
-Hist Mus in Westrn Culture I,MUS120A,FA16,991
-Blues: An Oral Tradition,MUS126,FA16,992
-Chamber Music Performance,MUS130,FA16,993
-Pro-Seminar/Instrmntl Instruct,MUS132,FA16,994
-Pro-Seminar/Instrmntl Instruct,MUS132,FA16,995
+Music Theory and Practice IV,MUS102A,FA16,-985
+Seminar in Composition I,MUS103A,FA16,-984
+Honors Seminar in Composition,MUS103D,FA16,-983
+Music of The 20th Century,MUS114,FA16,-982
+Hist Mus in Westrn Culture I,MUS120A,FA16,-981
+Blues: An Oral Tradition,MUS126,FA16,-980
+Chamber Music Performance,MUS130,FA16,-979
+Pro-Seminar/Instrmntl Instruct,MUS132,FA16,-978
+Pro-Seminar/Instrmntl Instruct,MUS132,FA16,-977
 Pro-Seminar/Instrmntl Instruct,MUS132,FA16,996
 Pro-Seminar/Instrmntl Instruct,MUS132,FA16,997
 Pro-Seminar/Instrmntl Instruct,MUS132,FA16,998
@@ -700,11 +1020,11 @@ Engin. Comp Using MATLAB,CENG15,FA16,1017
 Engin. Comp Using MATLAB,CENG15,FA16,1018
 Material and Energy Balances,CENG100,FA16,1019
 Material and Energy Balances,CENG100,FA16,1020
-Introductory Fluid Mechanics,CENG101A,FA16,1021
-Chemical Process Dynmics&Cntrl,CENG120,FA16,1022
-Separation Processes,CENG122,FA16,1023
-Engin. Comp Using MATLAB,NANO15,FA16,1024
-Engin. Comp Using MATLAB,NANO15,FA16,1025
+Introductory Fluid Mechanics,CENG101A,FA16,-1019
+Chemical Process Dynmics&Cntrl,CENG120,FA16,1020
+Separation Processes,CENG122,FA16,-1019
+Engin. Comp Using MATLAB,NANO15,FA16,1020
+Engin. Comp Using MATLAB,NANO15,FA16,1021
 Engin. Comp Using MATLAB,NANO15,FA16,1026
 Foundatn NanoEng: Chem Princpl,NANO102,FA16,1027
 Materials Science & Engineerng,NANO108,FA16,1028
@@ -789,22 +1109,22 @@ Electricity & Magnetism Lab,PHYS1BL,FA16,1099
 "Waves,Optics&Modrn Phys Lab",PHYS1CL,FA16,1107
 "Waves,Optics&Modrn Phys Lab",PHYS1CL,FA16,1108
 Physics-Mechanics,PHYS2A,FA16,1109
-Phys-Electricity and Magnetism,PHYS2B,FA16,1110
-Physics Laboratory-Mechanics,PHYS2BL,FA16,1111
-"Physics-Flu,Wav,Thrmdyn,Optics",PHYS2C,FA16,1112
-"Physics-Flu,Wav,Thrmdyn,Optics",PHYS2C,FA16,1113
-Phys Lab-Elec&Magnetism,PHYS2CL,FA16,1114
-Phys Majrs-Elect & Magnetism,PHYS4C,FA16,1115
+Phys-Electricity and Magnetism,PHYS2B,FA16,-1108
+Physics Laboratory-Mechanics,PHYS2BL,FA16,1109
+"Physics-Flu,Wav,Thrmdyn,Optics",PHYS2C,FA16,1110
+"Physics-Flu,Wav,Thrmdyn,Optics",PHYS2C,FA16,-1109
+Phys Lab-Elec&Magnetism,PHYS2CL,FA16,1110
+Phys Majrs-Elect & Magnetism,PHYS4C,FA16,1111
 Phys Majrs-Elect & Magnetism,PHYS4C,FA16,1116
-Stars and Black Holes,PHYS5,FA16,1117
-Survey of Physics,PHYS11,FA16,1118
-Life in the Universe,PHYS13,FA16,1119
-Freshman Seminar,PHYS87,FA16,1120
-Freshman Seminar,PHYS87,FA16,1121
-Freshman Seminar,PHYS87,FA16,1122
-Electromagnetism I,PHYS100A,FA16,1123
-Mathematical&Computatnl Phy I,PHYS105A,FA16,1124
-Mechanics I,PHYS110A,FA16,1125
+Stars and Black Holes,PHYS5,FA16,-1115
+Survey of Physics,PHYS11,FA16,-1114
+Life in the Universe,PHYS13,FA16,-1113
+Freshman Seminar,PHYS87,FA16,-1112
+Freshman Seminar,PHYS87,FA16,-1111
+Freshman Seminar,PHYS87,FA16,-1110
+Electromagnetism I,PHYS100A,FA16,-1109
+Mathematical&Computatnl Phy I,PHYS105A,FA16,-1108
+Mechanics I,PHYS110A,FA16,-1107
 Experimental Techniques,PHYS122,FA16,1126
 Quantum Physics II,PHYS130B,FA16,1127
 Special Topics,PHYS139,FA16,1128
@@ -929,22 +1249,22 @@ Money and Banking,MGT184,FA16,1246
 Stuctural Materials Lab,SE2L,FA16,1247
 Stuctural Materials Lab,SE2L,FA16,1248
 Mechanics I: Statics,SE101A,FA16,1249
-Mechanics III: Vibrations,SE101C,FA16,1250
-Conceptual Structural Design,SE103,FA16,1251
-Solid Mechanics I,SE110A,FA16,1252
-Intro. to Computing for Eng.,SE121A,FA16,1253
-"Stats, Probability&Reliability",SE125,FA16,1254
-Structural Analysis I,SE130A,FA16,1255
+Mechanics III: Vibrations,SE101C,FA16,-1248
+Conceptual Structural Design,SE103,FA16,1249
+Solid Mechanics I,SE110A,FA16,1250
+Intro. to Computing for Eng.,SE121A,FA16,1251
+"Stats, Probability&Reliability",SE125,FA16,-1250
+Structural Analysis I,SE130A,FA16,1251
 Design of Composite Structures,SE142,FA16,1256
 Design of Steel Structures,SE150,FA16,1257
-Earthquake Engineering,SE180,FA16,1258
-Earthquake Engineering,SE180,FA16,1259
-Geotechnical Engineering,SE181,FA16,1260
-History of Earth & Evolution,SIO12,FA16,1261
-Natural Disasters,SIO15,FA16,1262
-Climate Change and Society,SIO25,FA16,1263
-The Oceans,SIO30,FA16,1264
-Life and Climate on Earth,SIO40,FA16,1265
+Earthquake Engineering,SE180,FA16,-1256
+Earthquake Engineering,SE180,FA16,-1255
+Geotechnical Engineering,SE181,FA16,-1254
+History of Earth & Evolution,SIO12,FA16,1255
+Natural Disasters,SIO15,FA16,1256
+Climate Change and Society,SIO25,FA16,1257
+The Oceans,SIO30,FA16,1258
+Life and Climate on Earth,SIO40,FA16,1259
 Intro/Earth&Environmental Sci,SIO50,FA16,1266
 Freshman Seminar,SIO87,FA16,1267
 Freshman Seminar,SIO87,FA16,1268
