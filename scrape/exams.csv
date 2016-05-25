@@ -1,1 +1,1226 @@
 Id,Type,Date,Days,Time,Building,Room,Professor,SeatsOpen,TotalSeats,ID
+<<<<<<< Updated upstream
+=======
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,5
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,6
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,7
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,8
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,9
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,10
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,11
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,13
+Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,15
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,17
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,18
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,19
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,20
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,22
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,24
+,LE,A00,W,1:00p-1:50p,CSB,001,,,,28
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,28
+,LE,A00,F,12:00p-12:50p,CSB,001,,,,30
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,30
+,LE,A00,F,2:00p-2:50p,SOLIS,111,,,,34
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,34
+,LE,A00,W,2:00p-2:50p,SOLIS,111,,,,35
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,35
+,LE,A00,W,4:00p-4:50p,SOLIS,111,,,,37
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,37
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,40
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,41
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,42
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,44
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,46
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,48
+,MI,10/20/2016,Th,8:00p-9:50p,YORK,2722,,,,49
+,MI,11/17/2016,Th,8:00p-9:50p,GH,242,,,,49
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,49
+,MI,10/27/2016,Th,8:00p-9:50p,GH,242,,,,50
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,50
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,54
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,55
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,56
+,MI,10/26/2016,W,8:00p-9:50p,GH,242,,,,57
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,57
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,58
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,59
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,61
+,MI,10/26/2016,W,8:00p-9:50p,PETER,108,,,,62
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,62
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,63
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,64
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,65
+,MI,10/28/2016,F,8:00p-9:50p,SOLIS,107,,,,66
+,FI,12/03/2016,S,11:30a-2:29p,TBA,TBA,,,,66
+,MI,10/28/2016,F,8:00p-9:50p,GH,242,,,,67
+,FI,12/03/2016,S,11:30a-2:29p,TBA,TBA,,,,67
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,68
+"BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.","BILD 4 A00 final exam will be held in the Natural
+ sciences Building auditorium.",69
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,69
+"BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.","BILD 4 B00 final exam will be held in the Natural
+ Sciences Building auditorium.",70
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,70
+"BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.","BILD 4 C00 final exam will be held in the
+ Natural Sciences Building auditorium.",71
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,71
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,72
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,76
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,77
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,84
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,85
+,MI,10/27/2016,Th,8:00p-9:20p,SOLIS,107,,,,88
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,88
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,89
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,90
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,93
+,MI,10/19/2016,W,7:00p-8:50p,PETER,110,,,,94
+,MI,11/16/2016,W,7:00p-8:50p,PETER,110,,,,94
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,94
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,95
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,96
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,97
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,98
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,103
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,104
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,105
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,106
+,FI,12/10/2016,S,11:30a-2:29p,TBA,TBA,,,,107
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,115
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,117
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,118
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,119
+Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,Capitalism & Gender,120
+,FI,12/10/2016,S,11:30a-2:29p,TBA,TBA,,,,122
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,123
+,MI,10/29/2016,S,9:00a-10:50a,WLH,2001,,,,124
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,124
+,MI,10/29/2016,S,9:00a-10:50a,YORK,2722,,,,125
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,125
+,MI,10/22/2016,S,9:00a-10:50a,YORK,2722,,,,126
+,MI,11/19/2016,S,9:00a-10:50a,YORK,2722,,,,126
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,126
+,MI,10/29/2016,S,9:00a-10:50a,GH,242,,,,127
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,127
+,MI,10/29/2016,S,9:00a-10:50a,PETER,108,,,,128
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,128
+,MI,10/24/2016,M,8:00p-9:50p,GH,242,,,,129
+,MI,11/21/2016,M,8:00p-9:50p,GH,242,,,,129
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,129
+,MI,10/29/2016,S,12:00p-1:50p,GH,242,,,,130
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,130
+,MI,10/29/2016,S,1:00p-2:50p,PETER,108,,,,131
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,131
+,MI,10/13/2016,Th,7:00p-7:50p,PCYNH,109,,,,132
+,MI,10/27/2016,Th,7:00p-7:50p,PCYNH,109,,,,132
+,MI,11/10/2016,Th,7:00p-7:50p,PCYNH,109,,,,132
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,132
+,MI,10/22/2016,S,12:00p-1:50p,GH,242,,,,133
+,MI,11/12/2016,S,12:00p-1:50p,GH,242,,,,133
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,133
+,MI,10/22/2016,S,3:00p-4:50p,GH,242,,,,134
+,MI,11/12/2016,S,3:00p-4:50p,GH,242,,,,134
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,134
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,137
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,139
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,140
+"Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).","Lecture Meeting Location: Urey Hall Addition 3060
+ (UHA 3060).",141
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,141
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,144
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,145
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,146
+,MI,10/26/2016,W,7:00p-9:20p,CSB,001,,,,147
+,MI,11/21/2016,M,7:00p-9:20p,CSB,001,,,,147
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,147
+,MI,10/31/2016,M,7:00p-8:50p,PCYNH,106,,,,148
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,148
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,149
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,150
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,151
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,152
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,153
+,MI,10/22/2016,S,9:00a-10:50a,GH,242,,,,154
+,MI,11/19/2016,S,9:00a-10:50a,GH,242,,,,154
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,154
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,155
+,FI,12/07/2016,W,7:00p-9:59p,TBA,TBA,,,,156
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,157
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,159
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,160
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,161
+CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,CHEM 195 will meet in NSB 2303,163
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,164
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,165
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,166
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,167
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,168
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,169
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,170
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,171
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,172
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,173
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,174
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,175
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,177
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,179
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,181
+,FI,12/07/2016,W,11:30a-12:20p,TBA,TBA,,,,182
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,183
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,184
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,185
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,186
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,187
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,191
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,193
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,194
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,195
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,197
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,198
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,200
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,202
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,203
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,204
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,220
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,221
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,222
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,223
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,226
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,228
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,229
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,230
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,231
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,232
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,233
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,234
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,235
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,236
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,237
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,238
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,239
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,240
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,241
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,242
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,243
+Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,Neuroscience Meets Theater,245
+Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,Cult. of Exhibition & Display,246
+"Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.",276
+"Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.","Location: Early Academic Outreach Program office,
+ UCTR building 301.",277
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,278
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,279
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,280
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,281
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,282
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,283
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,284
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,285
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,286
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,287
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,288
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,289
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,290
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,291
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,292
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,293
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,294
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,295
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,296
+,FI,12/03/2016,S,8:00a-10:59a,TBA,TBA,,,,297
+,FI,12/03/2016,S,8:00a-10:59a,TBA,TBA,,,,298
+,FI,12/03/2016,S,8:00a-10:50a,TBA,TBA,,,,302
+,FI,12/03/2016,S,8:00a-10:59a,TBA,TBA,,,,303
+,FI,12/03/2016,S,8:00a-10:59a,TBA,TBA,,,,304
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,305
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,306
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,308
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,309
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,310
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,311
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,312
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,314
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,315
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,316
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,317
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,318
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,319
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,320
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,321
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,322
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,323
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,324
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,325
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,326
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,327
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,328
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,329
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,330
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,331
+"Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F","Pre-requisites: CSE 132A (or equivalent).
+ To receive course clearance, please use the Course
+ Clearance form: http://goo.gl/forms/QRpjUcXr1F",332
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,332
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,335
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,336
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,337
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,338
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,339
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,340
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,341
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,342
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,343
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,344
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,345
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,346
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,347
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,348
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,349
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,350
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,352
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,353
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,354
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,355
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,356
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,357
+,MU,09/30/2016,F,5:00p-6:20p,CSB,002,,,,357
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,358
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,359
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,360
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,361
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,362
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,363
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,368
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,374
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,375
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,376
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,377
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,378
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,379
+,MI,10/19/2016,W,8:00p-8:50p,GH,242,,,,380
+,MI,11/16/2016,W,8:00p-8:50p,GH,242,,,,380
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,380
+"Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.","Midterms for ECON 100A C00 will meet in same location
+ as ECON 100A B00.",381
+,MI,10/19/2016,W,8:00p-8:50p,TBA,TBA,,,,381
+,MI,11/16/2016,W,8:00p-8:50p,TBA,TBA,,,,381
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,381
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,382
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,383
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,384
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,385
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,386
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,387
+,MI,10/24/2016,M,8:00p-9:20p,PETER,108,,,,388
+,MI,11/15/2016,Tu,8:00p-9:20p,GH,242,,,,388
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,388
+"Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.","Midterms for ECON 110A B00 will meet in same location
+ as ECON 110A A00.",389
+,MI,10/24/2016,M,8:00p-9:20p,TBA,TBA,,,,389
+,MI,11/15/2016,Tu,8:00p-9:20p,TBA,TBA,,,,389
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,389
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,390
+,MI,10/21/2016,F,7:00p-8:20p,LEDDN,AUD,,,,391
+,MI,11/14/2016,M,7:00p-8:20p,LEDDN,AUD,,,,391
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,391
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,392
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,393
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,394
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,395
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,396
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,397
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,398
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,399
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,400
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,401
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,402
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,403
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,404
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,405
+,MI,10/14/2016,F,7:00p-8:20p,GH,242,,,,406
+,MI,11/07/2016,M,8:00p-9:20p,GH,242,,,,406
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,406
+"Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.","Midterms for ECON 171 B00 will meet in same location as
+ ECON 171 A00.",407
+,MI,10/14/2016,F,7:00p-8:20p,TBA,TBA,,,,407
+,MI,11/07/2016,M,8:00p-9:20p,TBA,TBA,,,,407
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,407
+,MI,10/17/2016,M,7:00p-8:20p,LEDDN,AUD,,,,408
+,MI,11/09/2016,W,7:00p-8:20p,LEDDN,AUD,,,,408
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,408
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,409
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,410
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,411
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,412
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,413
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,416
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,420
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,421
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,423
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,424
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,439
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,453
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,454
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,456
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,457
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,458
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,459
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,460
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,461
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,462
+American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,463
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,463
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,465
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,466
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,467
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,468
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,473
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,474
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,475
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,476
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,478
+,LE,A00,W,1:00p-1:50p,APM,3402,,,,480
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,486
+"Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu","Email instructor for permission to enroll,then forward
+ instructor approval and your PID to
+ historyundergrad@ucsd.edu",487
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,487
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,488
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,489
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,490
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,491
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,493
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,494
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,495
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,496
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,497
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,498
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,499
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,500
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,501
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,505
+,FI,12/10/2016,S,8:00a-10:59a,TBA,TBA,,,,507
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,508
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,509
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,510
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,511
+American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,American Architecture and Urbanism in the 20th Century,512
+class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,class location is HSS 6008,513
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,514
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,515
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,518
+Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,Political Boundaries: Cross-Border Flows,519
+Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,Democracy/Econ Change in Latin A,520
+Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,Syrian Refugee Crisis in Intl Perspective,521
+Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,Contemp Political&Policy; Challenges in Latin A,522
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,524
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,525
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,526
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,527
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,528
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,529
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,530
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,531
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,532
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,533
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,534
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,535
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,536
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,537
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,538
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,539
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,540
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,541
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,542
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,543
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,545
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,547
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,548
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,554
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,555
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,558
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,567
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,568
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,569
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,573
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,579
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,580
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,588
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,589
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,590
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,593
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,595
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,596
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,597
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,599
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,600
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,601
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,602
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,603
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,604
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,605
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,606
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,607
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,608
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,609
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,610
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,616
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,617
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,619
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,623
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,624
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,626
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,634
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,635
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,636
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,640
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,641
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,644
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,652
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,653
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,654
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,665
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,666
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,667
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,668
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,669
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,685
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,686
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,687
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,688
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,689
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,690
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,691
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,692
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,693
+Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,Readings in Contemp Chinese Lit,694
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,694
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,695
+Weeks 1-5,Weeks 1-5,Weeks 1-5,Weeks 1-5,Weeks 1-5,Weeks 1-5,Weeks 1-5,Weeks 1-5,Weeks 1-5,Weeks 1-5,696
+"Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355","Weeks 6-10
+ class will meet in LIT 355",697
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,698
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,701
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,702
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,703
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,705
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,707
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,708
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,709
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,710
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,711
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,712
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,713
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,714
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,715
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,716
+,FI,12/03/2016,S,11:30a-2:29p,TBA,TBA,,,,717
+,FI,12/03/2016,S,11:30a-2:29p,TBA,TBA,,,,718
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,719
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,720
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,721
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,722
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,723
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,724
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,725
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,726
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,727
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,728
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,729
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,730
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,731
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,732
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,733
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,734
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,735
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,736
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,737
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,738
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,739
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,740
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,741
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,742
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,743
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,744
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,745
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,746
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,747
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,748
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,749
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,750
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,751
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,752
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,753
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,754
+,FI,12/03/2016,S,7:00p-9:59p,TBA,TBA,,,,755
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,756
+Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,Literatura Centroamericana hasta 1990,757
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,757
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,758
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,759
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,760
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,761
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,762
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,763
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,764
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,765
+Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,Latin American Narratives in Modernization,766
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,766
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,767
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,768
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,769
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,770
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,771
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,779
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,780
+,LE,A00,F,5:00p-5:50p,CSB,001,,,,783
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,783
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,784
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,785
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,786
+,LE,A00,W,2:00p-2:50p,CSB,001,,,,787
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,787
+,LE,A00,F,3:00p-3:50p,PETER,103,,,,788
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,788
+,LE,A00,F,5:00p-5:50p,WLH,2005,,,,789
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,789
+,LE,A00,Tu,2:00p-2:50p,PETER,102,,,,790
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,790
+,LE,B00,F,5:00p-5:50p,PCYNH,106,,,,792
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,792
+,FI,12/07/2016,W,7:00p-9:59p,TBA,TBA,,,,793
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,794
+,LE,A00,F,11:00a-11:50a,PCYNH,106,,,,795
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,795
+,LE,A00,TuTh,12:30p-1:50p,HSS,1330,,,,796
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,796
+,LE,A00,F,10:00a-10:50a,WLH,2005,,,,797
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,797
+,LE,A00,W,9:00a-9:50a,CSB,001,,,,798
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,798
+,LE,A00,W,1:00p-1:50p,PETER,104,,,,799
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,799
+,LE,A00,F,5:00p-5:50p,CENTR,119,,,,800
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,800
+,FI,12/07/2016,W,7:00p-9:59p,TBA,TBA,,,,801
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,802
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,803
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,804
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,805
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,806
+,LE,A00,M,4:00p-4:50p,CSB,002,,,,808
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,808
+,LE,B00,W,9:00a-9:50a,CSB,002,,,,809
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,809
+,LE,A00,F,9:00a-9:50a,CSB,002,,,,810
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,810
+,MI,10/20/2016,Th,8:00p-9:20p,SOLIS,107,,,,811
+,MI,11/17/2016,Th,8:00p-9:20p,SOLIS,107,,,,811
+,FI,12/03/2016,S,3:00p-5:59p,TBA,TBA,,,,811
+,MI,10/20/2016,Th,8:00p-9:20p,PETER,110,,,,812
+,MI,11/17/2016,Th,8:00p-9:20p,PETER,110,,,,812
+,FI,12/03/2016,S,3:00p-6:00p,TBA,TBA,,,,812
+,MI,10/20/2016,Th,8:00p-9:20p,PCYNH,109,,,,813
+,MI,11/17/2016,Th,8:00p-9:20p,PCYNH,109,,,,813
+,FI,12/03/2016,S,3:00p-5:59p,TBA,TBA,,,,813
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,814
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,815
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,816
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,817
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,818
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,819
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,820
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,821
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,822
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,823
+,MI,10/20/2016,Th,8:00p-9:20p,GH,242,,,,824
+,MI,11/17/2016,Th,8:00p-9:20p,YORK,2722,,,,824
+,FI,12/03/2016,S,3:00p-5:59p,TBA,TBA,,,,824
+,MI,10/20/2016,Th,8:00p-9:20p,YORK,2622,,,,825
+,MI,11/17/2016,Th,8:00p-9:20p,PETER,108,,,,825
+,FI,12/03/2016,S,3:00p-5:59p,TBA,TBA,,,,825
+,MI,10/20/2016,Th,8:00p-9:20p,LEDDN,AUD,,,,826
+,MI,11/17/2016,Th,8:00p-9:20p,LEDDN,AUD,,,,826
+,FI,12/03/2016,S,3:00p-5:59p,TBA,TBA,,,,826
+,MI,10/20/2016,Th,8:00p-9:20p,PCYNH,106,,,,827
+,MI,11/17/2016,Th,8:00p-9:20p,PCYNH,106,,,,827
+,FI,12/03/2016,S,3:00p-5:59p,TBA,TBA,,,,827
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,828
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,829
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,830
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,831
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,832
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,833
+"Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.","Math 20C B00 will have midterms on Tuesday, October
+ 18 and Tuesday,November 15 at 8-8:50pm.",834
+,MI,10/18/2016,Tu,8:00p-8:50p,PETER,110,,,,834
+,MI,11/15/2016,Tu,8:00p-8:50p,PETER,110,,,,834
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,834
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,835
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,836
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,837
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,838
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,839
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,840
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,841
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,842
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,843
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,844
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,846
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,847
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,848
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,849
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,850
+"Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.","Math 109 A00 will have midterms on Tuesday, October
+ 18 and Tuesday, November 15 at 6:30-7:20pm.",851
+,MI,10/18/2016,Tu,6:30p-7:20p,CENTR,109,,,,851
+,MI,11/15/2016,Tu,6:30p-7:20p,CENTR,109,,,,851
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,851
+"Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.","Math 109 B00 will have midterms on Wednesday,
+ October 19 and Wednesday, November 9 at 7-8:50pm.",852
+,MI,10/19/2016,W,7:00p-8:50p,CSB,002,,,,852
+,MI,11/09/2016,W,7:00p-8:50p,CSB,002,,,,852
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,852
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,853
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,854
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,855
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,856
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,857
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,858
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,859
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,860
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,861
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,862
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,863
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,864
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,865
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,866
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,867
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,868
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,923
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,924
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,925
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,926
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,927
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,928
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,933
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,934
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,935
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,940
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,941
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,942
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,943
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,944
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,945
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,946
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,961
+"Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting",963
+"Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting",964
+"Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting",972
+"Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting","Both sections meet in CPMC Room 264 on the first
+ class meeting",973
+,LE,A00,TuTh,9:30a-10:50a,CPMC,265,,,,974
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,974
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,975
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,976
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,978
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,979
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,980
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,981
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,996
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,998
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1003
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1004
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1005
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1006
+,LE,A00,W,12:00p-12:50p,YORK,2622,,,,1007
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1007
+,LE,A00,Tu,5:00p-5:50p,CENTR,101,,,,1008
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1008
+,LE,A00,Th,5:00p-5:50p,CENTR,101,,,,1009
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1009
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1010
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1011
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1012
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1013
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1014
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1015
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1016
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1017
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,1018
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1019
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1020
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1021
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1022
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1023
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1024
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1026
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1027
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1029
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1030
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1031
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1032
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1033
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1034
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1035
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1036
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1037
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,1078
+,FI,12/07/2016,W,7:00p-9:59p,TBA,TBA,,,,1086
+,LE,A00,Tu,6:30p-7:20p,YORK,2722,,,,1095
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1095
+,LE,A00,TuTh,11:00a-12:20p,YORK,2722,,,,1096
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1096
+,LE,A00,F,12:00p-12:50p,PETER,108,,,,1098
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,1098
+,LE,B00,F,10:00a-10:50a,WLH,2001,,,,1099
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1099
+,LE,A00,W,11:00a-11:50a,PETER,103,,,,1101
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1101
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1102
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1103
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1104
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1108
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1109
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1110
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1112
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1113
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1114
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1115
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1116
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1118
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1119
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1120
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1121
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1122
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1124
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1125
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1126
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1127
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1128
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1129
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1130
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1131
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1132
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1133
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1134
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1135
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1136
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1137
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1138
+"Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.","Politics, Policies, and Economic Prosperity in Latin
+ America.",1139
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1139
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1140
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1141
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1142
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1143
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1149
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1150
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1151
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1152
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1153
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1154
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1156
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1157
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1158
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1159
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1162
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1163
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1164
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1165
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1166
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1167
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1168
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1169
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1170
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1171
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1172
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,1173
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1174
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,1175
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1177
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1178
+"Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.","Meets 10/3 - 11/21 in Literature Bldg. Students will be
+ notified about room number.",1179
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1180
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1181
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,1188
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1189
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1190
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1191
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1192
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1193
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1194
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1195
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1196
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1197
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1198
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1199
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1200
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1201
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1202
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1203
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1204
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1205
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1206
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,1207
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1208
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1209
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1210
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1211
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1212
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1213
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1214
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1215
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1216
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1217
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1218
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1219
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1220
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1221
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1222
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1223
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1224
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1225
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1226
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1227
+,LE,A00,F,10:00a-10:50a,WLH,2005,,,,1230
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1230
+,LE,A00,W,9:00a-9:50a,CSB,001,,,,1231
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,1231
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1232
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1233
+,LE,A00,W,2:00p-2:50p,CSB,004,,,,1234
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1234
+,LE,A00,F,3:00p-3:50p,YORK,2622,,,,1235
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1235
+,LE,A00,M,2:00p-2:50p,CSB,001,,,,1236
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1236
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1237
+,LE,A00,W,8:00a-8:50a,CENTR,212,,,,1238
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1238
+,LE,A00,F,2:00p-2:50p,CSB,001,,,,1239
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,1239
+,LE,A00,TuTh,8:00a-9:20a,RBC,AUD,,,,1240
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1240
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1241
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1242
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1244
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1245
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1246
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1251
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1253
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1254
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1255
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1256
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1257
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1258
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1260
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1263
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1264
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1267
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1268
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1269
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1271
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1272
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1273
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1274
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1275
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1276
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1277
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1278
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1279
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1281
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1282
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1284
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1285
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1286
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1287
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1288
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1289
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1290
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1291
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1292
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1293
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1295
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1296
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1297
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1298
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1329
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1335
+,FI,12/05/2016,M,11:30a-2:29p,TBA,TBA,,,,1336
+,FI,12/05/2016,M,7:00p-9:59p,TBA,TBA,,,,1337
+,FI,12/06/2016,Tu,7:00p-9:59p,TBA,TBA,,,,1338
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1339
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1340
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1341
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1342
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1343
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1344
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1346
+,FI,12/06/2016,Tu,11:30a-2:29p,TBA,TBA,,,,1348
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1349
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,1351
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1352
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,1353
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1354
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1355
+,FI,12/10/2016,S,8:00a-10:59a,TBA,TBA,,,,1356
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1357
+,FI,12/10/2016,S,8:00a-10:59a,TBA,TBA,,,,1358
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1361
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1364
+,FI,12/06/2016,Tu,3:00p-5:59p,TBA,TBA,,,,1366
+,FI,12/09/2016,F,8:00a-10:59a,TBA,TBA,,,,1367
+Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,Class location is Galbriath Hall room 253.,1375
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1382
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1390
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1399
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1400
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1401
+,FI,12/06/2016,Tu,8:00a-10:59a,TBA,TBA,,,,1402
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1403
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1405
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1406
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1407
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1408
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1410
+,FI,12/07/2016,W,3:00p-5:59p,TBA,TBA,,,,1412
+,FI,12/05/2016,M,8:00a-10:59a,TBA,TBA,,,,1419
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1420
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1421
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1422
+,LA,A03,W,12:00p-2:50p,MANDE,B111E,,,,1424
+,LA,A04,F,12:00p-2:50p,MCC,222,,,,1424
+,LA,A05,Tu,3:30p-6:20p,MCC,222,,,,1424
+,LA,A06,Th,3:30p-6:20p,MCC,222,,,,1424
+,FI,12/08/2016,Th,7:00p-9:59p,TBA,TBA,,,,1424
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1425
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1427
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1432
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1433
+,FI,12/09/2016,F,7:00p-9:59p,TBA,TBA,,,,1434
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1435
+,FI,12/07/2016,W,11:30a-2:29p,TBA,TBA,,,,1436
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1437
+,FI,12/07/2016,W,7:00p-9:59p,TBA,TBA,,,,1440
+,FI,12/08/2016,Th,3:00p-5:59p,TBA,TBA,,,,1441
+,FI,12/08/2016,Th,11:30a-2:29p,TBA,TBA,,,,1442
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1443
+,FI,12/08/2016,Th,8:00a-10:59a,TBA,TBA,,,,1446
+,FI,12/09/2016,F,11:30a-2:29p,TBA,TBA,,,,1447
+,FI,12/05/2016,M,3:00p-5:59p,TBA,TBA,,,,1448
+,FI,12/07/2016,W,8:00a-10:59a,TBA,TBA,,,,1449
+,FI,12/09/2016,F,3:00p-5:59p,TBA,TBA,,,,1450
+>>>>>>> Stashed changes

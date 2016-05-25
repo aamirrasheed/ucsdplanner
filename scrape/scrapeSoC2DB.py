@@ -422,17 +422,8 @@ def postCourse(course, sections, exams):
         else:
             r = requests.post(DB_URL + "/exams", exam_data)
 
-
-
-
-
-
-
-
-
-
 depts = getDepartments("FA16")
-page = 151
+page = 1
 all_courses = []
 all_sections = []
 all_exams = []
