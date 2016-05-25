@@ -10,6 +10,7 @@ from ast import literal_eval
 ALL_PROFS_URL = 'http://search.mtvnservices.com/typeahead/suggest/?q=*%3A*+AND+schoolid_s%3A1079&defType=edismax&siteName=rmp&rows=2670&start=0'
 RATINGS_URL = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid='  # url to get prof ratings
 COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili pepper
+DB_URL = "https://ucsdplanner-api.azure-mobile.net/api/term"
 
 def get_rmp():
     # get all prof info and make it into a dictionary
@@ -34,20 +35,19 @@ def get_rmp():
 
     # loop over each professor and get their ratings information
     for prof in all_profs:
-        print TEST
         req = requests.get(RATINGS_URL + str(prof['id']))
-        soup = BeautifulSoup(req.text, "lxml")
+        soup = BeautifulSoup(req.text, "html.parser")
         header = soup.find("div", "left-breakdown")
 
         # if header is None, then there are no ratings for prof
         if header == None:
             professor = {}
             professor['name'] = prof['name']
-            professor['overall_rating'] = None
-            professor['helpfulness'] = None
-            professor['clarity'] = None
-            professor['easiness'] = None
-            professor['hotness'] = None
+            professor['rmp_overall'] = None
+            professor['rmp_helpful'] = None
+            professor['rmp_clarity'] = None
+            professor['rmp_easiness'] = None
+            professor['rmp_hot'] = None
             data.append(professor)
             continue
 
@@ -63,13 +63,19 @@ def get_rmp():
         # dictionary of prof ratings to be put in data
         professor = {}
         professor['name'] = prof['name']
-        professor['overall_rating'] = overall_rating
-        professor['helpfulness'] = helpfulness
-        professor['clarity'] = clarity
-        professor['easiness'] = easiness
-        professor['hotness'] = True if chili_figure != COLD_CHILI_PIC else False
+        professor['rmp_overall'] = overall_rating
+        professor['rmp_helpful'] = helpfulness
+        professor['rmp_clarity'] = clarity
+        professor['rmp_easiness'] = easiness
+        professor['rmp_hot'] = 1 if chili_figure != COLD_CHILI_PIC else 0
+        print professor["name"]
         data.append(professor)
+
 
     return data
 
+def post_prof(prof):
+    r = requests.post(DB_URL + "professor", prof)
+    r.raise_for_status()
 
+get_rmp()

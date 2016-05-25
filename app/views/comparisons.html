@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="comparisons.css" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.8.1/rivets.bundled.min.js" type="text/javascript"></script>
+  <script src="comparisons.js" type="text/javascript"></script>
+</head>
+<body>
+  <button type="button" rv-on-click="app.add_class">Add Class</button>
+  <div class="col" rv-show="app.show_search">
+    <input type="text" placeholder="Course Name" rv-on-change="app.prof_info" rv-value="app.class_search"/>
+    <select rv-value="app.prof_search" rv-on-change="app.class_info">
+      <option value="" disabled selected>Professor</option>
+      <option rv-each-prof="app.profs" rv-value="prof.name">{prof.name}</option> 
+    </select>
+  </div>
+  <div rv-each-course="app.courses">
+    <div class="piechart">
+      <div rv-id="index | create_id"></div>
+    </div>
+  </div>
+</body>
+</html>
+
