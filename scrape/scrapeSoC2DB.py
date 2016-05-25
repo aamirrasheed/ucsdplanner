@@ -5,6 +5,7 @@ import re
 import csv
 from datetime import datetime
 import time
+from multiprocessing import Pool, TimeoutError
 
 # POST url to get the schedule of classes
 GET_DEPT_URL = "https://act.ucsd.edu/scheduleOfClasses/department-list.json"
@@ -217,7 +218,7 @@ def getExamOrSection(tr, fieldnames, initCol):
     return section_dict
 
 
-def parsePage(html, ID, term="SP16"):
+def parsePage(html, term="SP16"):
     """
     Parses a list of course Dicts extracted from the provided HTML, as well as the
     corresponding sections and exams.
@@ -225,13 +226,6 @@ def parsePage(html, ID, term="SP16"):
 
     soup = BeautifulSoup(html, "html.parser")
     course_titles = soup.find_all("td", class_="crsheader", colspan="5")
-
-    epoch = datetime.utcfromtimestamp(0)
-    dt = int((datetime.utcnow() - epoch).total_seconds() * 1000.0)
-    
-    courses = []
-    sections = []
-    exams = []
 
     for course in course_titles:
         course_dict = {}
@@ -244,8 +238,6 @@ def parsePage(html, ID, term="SP16"):
         course_dict["Title"] = course.find("span", class_="boldtxt").string.strip()
         course_dict["Code"] = dept.strip() + num.strip()
         course_dict["Term"] = term.strip()
-        course_dict["ID"] = ID
-        courses.append(course_dict)
 
         tr = course.parent.next_sibling.next_sibling
         while(tr):
@@ -257,9 +249,6 @@ def parsePage(html, ID, term="SP16"):
                 if section_dict is None:
                     tr = tr.find_next_sibling("tr")
                     continue
-                section_dict["ID"] = ID
-                section_dict["datetime"] = dt
-                sections.append(section_dict)
                 course_sections.append(section_dict)
 
             elif "nonenrtxt" in tr['class']:
@@ -270,13 +259,10 @@ def parsePage(html, ID, term="SP16"):
                     continue
                 if exam_dict["Type"] == "LE":
                     section_dict = getExamOrSection(tr, SECTION_FIELDS, EXAM_INIT_COL)
-                    section_dict["ID"] = ID
-                    section_dict["datetime"] = dt
                     sections.append(section_dict)
                     tr = tr.find_next_sibling("tr")
                     continue
                 exam_dict["ID"] = ID
-                exams.append(exam_dict)
                 course_exams.append(exam_dict)
 
             else:
@@ -422,40 +408,12 @@ def postCourse(course, sections, exams):
         else:
             r = requests.post(DB_URL + "/exams", exam_data)
 
-depts = getDepartments("FA16")
-page = 1
-all_courses = []
-all_sections = []
-all_exams = []
-ID = 0
+if __name__ == "__main__":
+    depts = getDepartments("FA16")
+    page = 1
 
-html = getSoCPage(depts, page, "FA16")
-   
-while "Exception report" not in html:
-    print(page)
-    courses, sections, exams = parsePage(html, ID, "FA16")
-    ID += len(courses)
-    all_courses += courses
-    all_sections += sections
-    all_exams += exams
+    html = getSoCPage(depts, page, "FA16")
+    num_pages = int(re.search(r"Page  \(1&nbsp;of&nbsp;([0-9]*)\)", html).group(1))
 
-    page += 1
-    try:
-	html = getSoCPage(depts, page, "FA16")
-    except Exception:
-	break
-
-f = open("courses.csv", "w")
-csv_courses = csv.DictWriter(f, fieldnames = ["Title", "Code", "Term", "ID"])
-csv_courses.writeheader()
-csv_courses.writerows(all_courses)
-
-f = open("sections.csv", "a")
-csv_sections = csv.DictWriter(f, fieldnames = SECTION_FIELDS + ["ID", "datetime"])
-csv_sections.writeheader()
-csv_sections.writerows(all_sections)
-
-f = open("exams.csv", "w")
-csv_exams = csv.DictWriter(f, fieldnames = EXAM_FIELDS + ["ID"])
-csv_exams.writeheader()
-csv_exams.writerows(all_exams)
+    pool = Pool(processes=20)
+    pool.map(lambda x : parsePage(getSoCPage(depts, x, "FA16"), "FA16"), range(1, num_pages + 1))
