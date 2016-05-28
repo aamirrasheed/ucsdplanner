@@ -113,7 +113,6 @@ def make_RMP_prof(fname, lname, cape_name):
 
     if len(profs) == 0:
         r = requests.post(DB_URL + "/professor", professor)
-        print r.text
         return json.loads(r.text)[0]["id"]
     
     profs = profs[0]["doclist"]["docs"]
@@ -122,7 +121,6 @@ def make_RMP_prof(fname, lname, cape_name):
 
     if len(profs) == 0:
         r = requests.post(DB_URL + "/professor", professor)
-        print r.text
         return json.loads(r.text)[0]["id"]
 
     else:
@@ -259,26 +257,19 @@ def parsePage(html, term="SP16"):
                     continue
                 if exam_dict["Type"] == "LE":
                     section_dict = getExamOrSection(tr, SECTION_FIELDS, EXAM_INIT_COL)
-                    sections.append(section_dict)
                     tr = tr.find_next_sibling("tr")
                     continue
-                exam_dict["ID"] = ID
                 course_exams.append(exam_dict)
 
             else:
                 break
 
             tr = tr.find_next_sibling("tr")
-        ID += 1
         postCourse(course_dict, course_sections, course_exams)
 
-    return (courses, sections, exams)
+    return True
 
 def postCourse(course, sections, exams):
-    print ""
-    print course
-    print sections
-    print exams
 
     course_name = split_course_name(course["Code"])
 
@@ -358,7 +349,6 @@ def postCourse(course, sections, exams):
             section_ids = [x["id"] for x in json.loads(r.text)]
             for section_id in section_ids:
                 r = requests.get(DB_URL + "/section/" + section_id)
-                print r.text
                 if json.loads(r.text)[0]["section_name"] == section["section_name"]:
                     r = requests.put(DB_URL + "/section/" + section_id, section)
                     lecture_id = section_id
@@ -408,6 +398,11 @@ def postCourse(course, sections, exams):
         else:
             r = requests.post(DB_URL + "/exams", exam_data)
 
+def getAndParsePage(x):
+    print "Working on page {}".format(x)
+    parsePage(getSoCPage(getDepartments("FA16"), x, "FA16"), "FA16")
+    print "Finished page {}".format(x)
+
 if __name__ == "__main__":
     depts = getDepartments("FA16")
     page = 1
@@ -415,5 +410,5 @@ if __name__ == "__main__":
     html = getSoCPage(depts, page, "FA16")
     num_pages = int(re.search(r"Page  \(1&nbsp;of&nbsp;([0-9]*)\)", html).group(1))
 
-    pool = Pool(processes=20)
-    pool.map(lambda x : parsePage(getSoCPage(depts, x, "FA16"), "FA16"), range(1, num_pages + 1))
+    pool = Pool(processes=50)
+    pool.map(getAndParsePage, range(1, num_pages + 1))
