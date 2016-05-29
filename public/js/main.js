@@ -53,6 +53,9 @@ window.addEventListener("load", function () {
     },
     toggle_terms: function () {
       app.terms_expanded ^= 1;
+    },
+    toggle_expand: function (e, rv) {
+      rv.section.expanded ^= 1;
     }
   }
   
