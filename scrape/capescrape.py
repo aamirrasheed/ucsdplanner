@@ -5,6 +5,7 @@ import cookielib
 import json
 import requests
 import re
+from collections import OrderedDict
 
 BASE_URL="https://cape.ucsd.edu/responses/Results.aspx?Name=&CourseNumber="
 DEPARTMENT_LIST_URL="https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudent.htm"
@@ -28,7 +29,70 @@ def get_soup(url):
 # ======================================== 
 def get_departments():
     return ['AIP', 'ANBI', 'ANAR', 'ANTH', 'ANSC', 'AESE', 'BENG', 'BNFO', 'BIEB', 'BICD', 'BIPN', 'BIBC', 'BGGN', 'BGSE', 'BILD', 'BIMM', 'BISP', 'BIOM', 'CENG', 'CHEM', 'CHIN', 'CLAS', 'CLIN', 'COGS', 'COMM', 'COGR', 'CSE', 'ICAM', 'CONT', 'CGS', 'CAT', 'TDCH', 'TDHD', 'TDMV', 'TDTR', 'DOC', 'ECON', 'EAP', 'EDS', 'ERC', 'ECE', 'ENG', 'ENVR', 'ESYS', 'ETHN', 'EXPR', 'FPMU', 'FILM', 'HITO', 'HIAF', 'HIEA', 'HIEU', 'HILA', 'HISC', 'HINE', 'HIUS', 'HIGR', 'HILD', 'HDP', 'HUM', 'INTL', 'IRCO', 'IRGN', 'IRLA', 'JAPN', 'JUDA', 'LATI', 'LAWS', 'LISL', 'LIAB', 'LIFR', 'LIGN', 'LIGM', 'LIHL', 'LIIT', 'LIPO', 'LISP', 'LTCH', 'LTCO', 'LTCS', 'LTEU', 'LTFR', 'LTGM', 'LTGK', 'LTIT', 'LTKO', 'LTLA', 'LTRU', 'LTSP', 'LTTH', 'LTWR', 'LTEN', 'LTWL', 'LTEA', 'MMW', 'MBC', 'MATS', 'MATH', 'MSED', 'MAE', 'MUIR', 'MCWP', 'MUS', 'NANO', 'PHAR', 'SPPS', 'PHIL', 'PHYS', 'POLI', 'PSYC', 'MGT', 'RELI', 'REV', 'SDCC', 'SIOC', 'SIOG', 'SIOB', 'SIO', 'SXTH', 'SOCG', 'SOCE', 'SOCI', 'SE', 'TDAC', 'TDDE', 'TDDR', 'TDGE', 'TDGR', 'TDHT', 'TDPW', 'TDPR', 'TWS', 'TMC', 'USP', 'VIS', 'WARR', 'WCWP']
+     
 
+def get_gradedistributions(url):
+    expected = None
+    received = None
+    if url is None:
+        return (expected, received)
+    site = "https://cape.ucsd.edu/responses/"
+    if url.startswith('.'):
+        delim1,url = url.split('.',1)
+        delim2,url = url.split('.',1)
+        site = "https://cape.ucsd.edu" + url
+        r = requests.get(site, headers={"User-agent":'Mozilla'})
+        soup = BeautifulSoup(r.text, "html.parser");
+        tables = soup.findAll('table')
+        table_expected = tables[3]
+        if table_expected is not None:
+           rows = table_expected.findChildren(['tr'])
+           if rows is not None:
+               expectedrow = rows[2]
+               cells = expectedrow.findChildren(['td'])
+               A = cells[3].text.encode('utf-8')
+               B = cells[4].text.encode('utf-8')
+               C = cells[5].text.encode('utf-8')
+               D = cells[6].text.encode('utf-8')
+               F = cells[7].text.encode('utf-8')
+               P = cells[8].text.encode('utf-8')
+               NP = cells[9].text.encode('utf-8')
+               expected = {'A': A,'B': B,'C': C,'D': D, 'F': F, 'P': P, 'NP': NP}
+    else:
+        site += url
+        r = requests.get(site, headers={"User-agent":'Mozilla'})
+        soup = BeautifulSoup(r.text, "html.parser");
+        tables = soup.findAll('table')
+        table_expected = soup.find('table', id = "ctl00_ContentPlaceHolder1_tblExpectedGrades") 
+        table_received = soup.find('table', id = "ctl00_ContentPlaceHolder1_tblGradesReceived")
+        if table_expected is not None:
+           rows = table_expected.findChildren(['tr'])
+           if rows is not None:
+               expectedrow = rows[2]
+               cells = expectedrow.findChildren(['td'])
+               A = cells[0].text.encode('utf-8')
+               B = cells[1].text.encode('utf-8')
+               C = cells[2].text.encode('utf-8')
+               D = cells[3].text.encode('utf-8')
+               F = cells[4].text.encode('utf-8')
+               P = cells[5].text.encode('utf-8')
+               NP = cells[6].text.encode('utf-8')
+               expected = {'A': A,'B': B,'C': C,'D': D, 'F': F, 'P': P, 'NP': NP}
+        if table_received is not None:
+            rows = table_received.findChildren(['tr'])
+            if rows is not None:
+                receivedrow = rows[2]
+                cells = receivedrow.findChildren(['td']) 
+                A2 = cells[0].text.encode('utf-8')
+                B2 = cells[1].text.encode('utf-8')
+                C2 = cells[2].text.encode('utf-8')
+                D2 = cells[3].text.encode('utf-8')
+                F2 = cells[4].text.encode('utf-8')
+                P2 = cells[5].text.encode('utf-8')
+                NP2 = cells[6].text.encode('utf-8')
+                received = {'A': A2,'B': B2,'C': C2,'D': D2, 'F': F2, 'P': P2, 'NP': NP2}
+    return (expected,received) 
+    
 
 # ========================================
 # Purpose: Gets CAPE Data for a
@@ -54,7 +118,6 @@ def get_cape_data_for_dept(dept):
     # for that row
     cape_data = []
     row_num = 0
-
     # iterate through each row of the CAPES for the department, filling up list with 
     # one row at a time
     while isinstance(row, bs4.element.Tag):
@@ -71,6 +134,8 @@ def get_cape_data_for_dept(dept):
         hrsperwk = None
         gradeexp = None
         graderec = None
+        expected_grade = None
+        received_grade = None
 
         # get instructor
         working_col = row.td
@@ -78,8 +143,13 @@ def get_cape_data_for_dept(dept):
 
         # get course
         working_col = working_col.next_sibling
+        link = working_col.find('a').get('href')
         course_info = working_col.a.contents[0].split('-')
         course = course_info[0][:-1]
+
+        # get gradedistributions
+        expected_grade,received_grade = get_gradedistributions(link)
+       
 
         # get term
         working_col = working_col.next_sibling
@@ -155,13 +225,15 @@ def get_cape_data_for_dept(dept):
             'cape_rec_prof': format_float(rcmndinstr),
             'cape_study_hrs': format_float(hrsperwk),
             #'gradeexp': gradeexp,
-            'cape_prof_gpa': format_float(graderec)
+            'cape_prof_gpa': format_float(graderec),
+            'cape_expected_grade': expected_grade,
+            'cape_recieved_grade': received_grade
         }
         
         r = requests.get(DB_URL + "/cape/" + prof_id + "/" + catalog_id + "/" + term)
         if r.text == "[]":
             r = requests.post(DB_URL + "/cape", entry)
-
+        
         # add entry to list
         row = row.next_sibling
     return cape_data
