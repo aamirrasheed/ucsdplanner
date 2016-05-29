@@ -1,4 +1,4 @@
-window.addEventListener("load", function ()  {
+window.addEventListener("load", function () {
   $ = document.querySelectorAll.bind(document);
   
   api = {
@@ -9,109 +9,66 @@ window.addEventListener("load", function ()  {
   }
   
   app = {
-    fake_capes: [{
-      prof: "Gary Gillespie",
-      term: "SP15",
-      cape_num_evals: 94,
-      cape_rec_prof: 79.8,
-      cape_study_hrs: 11.03,
-      cape_prof_gpa: 3.28,
-      overall: 3.2,
-      helpfulness: 3.2,
-      clarity: 3.1,
-      easiness: 2.1
-    }, {
-      prof: "William Griswold",
-      term: "WI14",
-      cape_num_evals: 95,
-      cape_rec_prof: 84.8,
-      cape_study_hrs: 10.36,
-      cape_prof_gpa: 3.07,
-      overall: 3.6,
-      helpfulness: 3.7,
-      clarity: 3.5,
-      easiness: 3.2
-    }],
     search: "",
-    tab: 0,
-    term: "catalog",
-    terms: [],
-    course: {},
+    course: null,
     courses: [],
-    is_loading: true,
+    term: {id:"catalog", name:"catalog"},
+    terms: [{
+      term_id: "catalog",
+      term_name: "catalog"
+    }],
+    terms_expanded: 0,
+    is_loading: false,
     show_catalog: true,
     
     clear_search: function () {
       app.search = "";
     },
-    move_selected: function (e, dir) {
-      var cur = $("#courses li.selected")[0];
-      
-      if (!cur) return;
-      e.preventDefault();
-
-      // prevent key-repeat firing
-      if (keydown) return;
-      
-      $("#courses")[0].scrollTop += 
-        (dir ? 1 : -1) * cur.offsetHeight;
-      
-      var next = dir ? cur.nextSibling : cur.previousSibling;
-      if (next) next.click();
-    },
     select_course: function (e, rv) {
-      app.course.selected = false;
+      if (app.course)
+        app.course.selected = false;
       app.course = rv.course;
       app.course.selected = true;
+      
+      document.body.scrollTop = 0;
       
       if (!app.show_catalog && !app.course.details)
         load_course(app.course);
     },
-    select_tab: function (e) {
-      if (e.target.classList.contains("greyed")) return;
-      app.tab = e.target.value;
-    },
     select_term: function (e, rv) {
-      app.show_catalog = app.term == "catalog";
-      app.course.selected = false;
-      app.course = {};
+      app.terms_expanded = 0;
+      if (app.course)
+        app.course.selected = false;
+      if (app.term.id == e.target.dataset["value"])
+        return;
+      app.term = {
+        id: rv.term.term_id,
+        name: rv.term.term_name
+      };
+      app.show_catalog = app.term.id == "catalog";
+      app.course = null;
+      app.courses = [];
       app.clear_search();
-      load_courses(app.term);
+      load_courses(app.term.id);
     },
-    toggle_expand: function (e, rv) {
-      rv.section.expanded ^= 1;
+    toggle_terms: function () {
+      app.terms_expanded ^= 1;
     }
   }
   
-  // cache for course lists, and course details
-  courses = {
-    details: []
-  }
+  courses = {}
+
+  // document.addEventListener("scroll", function (e) {
+  //   console.log(document.body.scrollTop);
+  // });
   
-  var keydown;
-  
-  document.addEventListener("keydown", function (e) {
-    switch (e.which) {
-      case 38: app.move_selected(e, 0); break;
-      case 40: app.move_selected(e, 1); break;
-    }
-    
-    keydown = true;
-  });
-  
-  document.addEventListener("keyup", function (e) {
-    keydown = false;
-  });
-  
-  var container = document.body;
   setup_rivets();
-  rivets.bind(container, {
+  rivets.bind(document.body, {
     app: app
   });
   
   load_terms();
   load_courses("catalog");
-  $("#app")[0].style.display = "";
 });
 
 function setup_rivets () {
@@ -233,8 +190,9 @@ function load_course (course) {
 function load_courses (id) {
   if (courses[id]) {
     app.courses = courses[id];
-    $("#courses li")[0].click();
-    app.tab = 0;
+    // $("#course_list li")[0].click();
+    document.body.scrollTop = 0;
+    $("#course_list")[0].scrollTop = 0;
     return;
   }
   
@@ -253,9 +211,10 @@ function load_courses (id) {
     app.courses = courses[id];
     
     // select first course
-    $("#courses li")[0].click();
+    // $("#course_list li")[0].click();
     app.is_loading = false;
-    app.tab = 0;
+    document.body.scrollTop = 0;
+    $("#course_list")[0].scrollTop = 0;
   }
   xhr.open("GET", url);
   xhr.send();
@@ -269,7 +228,7 @@ function load_terms () {
   xhr.onload = function (e) {
     // async prevent double-run
     if (app.terms.length > 1) return;
-    app.terms = JSON.parse(e.target.response);
+    app.terms = app.terms.concat(JSON.parse(e.target.response));
   }
   xhr.open("GET", api.terms);
   xhr.send();

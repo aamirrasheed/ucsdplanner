@@ -8,7 +8,7 @@ var config = {
     app: {
       name: 'ucsdplanner'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 80,
   },
 
   test: {
@@ -16,7 +16,7 @@ var config = {
     app: {
       name: 'ucsdplanner'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 80,
   },
 
   production: {
