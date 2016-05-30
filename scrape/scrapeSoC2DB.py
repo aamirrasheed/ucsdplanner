@@ -345,6 +345,7 @@ def postCourse(course, sections, exams):
             section["professor_id"] = prof_id
 
             # find the corresponding section_id
+            #TODO: DEBUG THIS AND MAKE SURE IT WORKS - CSE 170
             r = requests.get(DB_URL + "/section/" + course_id + "/" + prof_id)
             section_ids = [x["id"] for x in json.loads(r.text)]
             for section_id in section_ids:
@@ -360,6 +361,11 @@ def postCourse(course, sections, exams):
                     course_exams = [x["id"] for x in json.loads(r.text)]
 
                     prev_lecture_code = meeting["Code"]
+                    break
+            else:
+                r = requests.post(DB_URL + "/section", section)
+                lecture_id = json.loads(r.text)[0]["id"]
+
 
         else:
             discussion = {}
@@ -385,6 +391,8 @@ def postCourse(course, sections, exams):
 
     for exam in exams:
         exam_data = {}
+        if lecture_id is None:
+            break
         exam_data["section_id"] = lecture_id
         exam_data["exam_type"] = exam["Type"]
         exam_data["exam_start_time"] = exam["Time"].split("-")[0] if exam["Time"] != "TBA" else "TBA"
@@ -397,11 +405,11 @@ def postCourse(course, sections, exams):
             r = requests.put(DB_URL + "/exams" + exam_id, exam_data)
         else:
             r = requests.post(DB_URL + "/exams", exam_data)
+    return True
 
 def getAndParsePage(x):
-    print "Working on page {}".format(x)
     parsePage(getSoCPage(getDepartments("FA16"), x, "FA16"), "FA16")
-    print "Finished page {}".format(x)
+    return x
 
 if __name__ == "__main__":
     depts = getDepartments("FA16")
@@ -409,6 +417,17 @@ if __name__ == "__main__":
 
     html = getSoCPage(depts, page, "FA16")
     num_pages = int(re.search(r"Page  \(1&nbsp;of&nbsp;([0-9]*)\)", html).group(1))
+    print num_pages
 
-    pool = Pool(processes=50)
-    pool.map(getAndParsePage, range(1, num_pages + 1))
+    pool = Pool(processes=20)
+
+    pages = range(1, num_pages + 1)
+    count = 0
+    for x in pool.imap_unordered(getAndParsePage, range(1, num_pages + 1)):
+        count += 1
+        pages.remove(x)
+        print "{}/{}% done".format(count, num_pages)
+        if len(pages) < 10:
+            print pages
+
+        
