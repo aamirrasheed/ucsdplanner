@@ -95,16 +95,27 @@ function setup_rivets () {
   
   rivets.formatters.time = function (obj) {
     if (!obj) return "";
-    var start = obj.section_start_time || obj.disc_start_time;
-    var end = obj.section_end_time || obj.disc_end_time;
+    var start = obj.section_start_time || obj.disc_start_time || obj.exam_start_time;
+    var end = obj.section_end_time || obj.disc_end_time || obj.exam_end_time;
+    if (start == "TBA") return "TBA";
     return (start && end) ? start + "-" + end : "";
   }
   
   rivets.formatters.seats = function (obj) {
     if (!obj) return "";
-    var avail = obj.section_seats_avail || obj.disc_seats_avail;
-    var total = obj.section_seats_total || obj.disc_seats_total;
-    return (total) ? ~~avail + "/" + total : "";
+    var avail = obj.section_seats_avail || obj.disc_seats_avail || 0;
+    var total = obj.section_seats_total || obj.disc_seats_total || 0;
+    if (avail == -1) return "";
+    return ~~avail + "/" + total;
+  }
+  
+  rivets.formatters.noyear = function (val) {
+    return val.substr(0, val.lastIndexOf("/"));
+  }
+  
+  rivets.formatters.blank = function (val, n) {
+    if (val == n) return "";
+    return val;
   }
   
   rivets.formatters.replace = function (val, f, r) {
@@ -137,9 +148,9 @@ function setup_rivets () {
   
   rivets.formatters.case = function (val, c) {
     if (!val) return;
-    if (c == "upper") return val.toUpperCase();
-    if (c == "lower") return val.toLowerCase();
-    return val;
+    return c
+      ? val.toUpperCase()
+      : val.toLowerCase();
   }
   
   rivets.formatters.letter = function (gpa) {

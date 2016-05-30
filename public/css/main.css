@@ -368,6 +368,25 @@ ul {
 #sections_table {
   width: 100%;
   text-align: center;
+  border-collapse: collapse;
+}
+
+#sections_table th {
+  font-weight: 400;
+}
+
+#sections_table td {
+  font-size: 0.9em;
+}
+
+#sections_table tbody > tr:first-child > td:first-child {
+  cursor: pointer;
+}
+
+#sections tbody:not(:last-child)::after {
+  content: '';
+  display: block;
+  height: 1em;
 }
 
 #feedback {

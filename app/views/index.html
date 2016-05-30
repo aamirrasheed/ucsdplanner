@@ -31,7 +31,7 @@
         <li rv-each-course="app.courses | mark app.search" rv-hide="course.hide" rv-class-selected="course.selected" rv-on-click="app.select_course">
           <span class="dept">{course.course_id | grab 0}</span>
           <span class="num">{course.course_id | grab 1}</span>
-          <div class="title">{course.course_name | case "upper"}</div>
+          <div class="title">{course.course_name | case 1}</div>
         </li>
       </ul>
     </div>
@@ -65,10 +65,10 @@
           <div class="col m30" rv-hide="app.show_catalog">
             <h3>Average Grade</h3>
             <p><span class="big">{app.course.avg_gpa | fixed 2} </span>{app.course.avg_gpa | letter}</p>
-            <h3>Seats Taken</h3>
+            <h3>Seats Remaining</h3>
             <p>
               <span class="big">{app.course.seats_avail}/{app.course.seats_total}</span>
-              <br />across {app.course.details.course_sections | len} sections
+              <br />across {app.course.details.course_sections | len} section<span rv-hide="app.course.details.course_sections | len | eq 1">s</span>
             </p>
             <h3>Workload</h3>
             <p><span class="big">{app.course.workload}</span> hrs/wk</p>
@@ -93,37 +93,40 @@
             </tr>
           </thead>
           <tbody rv-each-section="app.course.details.course_sections">
-            <tr class="section" rv-on-click="app.toggle_expand" rv-class-expanded="section.expanded">
-              <td><i class="material-icons">expand_more</i></td>
+            <tr class="section">
+              <td rv-on-click="app.toggle_expand">
+                <i class="material-icons" rv-hide="section.expanded">expand_more</i>
+                <i class="material-icons" rv-show="section.expanded">expand_less</i>
+              </td>
               <td>{section.section_name}</td>
-              <td>{section.section_id}</td>
+              <td>{section.section_id | blank 0}</td>
               <td>{section.section_type}</td>
               <td>{section.section_days}</td>
               <td>{section | time}</td>
               <td>{section.location}</td>
               <td>{section.professor_name}</td>
               <td>{section | seats}</td>
-              <td>{section.section_waitlist}</td>
+              <td>{section.section_waitlist | blank -1}</td>
             </tr>
             <tr class="subsection" rv-each-disc="section.discussions" rv-show="section.expanded">
               <td></td>
               <td>{disc.disc_name}</td>
-              <td>{disc.disc_id}</td>
+              <td>{disc.disc_id | blank 0}</td>
               <td>{disc.disc_type}</td>
               <td>{disc.disc_days}</td>
               <td>{disc | time}</td>
               <td>{disc.disc_location}</td>
               <td></td>
               <td>{disc | seats}</td>
-              <td>{disc.disc_waitlist}</td>
+              <td>{disc.disc_waitlist | blank -1}</td>
             </tr>
             <tr class="subsection" rv-each-exam="section.exams" rv-show="section.expanded">
               <td></td>
               <td></td>
               <td></td>
               <td>{exam.exam_type}</td>
-              <td>{exam.exam_date}</td>
-              <td>{exam.exam_start_time}-{exam.exam_end_time}</td>
+              <td>{exam.exam_date | noyear}</td>
+              <td>{exam | time}</td>
               <td>{exam.exam_location}</td>
               <td></td>
               <td></td>
