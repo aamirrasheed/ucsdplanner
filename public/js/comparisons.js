@@ -1,3 +1,6 @@
+// grade-dist-chart
+var pie;
+
 window.addEventListener("load", function() {
   $ = document.querySelectorAll.bind(document);
 
@@ -96,10 +99,9 @@ window.addEventListener("load", function() {
     course_data: [],
     
     change_cape: function(e, rv){
-      var course_id = rv.courseprof.course.id;
-      var prof_id = rv.courseprof.prof.id;
+      // var course_id = rv.courseprof.course.id;
+      // var prof_id = rv.courseprof.prof.id;
       var capes = rv.courseprof.data.capes;
-      console.log(capes);
       var current_cape_term = rv.courseprof.current_cape_term;
 
       // search through capes to find new one
@@ -219,6 +221,7 @@ function load_course_prof () {
     // async prevent double-run
     if (app.current_course_prof.data) return;
     var course_prof_data = JSON.parse(e.target.response);
+    console.log(course_prof_data);
     populate_course_prof(course_prof_data);
   };
   xhr.open("GET", url);
@@ -235,7 +238,7 @@ function populate_course_prof(course_data){
       overall:course_data.rmp_overall,
       helpfulness: course_data.rmp_helpful,
       clarity: course_data.rmp_clarity,
-      easiness: course_data.name,
+      easiness: course_data.rmp_easiness,
       hot: course_data.rmp_hot
     },
     capes: course_data.capes,
@@ -271,12 +274,21 @@ function populate_course_prof(course_data){
     total_nps += course_data.capes[i].np_percentage * course_data.capes[i].cape_num_evals;
   }
 
+  // vars for avg_cape url
+  var prof_names = app.current_course_prof.prof.name.split(" ");
+  var prof_first_name = prof_names[0].toLowerCase();
+  var prof_last_name = prof_names[prof_names.length - 1].toLowerCase();
+  var course_dept = app.current_course_prof.course.dept.toLowerCase();
+  var course_code = app.current_course_prof.course.code;
+
   // populate with the average cape
   var avg_cape = {
     cape_num_evals: total_num_evals/course_data.capes.length,
     cape_study_hrs: total_study_hrs/total_num_evals,
     cape_prof_gpa: total_prof_gpa/total_num_evals,
     cape_rec_prof: total_rec_prof/total_num_evals,
+    cape_url: "http://cape.ucsd.edu/responses/Results.aspx?Name="+ prof_last_name + 
+                  "%2C+"+ prof_first_name + "&CourseNumber="+ course_dept +"+" + course_code,
     rcmnd_class: total_rcmnd_class/total_num_evals,
     term:"Average",
     "a_percentage": total_as/total_num_evals,
@@ -288,17 +300,144 @@ function populate_course_prof(course_data){
     "np_percentage": total_nps/total_num_evals,
   };
 
-  app.current_course_prof.current_cape = avg_cape;
-  app.current_course_prof.current_cape_term = avg_cape.term;
-
 
   app.current_course_prof.data.capes.unshift(avg_cape);
-  
+
+  app.current_course_prof.current_cape = avg_cape;
+  app.current_course_prof.current_cape_term = avg_cape.term;
+  app.current_course_prof.grade_dist_chart = 0;
+
   app.displayed_course_profs.push(app.current_course_prof);
+
+  console.log(app.current_course_prof);
+  
+  update_grade_distribution(app.current_course_prof.course.id, app.current_course_prof.prof.id);
+
   app.course_search = "";
   app.prof_search = "";
   app.show_course_prof = true;
   
+}
+
+function update_grade_distribution(course_id, prof_id){
+
+  // find course_prof_to_update
+  var course_prof_to_update;
+  for(var i = 0; i < app.displayed_course_profs.length; i++){
+    if(app.displayed_course_profs[i].course.id === course_id &&
+        app.displayed_course_profs[i].prof.id === prof_id){ 
+      course_prof_to_update = app.displayed_course_profs[i];
+    }
+  }
+  console.log(course_prof_to_update);
+
+  var a_percentage = course_prof_to_update.current_cape.a_percentage;
+  var b_percentage = course_prof_to_update.current_cape.b_percentage;
+  var c_percentage = course_prof_to_update.current_cape.c_percentage;
+  var d_percentage = course_prof_to_update.current_cape.d_percentage;
+  var f_percentage = course_prof_to_update.current_cape.f_percentage;
+  var grade_dist_chart = course_prof_to_update.grade_dist_chart;
+  var grade_dist_chart_id = course_prof_to_update.course.id; //+ " " + course_prof_to_update.prof.id;
+
+  
+  grade_dist_chart = new d3pie(grade_dist_chart_id, {
+    "header": {
+        "title": {
+            "fontSize": 41,
+            "font": "open sans"
+        },
+        "subtitle": {
+            "color": "#999999",
+            "fontSize": 12,
+            "font": "open sans"
+        },
+        "titleSubtitlePadding": 9
+    },
+    "footer": {
+        "color": "#999999",
+        "fontSize": 10,
+        "font": "open sans",
+        "location": "bottom-left"
+    },
+    "size": {
+        "canvasHeight": 250,
+        "canvasWidth": 250,
+        "pieOuterRadius": "90%"
+    },
+    "data": {
+        "sortOrder": "value-desc",
+        "content":
+        [
+            {
+                "label": "A",
+                "value": a_percentage,
+                "color": "#F38630"
+            },
+            {
+                "label": "B",
+                "value": b_percentage,
+                "color": "#69D2E7"
+            },
+            {
+                "label": "C",
+                "value": c_percentage,
+                "color": "#FA6900"
+            },
+            {
+                "label": "D",
+                "value": d_percentage,
+                "color": "#A7DBD8"
+            },
+            {
+                "label": "F",
+                "value": f_percentage,
+                "color": "#E0E4CC"
+            }
+        ]
+    },
+    "labels": {
+        "outer": {
+            "format":"none",
+            "pieDistance": 32
+        },
+        "inner": {
+            "format":"label-percentage1",
+            "hideWhenLessThanPercentage": 3
+        },
+        "mainLabel": {
+            "fontSize": 11
+        },
+        "percentage": {
+            "color": "#000000",
+            "decimalPlaces": 0
+        },
+        "value": {
+            "color": "#adadad",
+            "fontSize": 11
+        },
+        "lines": {
+            "enabled": true
+        },
+        "truncation": {
+            "enabled": true
+        }
+    },
+    "effects": {
+        "pullOutSegmentOnClick": {
+            "effect": "none",
+            "speed": 400,
+            "size": 8
+        }
+    },
+    "misc": {
+        "gradient": {
+            "enabled": false,
+            "percentage": 100
+        }
+    },
+    "callbacks": {}
+});
+
 }
 
 rivets.formatters.create_id = function(n) {
@@ -369,103 +508,7 @@ rivets.formatters.mark = function (arr, val) {
   return arr;
 };
 
-// var pie = new d3pie("grade-dist-chart", {
-//     "header": {
-//         "title": {
-//             "fontSize": 41,
-//             "font": "open sans"
-//         },
-//         "subtitle": {
-//             "color": "#999999",
-//             "fontSize": 12,
-//             "font": "open sans"
-//         },
-//         "titleSubtitlePadding": 9
-//     },
-//     "footer": {
-//         "color": "#999999",
-//         "fontSize": 10,
-//         "font": "open sans",
-//         "location": "bottom-left"
-//     },
-//     "size": {
-//         "canvasHeight": 250,
-//         "canvasWidth": 250,
-//         "pieOuterRadius": "90%"
-//     },
-//     "data": {
-//         "sortOrder": "value-desc",
-//         "content":
-//         [
-//             {
-//                 "label": "A",
-//                 "value": 85002,
-//                 "color": "#F38630"
-//             },
-//             {
-//                 "label": "B",
-//                 "value": 78327,
-//                 "color": "#69D2E7"
-//             },
-//             {
-//                 "label": "C",
-//                 "value": 67706,
-//                 "color": "#FA6900"
-//             },
-//             {
-//                 "label": "D",
-//                 "value": 36344,
-//                 "color": "#A7DBD8"
-//             },
-//             {
-//                 "label": "F",
-//                 "value": 32170,
-//                 "color": "#E0E4CC"
-//             }
-//         ]
-//     },
-//     "labels": {
-//         "outer": {
-//             "format":"none",
-//             "pieDistance": 32
-//         },
-//         "inner": {
-//             "format":"label-percentage1",
-//             "hideWhenLessThanPercentage": 3
-//         },
-//         "mainLabel": {
-//             "fontSize": 11
-//         },
-//         "percentage": {
-//             "color": "#000000",
-//             "decimalPlaces": 0
-//         },
-//         "value": {
-//             "color": "#adadad",
-//             "fontSize": 11
-//         },
-//         "lines": {
-//             "enabled": true
-//         },
-//         "truncation": {
-//             "enabled": true
-//         }
-//     },
-//     "effects": {
-//         "pullOutSegmentOnClick": {
-//             "effect": "none",
-//             "speed": 400,
-//             "size": 8
-//         }
-//     },
-//     "misc": {
-//         "gradient": {
-//             "enabled": false,
-//             "percentage": 100
-//         }
-//     },
-//     "callbacks": {}
-// });
+
 
 
 
