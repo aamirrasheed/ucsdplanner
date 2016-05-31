@@ -27,7 +27,15 @@
         </ul>
       </div>
       <ul id="course_list">
+        <div class="center" rv-show="app.sidebar_loading">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
         <div class="darken" rv-show="app.terms_expanded"></div>
+        <div class="center" rv-show="app.no_results">
+          NO RESULTS FOUND
+        </div>
         <li rv-each-course="app.courses | mark app.search" rv-hide="course.hide" rv-class-selected="course.selected" rv-on-click="app.select_course">
           <span class="dept">{course.course_id | grab 0}</span>
           <span class="num">{course.course_id | grab 1}</span>
@@ -44,10 +52,10 @@
           <span class="dept">{app.course.units}</span><div class="title">units</div>
         </div>
       </div>
-      <ul class="t1 w3" rv-class-w2="app.show_catalog">
-        <li><a href="javascript:;">Overview</a></li
-        ><li rv-hide="app.show_catalog"><a href="javascript:;">Sections</a></li
-        ><li><a href="javascript:;">Comparisons</a></li>
+      <ul id="tabs" class="t1 w3" rv-class-w2="app.show_catalog">
+        <li><a href="javascript:scroll_to('overview');">Overview</a></li
+        ><li rv-if="app.show_catalog | eq 0"><a href="javascript:scroll_to('sections');">Sections</a></li
+        ><li><a href="javascript:scroll_to('comparisons');">Comparisons</a></li>
         <hr />
       </ul>
     </div>
@@ -64,18 +72,23 @@
           </div>
           <div class="col m30" rv-hide="app.show_catalog">
             <h3>Average Grade</h3>
-            <p><span class="big">{app.course.avg_gpa | fixed 2} </span>{app.course.avg_gpa | letter}</p>
+            <p><span class="big">{app.course.avg_gpa | fixed 2 | na} </span>{app.course.avg_gpa | letter}</p>
             <h3>Seats Remaining</h3>
             <p>
-              <span class="big">{app.course.seats_avail}/{app.course.seats_total}</span>
-              <br />across {app.course.details.course_sections | len} section<span rv-hide="app.course.details.course_sections | len | eq 1">s</span>
+              <span class="big">{app.course | seats | na}</span>
+              <br />across {app.course.num_sections} section<span rv-hide="app.course.num_sections | eq 1">s</span>
             </p>
             <h3>Workload</h3>
-            <p><span class="big">{app.course.workload}</span> hrs/wk</p>
+            <p><span class="big">{app.course.workload | fixed 2 | na}</span> <span rv-show="app.course.workload | def">hrs/wk</span></p>
           </div>
         </div>
       </div>
-      <div id="sections" rv-hide="app.show_catalog">
+      <h2 class="line" rv-show="app.details_loading"><span class="loading">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </span></h2>
+      <div id="sections" rv-hide="app.show_catalog | or app.details_loading">
         <h2 class="line"><span>Sections</span></h2>
         <table id="sections_table">
           <thead>
@@ -94,9 +107,12 @@
           </thead>
           <tbody rv-each-section="app.course.details.course_sections">
             <tr class="section">
-              <td rv-on-click="app.toggle_expand">
-                <i class="material-icons" rv-hide="section.expanded">expand_more</i>
-                <i class="material-icons" rv-show="section.expanded">expand_less</i>
+              <td rv-on-click="app.toggle_expand" rv-class-nosubs="section.no_subsections">
+                <span rv-hide="section.no_subsections">
+                  <i class="material-icons" rv-hide="section.expanded">expand_more</i>
+                  <i class="material-icons" rv-show="section.expanded">expand_less</i>
+                </span>
+                <i class="material-icons" rv-show="section.no_subsections">remove</i>
               </td>
               <td>{section.section_name}</td>
               <td>{section.section_id | blank 0}</td>
@@ -120,7 +136,8 @@
               <td>{disc | seats}</td>
               <td>{disc.disc_waitlist | blank -1}</td>
             </tr>
-            <tr class="subsection" rv-each-exam="section.exams" rv-show="section.expanded">
+            <tr rv-show="section.expanded"><td></td></tr>
+            <tr class="exam" rv-each-exam="section.exams" rv-show="section.expanded">
               <td></td>
               <td></td>
               <td></td>
@@ -135,7 +152,7 @@
           </tbody>
         </table>
       </div>
-      <div id="comparisons">
+      <div id="comparisons" rv-hide="app.details_loading">
         <h2 class="line"><span>Comparisons</span></h2>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo possimus eius esse eaque maxime animi ex blanditiis, repudiandae minus commodi impedit suscipit, minima, explicabo fugit, beatae iste quasi nam non!
       </div>

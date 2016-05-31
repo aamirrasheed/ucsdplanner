@@ -18,6 +18,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2.line {
+  height: 4px;
   width: 100%;
   text-align: center;
   line-height: 1px;
@@ -32,12 +33,57 @@ h2.line span {
 }
 
 p {
-  margin-left: 1em;
+  margin: 0.5em 1em;
 }
 
 body {
   font-family: "Open Sans";
   font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 80%, 100% { transform: scale(0) }
+  40% { transform: scale(1) }
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.center {
+  position: absolute;
+  top: calc(50% - 60px);
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  margin: 5px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: inline-block;
+  animation: blink 2s infinite ease-in-out both;
+}
+
+h2.line .loading {
+  display: inline-block;
+  height: 20px;
+  transform: translateY(-8px);
+}
+
+h2.line .circle {
+  background-color: #176c96;
+}
+
+.circle:nth-child(1) {
+  animation-delay: -400ms;
+}
+.circle:nth-child(2) {
+  animation-delay: -200ms;
 }
 
 #sidebar {
@@ -166,6 +212,7 @@ body {
 
 .colgroup {
   display: table;
+  width: 100%;
   padding: 0;
   margin: 0;
 }
@@ -365,6 +412,10 @@ ul {
   bottom: 0;
 }
 
+#sections {
+  padding-bottom: 1em;
+}
+
 #sections_table {
   width: 100%;
   text-align: center;
@@ -376,18 +427,47 @@ ul {
 }
 
 #sections_table td {
+  vertical-align: middle;
+  height: 1em;
   font-size: 0.9em;
 }
 
-#sections_table tbody > tr:first-child > td:first-child {
+#sections_table tbody > tr:first-child > td:first-child:not(.nosubs) {
   cursor: pointer;
 }
 
-#sections tbody:not(:last-child)::after {
+#sections_table tbody:not(:last-child)::after,
+#sections_table thead::after {
   content: '';
   display: block;
-  height: 1em;
+  height: 0.75em;
 }
+
+#sections_table tr br {
+	background: #f00;
+	height: 0.75em;
+}
+
+#sections_table tr.section {
+	background-color: #176c96;
+	color: #fff;
+	font-weight: 400;
+}
+
+#sections_table tr.subsection:hover {
+/* 	background-color: #176c96; */
+/* 	color: #fff; */
+	background-color: #fbbb18
+}
+
+#sections_table tr.subsection td:first-child {
+	background-color: #fff;
+}
+
+#sections_table i {
+	line-height: 1.2em;
+}
+
 
 #feedback {
   position: fixed;

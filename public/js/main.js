@@ -18,7 +18,9 @@ window.addEventListener("load", function () {
       term_name: "catalog"
     }],
     terms_expanded: 0,
-    is_loading: false,
+    no_results: false,
+    sidebar_loading: false,
+    details_loading: false,
     show_catalog: true,
     
     clear_search: function () {
@@ -55,15 +57,24 @@ window.addEventListener("load", function () {
       app.terms_expanded ^= 1;
     },
     toggle_expand: function (e, rv) {
-      rv.section.expanded ^= 1;
+      if (!rv.section.no_subsections)
+        rv.section.expanded ^= 1;
     }
   }
   
   courses = {}
 
-  // document.addEventListener("scroll", function (e) {
-  //   console.log(document.body.scrollTop);
-  // });
+  document.addEventListener("scroll", function (e) {
+    var tabs = ["overview", "sections", "comparisons"];
+    if (app.show_catalog) tabs.splice(1, 1);
+    
+    for (var i = 0; i < tabs.length; i++) {
+      if ($("#" + tabs[i])[0].offsetTop + $("#" + tabs[i])[0].clientHeight - document.body.scrollTop > 0) {
+        $("#tabs")[0].className = $("#tabs")[0].className.replace(/t[0-9]/g, "t" + (i+1));
+        break;
+      }
+    }
+  });
   
   setup_rivets();
   rivets.bind(document.body, {
@@ -74,20 +85,27 @@ window.addEventListener("load", function () {
   load_courses("catalog");
 });
 
+function scroll_to (id) {
+  window.scrollTo(0, $("#" + id)[0].offsetTop - 20);
+}
+
 function setup_rivets () {
   rivets.formatters.mark = function (arr, val) {
     if (!arr.length) return arr;
     
     var terms = val.toLowerCase().split(" ");
+    app.no_results = true;
     
     for (var i = 0; i < arr.length; i++) {
-      var show = terms.every(function (term) {
-        if (/^[0-9]/.test(term)) term = " " + term;
-        var combined = (arr[i].course_id||"")
+      arr[i].hide = !terms.every(function (term) {
+        // if (/^[0-9]/.test(term)) term = " " + term;
+        var combined = " " + (arr[i].course_id||"")
           + " " + (arr[i].course_name||"");
-        return ~combined.toLowerCase().indexOf(term);
+        return ~combined.toLowerCase().indexOf(" " + term);
       });
-      arr[i].hide = !show;
+      
+      if (!arr[i].hide)
+        app.no_results = false;
     }
     
     return arr;
@@ -103,14 +121,18 @@ function setup_rivets () {
   
   rivets.formatters.seats = function (obj) {
     if (!obj) return "";
-    var avail = obj.section_seats_avail || obj.disc_seats_avail || 0;
-    var total = obj.section_seats_total || obj.disc_seats_total || 0;
+    var avail = obj.seats_avail || obj.section_seats_avail || obj.disc_seats_avail || 0;
+    var total = obj.seats_total || obj.section_seats_total || obj.disc_seats_total || 0;
     if (avail == -1) return "";
     return ~~avail + "/" + total;
   }
   
   rivets.formatters.noyear = function (val) {
     return val.substr(0, val.lastIndexOf("/"));
+  }
+  
+  rivets.formatters.na = function (val) {
+    return (!val && val !== 0 || val < 0) ? "N/A" : val;
   }
   
   rivets.formatters.blank = function (val, n) {
@@ -127,6 +149,14 @@ function setup_rivets () {
     var n = /(.+?) ([0-9].*)/.exec(str);
     if (!n) return;
     return n[i+1];
+  }
+  
+  rivets.formatters.and = function (a, b) {
+    return a && b;
+  }
+  
+  rivets.formatters.or = function (a, b) {
+    return a || b;
   }
   
   rivets.formatters.eq = function (a, b) {
@@ -155,17 +185,18 @@ function setup_rivets () {
   
   rivets.formatters.letter = function (gpa) {
     if (gpa == undefined) return;
-    return gpa < 1.0 ? "F" : gpa < 1.3
-      ? "D"  : gpa < 1.7 ? "D+" : gpa < 2.0
-      ? "C-" : gpa < 2.3 ? "C"  : gpa < 2.7
-      ? "C+" : gpa < 3.0 ? "B-" : gpa < 3.3
-      ? "B"  : gpa < 3.7 ? "B+" : gpa < 4.0
-      ? "A-" : "A";
+    gpa /= 100;
+    return gpa < 0 ? "" : gpa < 1.0
+      ? "F" : gpa < 1.3 ? "D"  : gpa < 1.7 
+      ? "D+" : gpa < 2.0 ? "C-" : gpa < 2.3 
+      ? "C"  : gpa < 2.7 ? "C+" : gpa < 3.0 
+      ? "B-" : gpa < 3.3 ? "B"  : gpa < 3.7 
+      ? "B+" : gpa < 4.0 ? "A-" : "A";
   }
   
   rivets.formatters.fixed = function (val, n) {
     if (val == undefined) return;
-    return parseFloat(val).toFixed(n);
+    return parseFloat(val / 100).toFixed(n);
   }
 }
 
@@ -186,25 +217,37 @@ function course_sort (a, b) {
 function load_course (course) {
   var url = api.details + course.id;
   
-  app.is_loading = true;
+  app.details_loading = true;
   var xhr = new XMLHttpRequest();
   xhr.onload = function (e) {
     // async prevent double-run
     if (course.details) return;
     
     course.details = JSON.parse(e.target.response);
+    var sections = course.details.course_sections;
+    for (var i = 0; i < sections.length; i++) {
+      var s = sections[i];
+      s.no_subsections = !(s.discussions.length + s.exams.length);
+    }
+    course.num_sections = sections.length;
     
     // select first course
-    app.is_loading = false;
+    app.details_loading = false;
   }
   xhr.open("GET", url);
   xhr.send();
 }
 
 function load_courses (id) {
+  app.courses = [];
+  
   if (courses[id]) {
-    app.courses = courses[id];
-    // $("#course_list li")[0].click();
+    app.sidebar_loading = true;
+    setTimeout(function () {
+      app.courses = courses[id];
+      app.sidebar_loading = false;
+    }, 200);
+    
     document.body.scrollTop = 0;
     $("#course_list")[0].scrollTop = 0;
     return;
@@ -214,7 +257,7 @@ function load_courses (id) {
     ? api.catalog
     : api.courses + id;
   
-  app.is_loading = true;
+  app.sidebar_loading = true;
   var xhr = new XMLHttpRequest();
   xhr.onload = function (e) {
     // async prevent double-run
@@ -222,11 +265,11 @@ function load_courses (id) {
     
     courses[id] = JSON.parse(e.target.response);
     courses[id].sort(course_sort);
-    app.courses = courses[id];
+    setTimeout(function () {
+      app.courses = courses[id];
+      app.sidebar_loading = false;
+    }, 200);
     
-    // select first course
-    // $("#course_list li")[0].click();
-    app.is_loading = false;
     document.body.scrollTop = 0;
     $("#course_list")[0].scrollTop = 0;
   }
