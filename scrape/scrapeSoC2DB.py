@@ -65,7 +65,7 @@ def split_course_name(name):
 
 def parse_seats(string):
     if string in NO_SEATS:
-        return -1, -1
+        return -1, 0 
 
     s = re.match("FULL Waitlist\(([0-9]+)\)", string)
 
@@ -275,7 +275,7 @@ def postCourse(course, sections, exams):
 
     r = requests.get(DB_URL + "/catalog/" + course_name)
     if r.text == "[]":
-        print "ERROR: Could not find course: " + course_name
+        #print "ERROR: Could not find course: " + course_name
         return None
     response = json.loads(r.text)[0]
 
@@ -322,6 +322,7 @@ def postCourse(course, sections, exams):
         if (meeting["Type"] not in AUX_TYPES and  \
             meeting["Code"] != prev_lecture_code)  or \
             lecture_id is None:
+
             section = {}
             section["course_id"] = course_id
             section["section_id"] = int(meeting["Id"]) if meeting["Id"] != "" else 0
@@ -417,17 +418,16 @@ if __name__ == "__main__":
 
     html = getSoCPage(depts, page, "FA16")
     num_pages = int(re.search(r"Page  \(1&nbsp;of&nbsp;([0-9]*)\)", html).group(1))
-    print num_pages
+    print "Scraping {} pages from the Schedule of Classes".format(num_pages)
 
-    pool = Pool(processes=20)
+    pool = Pool(processes = 20)
 
-    pages = range(1, num_pages + 1)
     count = 0
+    pages = range(1, num_pages + 1)
     for x in pool.imap_unordered(getAndParsePage, range(1, num_pages + 1)):
         count += 1
         pages.remove(x)
-        print "{}/{}% done".format(count, num_pages)
-        if len(pages) < 10:
-            print pages
+        print "{}/{} pages completed".format(count, num_pages)
 
-        
+        if len(pages) < 10:
+            print "Pages remaining: ", pages

@@ -36,11 +36,10 @@ def get_gradedistributions(url):
     expected = None
     received = None
     if url is None:
-        return (expected, received)
+        return expected, received, ""
     site = "https://cape.ucsd.edu/responses/"
     if url.startswith('.'):
-        delim1,url = url.split('.',1)
-        delim2,url = url.split('.',1)
+        url = url[2:]
         site = "https://cape.ucsd.edu" + url
         r = requests.get(site, headers={"User-agent":'Mozilla'})
         soup = BeautifulSoup(r.text, "html.parser");
@@ -71,26 +70,26 @@ def get_gradedistributions(url):
            if rows is not None:
                expectedrow = rows[2]
                cells = expectedrow.findChildren(['td'])
-               A = cells[0].text.encode('utf-8')
-               B = cells[1].text.encode('utf-8')
-               C = cells[2].text.encode('utf-8')
-               D = cells[3].text.encode('utf-8')
-               F = cells[4].text.encode('utf-8')
-               P = cells[5].text.encode('utf-8')
-               NP = cells[6].text.encode('utf-8')
+               A = cells[0].text.encode('utf-8').split("%")[0]
+               B = cells[1].text.encode('utf-8').split("%")[0]
+               C = cells[2].text.encode('utf-8').split("%")[0]
+               D = cells[3].text.encode('utf-8').split("%")[0]
+               F = cells[4].text.encode('utf-8').split("%")[0]
+               P = cells[5].text.encode('utf-8').split("%")[0]
+               NP = cells[6].text.encode('utf-8').split("%")[0]
                expected = {'A': A,'B': B,'C': C,'D': D, 'F': F, 'P': P, 'NP': NP}
         if table_received is not None:
             rows = table_received.findChildren(['tr'])
             if rows is not None:
                 receivedrow = rows[2]
                 cells = receivedrow.findChildren(['td']) 
-                A2 = cells[0].text.encode('utf-8')
-                B2 = cells[1].text.encode('utf-8')
-                C2 = cells[2].text.encode('utf-8')
-                D2 = cells[3].text.encode('utf-8')
-                F2 = cells[4].text.encode('utf-8')
-                P2 = cells[5].text.encode('utf-8')
-                NP2 = cells[6].text.encode('utf-8')
+                A2 = cells[0].text.encode('utf-8').split("%")[0]
+                B2 = cells[1].text.encode('utf-8').split("%")[0]
+                C2 = cells[2].text.encode('utf-8').split("%")[0]
+                D2 = cells[3].text.encode('utf-8').split("%")[0]
+                F2 = cells[4].text.encode('utf-8').split("%")[0]
+                P2 = cells[5].text.encode('utf-8').split("%")[0]
+                NP2 = cells[6].text.encode('utf-8').split("%")[0]
                 received = {'A': A2,'B': B2,'C': C2,'D': D2, 'F': F2, 'P': P2, 'NP': NP2}
     return expected, received, site
     
@@ -167,6 +166,7 @@ def get_cape_data_for_dept(dept):
         # get rcmndclass
         working_col = working_col.next_sibling
         rcmndclass = working_col.span.contents[0]
+        rcmndclass = rcmndclass.split("%")[0]
 
         # get rcmndinstr
         working_col = working_col.next_sibling
@@ -204,8 +204,11 @@ def get_cape_data_for_dept(dept):
         
         r = requests.get(DB_URL + "/professor/" + instructor)
         print instructor
-        prof_id = update_RMP_prof(fname, lname, instructor) 
+        prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
         
+        if prof_id is None:
+            continue
+
         r = requests.get(DB_URL + "catalog/" + course)
         courses = json.loads(r.text)
 
@@ -225,17 +228,19 @@ def get_cape_data_for_dept(dept):
             'term': term,
             'enroll': int(enroll),
             'cape_num_evals': int(evals),
-            'rcmnd_class': rcmndclass,
+            'rcmnd_class': format_float(rcmndclass),
             'cape_rec_prof': format_float(rcmndinstr),
             'cape_study_hrs': format_float(hrsperwk),
             #'gradeexp': gradeexp,
             'cape_prof_gpa': format_float(graderec),
             #'cape_expected_grade': expected_grade,
-            'a_percentage': received_grade["A"] if received_grade is not None else -1,
-            'b_percentage': received_grade["B"] if received_grade is not None else -1,
-            'c_percentage': received_grade["C"] if received_grade is not None else -1,
-            'd_percentage': received_grade["D"] if received_grade is not None else -1,
-            'f_percentage': received_grade["F"] if received_grade is not None else -1,
+            'a_percentage': format_float(received_grade["A"]) if received_grade is not None else -1,
+            'b_percentage': format_float(received_grade["B"]) if received_grade is not None else -1,
+            'c_percentage': format_float(received_grade["C"]) if received_grade is not None else -1,
+            'd_percentage': format_float(received_grade["D"]) if received_grade is not None else -1,
+            'f_percentage': format_float(received_grade["F"]) if received_grade is not None else -1,
+            'p_percentage': format_float(received_grade["P"]) if received_grade is not None else -1,
+            'np_percentage': format_float(received_grade["NP"]) if received_grade is not None else -1,
             'cape_url':  site
         }
         
