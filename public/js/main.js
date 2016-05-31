@@ -1,4 +1,4 @@
-window.addEventListener("load", function ()  {
+window.addEventListener("load", function () {
   $ = document.querySelectorAll.bind(document);
   
   api = {
@@ -9,125 +9,103 @@ window.addEventListener("load", function ()  {
   }
   
   app = {
-    fake_capes: [{
-      prof: "Gary Gillespie",
-      term: "SP15",
-      cape_num_evals: 94,
-      cape_rec_prof: 79.8,
-      cape_study_hrs: 11.03,
-      cape_prof_gpa: 3.28,
-      overall: 3.2,
-      helpfulness: 3.2,
-      clarity: 3.1,
-      easiness: 2.1
-    }, {
-      prof: "William Griswold",
-      term: "WI14",
-      cape_num_evals: 95,
-      cape_rec_prof: 84.8,
-      cape_study_hrs: 10.36,
-      cape_prof_gpa: 3.07,
-      overall: 3.6,
-      helpfulness: 3.7,
-      clarity: 3.5,
-      easiness: 3.2
-    }],
     search: "",
-    tab: 0,
-    term: "catalog",
-    terms: [],
-    course: {},
+    course: null,
     courses: [],
-    is_loading: true,
+    term: {id:"catalog", name:"catalog"},
+    terms: [{
+      term_id: "catalog",
+      term_name: "catalog"
+    }],
+    terms_expanded: 0,
+    no_results: false,
+    sidebar_loading: false,
+    details_loading: false,
     show_catalog: true,
     
     clear_search: function () {
       app.search = "";
     },
-    move_selected: function (e, dir) {
-      var cur = $("#courses li.selected")[0];
-      
-      if (!cur) return;
-      e.preventDefault();
-
-      // prevent key-repeat firing
-      if (keydown) return;
-      
-      $("#courses")[0].scrollTop += 
-        (dir ? 1 : -1) * cur.offsetHeight;
-      
-      var next = dir ? cur.nextSibling : cur.previousSibling;
-      if (next) next.click();
-    },
     select_course: function (e, rv) {
-      app.course.selected = false;
+      if (app.course)
+        app.course.selected = false;
       app.course = rv.course;
       app.course.selected = true;
+      
+      document.body.scrollTop = 0;
       
       if (!app.show_catalog && !app.course.details)
         load_course(app.course);
     },
-    select_tab: function (e) {
-      if (e.target.classList.contains("greyed")) return;
-      app.tab = e.target.value;
-    },
     select_term: function (e, rv) {
-      app.show_catalog = app.term == "catalog";
-      app.course.selected = false;
-      app.course = {};
+      app.terms_expanded = 0;
+      if (app.course)
+        app.course.selected = false;
+      if (app.term.id == e.target.dataset["value"])
+        return;
+      app.term = {
+        id: rv.term.term_id,
+        name: rv.term.term_name
+      };
+      app.show_catalog = app.term.id == "catalog";
+      app.course = null;
+      app.courses = [];
       app.clear_search();
-      load_courses(app.term);
+      load_courses(app.term.id);
+    },
+    toggle_terms: function () {
+      app.terms_expanded ^= 1;
     },
     toggle_expand: function (e, rv) {
-      rv.section.expanded ^= 1;
+      if (!rv.section.no_subsections)
+        rv.section.expanded ^= 1;
     }
   }
   
-  // cache for course lists, and course details
-  courses = {
-    details: []
-  }
-  
-  var keydown;
-  
-  document.addEventListener("keydown", function (e) {
-    switch (e.which) {
-      case 38: app.move_selected(e, 0); break;
-      case 40: app.move_selected(e, 1); break;
-    }
+  courses = {}
+
+  document.addEventListener("scroll", function (e) {
+    var tabs = ["overview", "sections", "comparisons"];
+    if (app.show_catalog) tabs.splice(1, 1);
     
-    keydown = true;
+    for (var i = 0; i < tabs.length; i++) {
+      if ($("#" + tabs[i])[0].offsetTop + $("#" + tabs[i])[0].clientHeight - document.body.scrollTop > 0) {
+        $("#tabs")[0].className = $("#tabs")[0].className.replace(/t[0-9]/g, "t" + (i+1));
+        break;
+      }
+    }
   });
   
-  document.addEventListener("keyup", function (e) {
-    keydown = false;
-  });
-  
-  var container = document.body;
   setup_rivets();
-  rivets.bind(container, {
+  rivets.bind(document.body, {
     app: app
   });
   
   load_terms();
   load_courses("catalog");
-  $("#app")[0].style.display = "";
 });
+
+function scroll_to (id) {
+  window.scrollTo(0, $("#" + id)[0].offsetTop - 20);
+}
 
 function setup_rivets () {
   rivets.formatters.mark = function (arr, val) {
     if (!arr.length) return arr;
     
     var terms = val.toLowerCase().split(" ");
+    app.no_results = true;
     
     for (var i = 0; i < arr.length; i++) {
-      var show = terms.every(function (term) {
-        if (/^[0-9]/.test(term)) term = " " + term;
-        var combined = (arr[i].course_id||"")
+      arr[i].hide = !terms.every(function (term) {
+        // if (/^[0-9]/.test(term)) term = " " + term;
+        var combined = " " + (arr[i].course_id||"")
           + " " + (arr[i].course_name||"");
-        return ~combined.toLowerCase().indexOf(term);
+        return ~combined.toLowerCase().indexOf(" " + term);
       });
-      arr[i].hide = !show;
+      
+      if (!arr[i].hide)
+        app.no_results = false;
     }
     
     return arr;
@@ -135,16 +113,31 @@ function setup_rivets () {
   
   rivets.formatters.time = function (obj) {
     if (!obj) return "";
-    var start = obj.section_start_time || obj.disc_start_time;
-    var end = obj.section_end_time || obj.disc_end_time;
+    var start = obj.section_start_time || obj.disc_start_time || obj.exam_start_time;
+    var end = obj.section_end_time || obj.disc_end_time || obj.exam_end_time;
+    if (start == "TBA") return "TBA";
     return (start && end) ? start + "-" + end : "";
   }
   
   rivets.formatters.seats = function (obj) {
     if (!obj) return "";
-    var avail = obj.section_seats_avail || obj.disc_seats_avail;
-    var total = obj.section_seats_total || obj.disc_seats_total;
-    return (total) ? ~~avail + "/" + total : "";
+    var avail = obj.seats_avail || obj.section_seats_avail || obj.disc_seats_avail || 0;
+    var total = obj.seats_total || obj.section_seats_total || obj.disc_seats_total || 0;
+    if (avail == -1) return "";
+    return ~~avail + "/" + total;
+  }
+  
+  rivets.formatters.noyear = function (val) {
+    return val.substr(0, val.lastIndexOf("/"));
+  }
+  
+  rivets.formatters.na = function (val) {
+    return (!val && val !== 0 || val < 0) ? "N/A" : val;
+  }
+  
+  rivets.formatters.blank = function (val, n) {
+    if (val == n) return "";
+    return val;
   }
   
   rivets.formatters.replace = function (val, f, r) {
@@ -156,6 +149,14 @@ function setup_rivets () {
     var n = /(.+?) ([0-9].*)/.exec(str);
     if (!n) return;
     return n[i+1];
+  }
+  
+  rivets.formatters.and = function (a, b) {
+    return a && b;
+  }
+  
+  rivets.formatters.or = function (a, b) {
+    return a || b;
   }
   
   rivets.formatters.eq = function (a, b) {
@@ -177,24 +178,25 @@ function setup_rivets () {
   
   rivets.formatters.case = function (val, c) {
     if (!val) return;
-    if (c == "upper") return val.toUpperCase();
-    if (c == "lower") return val.toLowerCase();
-    return val;
+    return c
+      ? val.toUpperCase()
+      : val.toLowerCase();
   }
   
   rivets.formatters.letter = function (gpa) {
     if (gpa == undefined) return;
-    return gpa < 1.0 ? "F" : gpa < 1.3
-      ? "D"  : gpa < 1.7 ? "D+" : gpa < 2.0
-      ? "C-" : gpa < 2.3 ? "C"  : gpa < 2.7
-      ? "C+" : gpa < 3.0 ? "B-" : gpa < 3.3
-      ? "B"  : gpa < 3.7 ? "B+" : gpa < 4.0
-      ? "A-" : "A";
+    gpa /= 100;
+    return gpa < 0 ? "" : gpa < 1.0
+      ? "F" : gpa < 1.3 ? "D"  : gpa < 1.7 
+      ? "D+" : gpa < 2.0 ? "C-" : gpa < 2.3 
+      ? "C"  : gpa < 2.7 ? "C+" : gpa < 3.0 
+      ? "B-" : gpa < 3.3 ? "B"  : gpa < 3.7 
+      ? "B+" : gpa < 4.0 ? "A-" : "A";
   }
   
   rivets.formatters.fixed = function (val, n) {
     if (val == undefined) return;
-    return parseFloat(val).toFixed(n);
+    return parseFloat(val / 100).toFixed(n);
   }
 }
 
@@ -215,26 +217,39 @@ function course_sort (a, b) {
 function load_course (course) {
   var url = api.details + course.id;
   
-  app.is_loading = true;
+  app.details_loading = true;
   var xhr = new XMLHttpRequest();
   xhr.onload = function (e) {
     // async prevent double-run
     if (course.details) return;
     
     course.details = JSON.parse(e.target.response);
+    var sections = course.details.course_sections;
+    for (var i = 0; i < sections.length; i++) {
+      var s = sections[i];
+      s.no_subsections = !(s.discussions.length + s.exams.length);
+    }
+    course.num_sections = sections.length;
     
     // select first course
-    app.is_loading = false;
+    app.details_loading = false;
   }
   xhr.open("GET", url);
   xhr.send();
 }
 
 function load_courses (id) {
+  app.courses = [];
+  
   if (courses[id]) {
-    app.courses = courses[id];
-    $("#courses li")[0].click();
-    app.tab = 0;
+    app.sidebar_loading = true;
+    setTimeout(function () {
+      app.courses = courses[id];
+      app.sidebar_loading = false;
+    }, 200);
+    
+    document.body.scrollTop = 0;
+    $("#course_list")[0].scrollTop = 0;
     return;
   }
   
@@ -242,7 +257,7 @@ function load_courses (id) {
     ? api.catalog
     : api.courses + id;
   
-  app.is_loading = true;
+  app.sidebar_loading = true;
   var xhr = new XMLHttpRequest();
   xhr.onload = function (e) {
     // async prevent double-run
@@ -250,12 +265,13 @@ function load_courses (id) {
     
     courses[id] = JSON.parse(e.target.response);
     courses[id].sort(course_sort);
-    app.courses = courses[id];
+    setTimeout(function () {
+      app.courses = courses[id];
+      app.sidebar_loading = false;
+    }, 200);
     
-    // select first course
-    $("#courses li")[0].click();
-    app.is_loading = false;
-    app.tab = 0;
+    document.body.scrollTop = 0;
+    $("#course_list")[0].scrollTop = 0;
   }
   xhr.open("GET", url);
   xhr.send();
@@ -269,7 +285,7 @@ function load_terms () {
   xhr.onload = function (e) {
     // async prevent double-run
     if (app.terms.length > 1) return;
-    app.terms = JSON.parse(e.target.response);
+    app.terms = app.terms.concat(JSON.parse(e.target.response));
   }
   xhr.open("GET", api.terms);
   xhr.send();

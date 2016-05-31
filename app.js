@@ -6,6 +6,7 @@ var join = require('path').join
 var app = express();
 app.use(static(join(__dirname,'public/js')));
 app.use(static(join(__dirname,'public/css')));
+app.use(static(join(__dirname,'public/img')));
 app.use(static(join(__dirname,'app/views')));
 app.use(static(join(__dirname,'config')));
 app.listen(config.port, function () {
