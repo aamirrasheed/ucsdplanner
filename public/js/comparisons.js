@@ -32,6 +32,7 @@ window.addEventListener("load", function() {
         }
         current_cape:{}
         current_cape_term:""
+        grade_dist_chart:{}
         }
         data: {
           rmp: {
@@ -310,8 +311,9 @@ function populate_course_prof(course_data){
   app.displayed_course_profs.push(app.current_course_prof);
 
   console.log(app.current_course_prof);
-  
-  update_grade_distribution(app.current_course_prof.course.id, app.current_course_prof.prof.id);
+
+  update_grade_distribution(app.current_course_prof.course.id, app.current_course_prof.prof.id,
+                            app.current_course_prof.current_cape_term);
 
   app.course_search = "";
   app.prof_search = "";
@@ -319,7 +321,7 @@ function populate_course_prof(course_data){
   
 }
 
-function update_grade_distribution(course_id, prof_id){
+function update_grade_distribution(course_id, prof_id, cape_term){
 
   // find course_prof_to_update
   var course_prof_to_update;
