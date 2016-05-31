@@ -457,10 +457,11 @@ ul {
 #sections_table tr.subsection:hover {
 /* 	background-color: #176c96; */
 /* 	color: #fff; */
-	background-color: #fbbb18
+	background-color: #fbbb18;
 }
 
-#sections_table tr.subsection td:first-child {
+#sections_table tr.subsection td:first-child,
+#sections_table tr.subsection td:last-child {
 	background-color: #fff;
 }
 
@@ -468,8 +469,7 @@ ul {
 	line-height: 1.2em;
 }
 
-
-#feedback {
+#comp_link {
   position: fixed;
   right: 0.5em;
   bottom: 0.5em;
@@ -485,6 +485,15 @@ ul {
   color: #fff;
 }
 
-#feedback i {
+/*
+#comp_link:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+#comp_link:active {
+  background: rgba(0,0,0,0.2);
+}*/
+
+#comp_link i {
   font-size: 1em;
 }

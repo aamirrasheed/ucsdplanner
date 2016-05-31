@@ -100,9 +100,9 @@
               <th>Days</th>
               <th>Time</th>
               <th>Location</th>
-              <th>Professor</th>
               <th>Seats</th>
               <th>Waitlist</th>
+              <th>Professor</th>
             </tr>
           </thead>
           <tbody rv-each-section="app.course.details.course_sections">
@@ -120,9 +120,9 @@
               <td>{section.section_days}</td>
               <td>{section | time}</td>
               <td>{section.location}</td>
-              <td>{section.professor_name}</td>
               <td>{section | seats}</td>
               <td>{section.section_waitlist | blank -1}</td>
+              <td>{section.professor_name}</td>
             </tr>
             <tr class="subsection" rv-each-disc="section.discussions" rv-show="section.expanded">
               <td></td>
@@ -132,9 +132,9 @@
               <td>{disc.disc_days}</td>
               <td>{disc | time}</td>
               <td>{disc.disc_location}</td>
-              <td></td>
               <td>{disc | seats}</td>
               <td>{disc.disc_waitlist | blank -1}</td>
+              <td></td>
             </tr>
             <tr rv-show="section.expanded"><td></td></tr>
             <tr class="exam" rv-each-exam="section.exams" rv-show="section.expanded">
@@ -157,9 +157,9 @@
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo possimus eius esse eaque maxime animi ex blanditiis, repudiandae minus commodi impedit suscipit, minima, explicabo fugit, beatae iste quasi nam non!
       </div>
     </div>
-    <div id="feedback">
+    <a href="#" id="comp_link">
       <i class="material-icons">pie_chart</i>
-    </div>
+    </a>
   </div>
 </body>
 </html>
