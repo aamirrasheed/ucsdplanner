@@ -4,9 +4,17 @@
 .course-prof {
 	width: 280px;
 	float: left;
-  	width: 20%;
-  	height: 600px;
-  	background-color: ;
+  	border: 2px solid #00457A;
+  	padding: 8px;
+  	margin: 5px;
+}
+
+.course-dept {
+	font-size: 20px;
+}
+
+.course-code {
+	font-size: 20px;
 }
 .course-prof-header {
   text-align: center;
