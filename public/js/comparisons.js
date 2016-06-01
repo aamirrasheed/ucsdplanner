@@ -413,8 +413,8 @@ function update_grade_distribution(course_id, prof_id, cape_term){
         "location": "bottom-left"
     },
     "size": {
-        "canvasHeight": 250,
-        "canvasWidth": 250,
+        "canvasHeight": 200,
+        "canvasWidth": 200,
         "pieOuterRadius": "70%"
     },
     "data": {
