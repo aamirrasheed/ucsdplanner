@@ -12,6 +12,7 @@ window.addEventListener("load", function () {
     search: "",
     course: null,
     courses: [],
+    comparisons: [],
     term: {id:"catalog", name:"catalog"},
     terms: [{
       term_id: "catalog",
@@ -36,6 +37,17 @@ window.addEventListener("load", function () {
       
       if (!app.show_catalog && !app.course.details)
         load_course(app.course);
+    },
+    select_cape: function (e, rv) {
+      var comp = rv.comp;
+      for (var i=0; i<comp.capes.length; i++) {
+        if (comp.capes[i].term == comp.cape_term) {
+          comp.current_cape = comp.capes[i];
+          break;
+        }
+      }
+      
+      update_pie_chart(comp);
     },
     select_term: function (e, rv) {
       app.terms_expanded = 0;
@@ -176,6 +188,11 @@ function setup_rivets () {
     return arr.length;
   }
   
+  rivets.formatters.rmp = function (val) {
+    if (!val) return "N/A";
+    return parseFloat(val).toFixed(1) + "/5"
+  }
+  
   rivets.formatters.case = function (val, c) {
     if (!val) return;
     return c
@@ -198,6 +215,10 @@ function setup_rivets () {
     if (val == undefined) return;
     return parseFloat(val / 100).toFixed(n);
   }
+  
+  rivets.formatters.pie = function (comp) {
+    return btoa(comp.professor_name).replace(/=/g, "");
+  }
 }
 
 function course_sort (a, b) {
@@ -214,6 +235,135 @@ function course_sort (a, b) {
     ? -1 : 1;
 }
 
+function cape_average (cape_a, cape_b) {
+  var cape = JSON.parse(JSON.stringify(cape_a));
+  
+  var a_evals = cape_a.cape_num_evals;
+  var b_evals = cape_b.cape_num_evals;
+  var t_evals = a_evals + b_evals;
+  cape.cape_num_evals = t_evals;
+  
+  for (var i in cape) {
+    // ignore these properties
+    if (~["term", "cape_num_evals", "cape_id"].indexOf(i)) continue;
+    
+    var a_def = cape_a[i] !== null && cape_a[i] >= 0;
+    var b_def = cape_b[i] !== null && cape_b[i] >= 0;
+    
+    if (a_def && b_def)
+      cape[i] = (cape_a[i] * a_evals + cape_b[i] * b_evals) / t_evals;
+    else if (b_def)
+      cape[i] = cape_b[i];
+  }
+  
+  return cape;
+}
+
+function capes_transform (capes) {
+  if (!capes.length) return [];
+  
+  var terms = {"WI": 0, "SP":1, "FA":2, "S1":3, "S2":4};
+  var term_regex = /([A-Z0-9]{2})([0-9]{2})/;
+
+  var term_sort = function (a, b) {
+    a_term = terms[term_regex.exec(a.term)[1]];
+    b_term = terms[term_regex.exec(b.term)[1]];
+  	a_yr = ~~term_regex.exec(a.term)[2];
+    b_yr = ~~term_regex.exec(b.term)[2];
+    
+    return a_yr > b_yr
+      ? -1 : a_yr < b_yr
+      ?  1 : a_term > b_term
+      ? -1 : 1;
+  }
+  
+  capes.sort(term_sort);
+  
+  for (var i=0; i<capes.length-1; i++) {
+    for (var j=i+1; j<capes.length; j++) {
+      if (capes[i].term != capes[j].term) continue;
+      capes[i] = cape_average(capes[i], capes[j]);
+      capes.splice(j--, 1);
+    }
+  }
+  
+  var avg = JSON.parse(JSON.stringify(capes[0]));
+  avg.term = "average";
+  
+  for (var i=1; i<capes.length; i++)
+    avg = cape_average(avg, capes[i]);
+  
+  capes.unshift(avg);
+  
+  return capes;
+}
+
+function update_pie_chart (comp) {
+  var id = rivets.formatters.pie(comp);
+  var cape = comp.current_cape;
+  
+  $("#" + id)[0].innerHTML = "";
+  
+  var grade_dist_chart = new d3pie(id, {
+    "size": {
+      "canvasHeight": 200,
+      "canvasWidth": 200,
+      "pieOuterRadius": "90%"
+    },
+    "data": {
+      "sortOrder": "label-asc",
+      "content": [
+        {
+          "label": "A",
+          "value": cape.a_percentage,
+          "color": "#F38630"
+        }, {
+          "label": "B",
+          "value": cape.b_percentage,
+          "color": "#69D2E7"
+        }, {
+          "label": "C",
+          "value": cape.c_percentage,
+          "color": "#FA6900"
+        }, {
+          "label": "D",
+          "value": cape.d_percentage,
+          "color": "#A7DBD8"
+        }, {
+          "label": "F",
+          "value": cape.f_percentage,
+          "color": "#E0E4CC"
+        }
+      ]
+    },
+    "labels": {
+      "inner": {
+        "format": "label",
+        "hideWhenLessThanPercentage": 3
+      },
+      "outer": {
+        "format": "none"
+      },
+      "mainLabel": {
+        "fontSize": 11
+      },
+      "value": {
+        "color": "#adadad",
+        "fontSize": 11
+      },
+      "truncation": {
+        "enabled": true
+      }
+    },
+    "effects": {
+      "load": {
+  			"effect": "none"
+      }
+    },
+    "callbacks": {}
+  });
+}
+
 function load_course (course) {
   var url = api.details + course.id;
   
@@ -224,12 +374,44 @@ function load_course (course) {
     if (course.details) return;
     
     course.details = JSON.parse(e.target.response);
+    
+    var uniq_profs = ["Staff"];
+    course.details.comparisons = [];
+    
+    // mark sections if they don't have subsections
+    // also populate comparisons
     var sections = course.details.course_sections;
+    course.num_sections = sections.length;
     for (var i = 0; i < sections.length; i++) {
       var s = sections[i];
       s.no_subsections = !(s.discussions.length + s.exams.length);
+      
+      if (!~uniq_profs.indexOf(s.professor_name)) {
+        uniq_profs.push(s.professor_name);
+        var comp = {
+          professor_name: s.professor_name,
+          rmp: {
+            tid: s.rmp_tid,
+            overall: s.rmp_overall,
+            easiness: s.rmp_easiness,
+            helpful: s.rmp_helpful,
+            clarity: s.rmp_clarity,
+            hot: s.rmp_hot,
+          },
+          capes: capes_transform(s.cape_info)
+        }
+        
+        if (comp.capes.length) {
+          comp.cape_term = "average";
+          comp.current_cape = comp.capes[0];
+          course.details.comparisons.push(comp);
+          update_pie_chart(comp);
+        }
+      }
     }
-    course.num_sections = sections.length;
+    
+    if (!course.details.comparisons.length)
+      course.details.comparisons = false;
     
     // select first course
     app.details_loading = false;
