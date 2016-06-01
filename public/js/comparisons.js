@@ -163,11 +163,6 @@ window.addEventListener("load", function() {
       app.profs = [];
       load_course_prof();
     },
-
-    remove_course_prof: function(e, rv) {
-      var index = app.displayed_course_profs.indexOf(rv.courseprof);
-      app.displayed_course_profs.splice(index);
-    },
   };
 
   rivets.bind(document.body, {
