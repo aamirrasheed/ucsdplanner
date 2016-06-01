@@ -94,6 +94,9 @@ window.addEventListener("load", function() {
     show_course_prof: false,
     prof_id:"",
     is_loading: true,
+    clear_search: function() {
+      app.course_search = "";
+    },
 
     profs: [],
     courses: [],
@@ -566,6 +569,11 @@ rivets.formatters.not = function (val){
 rivets.formatters.grade_dist_chart_id_generator = function (courseprof){
   return courseprof.course.id + courseprof.prof.id;
 };
+
+rivets.formatters.ne = function (a, b) {
+  return a != b;
+}
+
 
 
 

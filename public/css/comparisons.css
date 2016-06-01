@@ -21,26 +21,60 @@
 body {
   font-family: "Open Sans";
   font-weight: 300;
+  /*background-color: #85c2e0;*/
 }
 
 select {
   font: inherit;
 }
 
+#topbar {
+  background: #09364D;
+}
+
+#logo {
+  font-size: 1.7em;
+  font-weight: 400;
+  height: 70px;
+  line-height: 70px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0) url(logo.png) no-repeat center center;
+  background-size: 35%;
+}
+
 #search {
-    position: relative;
-    padding: 0 10px;
-    display: inline-block;
-    color: #fff;
-    font-size: 1.25em;
-    height: 50px;
-    line-height: 50px;
-    background-color: #0A4B6A;
+  position: relative;
+  padding: 0 10px;
+  display: inline-block;
+  color: #fff;
+  font-size: 1.25em;
+  height: 50px;
+  line-height: 50px;
+  background-color: #0A4B6A;
+  font-family: inherit;
+}
+
+.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.left,
+.material-icons.right {
+  position: absolute;
+  top: 50%;
 }
 
 .material-icons.left {
     left: 0;
-    transform: translate(30%, 15%);
+    transform: translate(50%, -50%);
+}
+
+.material-icons.right {
+    right: 0;
+    transform: translate(-50%, -50%);
 }
 
 #search input {
@@ -50,7 +84,25 @@ select {
   color: #fff;
   font: inherit;
   height: 100%;
-  padding: 0 1em;
+  padding: 0 2em;
+}
+
+#clear {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#clear:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#clear:active {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+#input {
+  background-color: #0e6b98;
+  width: 300px;
 }
 
 button {
@@ -64,7 +116,7 @@ button {
 
 button:hover,
 button.hover {
-  background-color: #1e8fc8;
+  background-color: #153d51;
   text-shadow: -1px 1px #27496d;
 }
 
@@ -78,5 +130,8 @@ ul {
   list-style: none;
   height: 200px;
   overflow: scroll;
+}
+
+#id {
 }
 

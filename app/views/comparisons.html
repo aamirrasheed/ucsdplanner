@@ -19,9 +19,16 @@
   </style>
 </head>
 <body>
-  <button type="button" rv-on-click="app.add_course">Add Class</button>
+  <div id="topbar">
+    <div id="logo"></div>
+  </div>
+  <button type="button" rv-on-click="app.add_course">add class</button>
   <div class="input" rv-show="app.show_search">
-    <input id="search" type="text" placeholder="Course Name" rv-value="app.course_search"/>
+    <div id="search">
+      <i class="material-icons md-18 left">search</i>
+      <input type="text" placeholder="course name" rv-value="app.course_search"/>
+      <i id="clear" class="material-icons md-18 right" rv-on-click="app.clear_search" rv-show="app.course_search | ne ''">close</i>
+    </div>
     <ul id="courses">
       <li rv-each-course="app.courses | mark app.course_search" rv-hide="course.hide" rv-on-click="app.user_selects_course">
         <span class="id" rv-text="course.course_id"></span>
