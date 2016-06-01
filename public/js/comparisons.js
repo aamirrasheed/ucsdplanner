@@ -367,7 +367,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
         "pieOuterRadius": "90%"
     },
     "data": {
-        "sortOrder": "value-desc",
+        "sortOrder": "label-asc",
         "content":
         [
             {
@@ -399,12 +399,12 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     },
     "labels": {
         "outer": {
-            "format":"none",
-            "pieDistance": 32
+            "format":"percentage",
+            "pieDistance": 10
         },
         "inner": {
-            "format":"label-percentage1",
-            "hideWhenLessThanPercentage": 3
+          "format":"label"
+            //"hideWhenLessThanPercentage": 3
         },
         "mainLabel": {
             "fontSize": 11
@@ -418,7 +418,8 @@ function update_grade_distribution(course_id, prof_id, cape_term){
             "fontSize": 11
         },
         "lines": {
-            "enabled": true
+            "enabled": true,
+            //"style":"straight"
         },
         "truncation": {
             "enabled": true
