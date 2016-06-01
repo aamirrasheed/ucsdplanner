@@ -30,6 +30,9 @@ select {
 
 #topbar {
   background: #09364D;
+  border: solid 1px;
+  width: 100%;
+  height:100px;
 }
 
 #logo {
@@ -42,7 +45,35 @@ select {
   text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
   border-bottom: 1px solid rgba(0,0,0,0.1);
   background: rgba(0, 0, 0, 0) url(logo.png) no-repeat center center;
-  background-size: 35%;
+  background-size: 75%;
+  float: left;
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+}
+
+.verticalLine {
+  border-left: solid #fff;
+  display: inline-block;
+  float: left;
+  height: 100%;
+}
+
+#tool-name {
+  float: right;
+  position: relative;
+  height: 100%;
+  background-size: 75%;
+  text-align: center;
+  color: #fff;
+  background: inherit;
+  font: "Open Sans";
+  display: inline-block;
+  font-size: 5em;
+  vertical-align: middle;
+  text-align: center;
+  transform: translate(-15%, 0%);
+  display: inline-block;
 }
 
 #search {
