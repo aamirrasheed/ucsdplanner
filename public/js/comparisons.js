@@ -131,7 +131,8 @@ window.addEventListener("load", function() {
     },
 
     user_selects_course: function (e, rv) {
-      
+      app.profs = [];
+
       // get data from rv
       var course_id = rv.course.id;
       var course_name = rv.course.course_id;
@@ -245,12 +246,12 @@ function populate_course_prof(course_data){
   // populate rmp info
   app.current_course_prof.data = {
     rmp: {
-      overall:course_data.rmp_overall,
+      overall: course_data.rmp_overall,
       helpfulness: course_data.rmp_helpful,
       clarity: course_data.rmp_clarity,
       easiness: course_data.rmp_easiness,
       hot: course_data.rmp_hot,
-      url: "http://www.ratemyprofessors.com/ShowRatings.jsp?tid="+ course_data.rmp_tip
+      url: (course_data.rmp_tid ? "http://www.ratemyprofessors.com/ShowRatings.jsp?tid="+ course_data.rmp_tid : false)
     },
     capes: course_data.capes,
   };
@@ -383,7 +384,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var d_percentage = course_prof_to_update.current_cape.d_percentage;
   var f_percentage = course_prof_to_update.current_cape.f_percentage;
   var grade_dist_chart = course_prof_to_update.grade_dist_chart;
-  var grade_dist_chart_id = course_prof_to_update.course.id; //+ " " + course_prof_to_update.prof.id;
+  var grade_dist_chart_id = course_prof_to_update.course.id + course_prof_to_update.prof.id;
 
   console.log("grade_dist_chart: " + grade_dist_chart);
   if(grade_dist_chart !== 0){
@@ -447,11 +448,12 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     "labels": {
         "outer": {
             "format":"percentage",
-            "pieDistance": 5
+            "pieDistance": 5,
+            "hideWhenLessThanPercentage": 3
         },
         "inner": {
           "format":"label",
-            "hideWhenLessThanPercentage": 1
+          "hideWhenLessThanPercentage": 3
         },
         "mainLabel": {
             "fontSize": 11
@@ -555,6 +557,14 @@ rivets.formatters.mark = function (arr, val) {
   }
     
   return arr;
+};
+
+rivets.formatters.not = function (val){
+  return !val;
+}
+
+rivets.formatters.grade_dist_chart_id_generator = function (courseprof){
+  return courseprof.course.id + courseprof.prof.id;
 };
 
 
