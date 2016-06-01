@@ -19,7 +19,7 @@ window.addEventListener("load", function() {
     displayed_course_profs: [],
     /*displayed_course_profs: [
       {
-        show: "false",
+        show: false,
         course: {
           id: "B8EGSDE7-62D1-6735-9744-182935EB4DD0"
           dept: "CSE",
@@ -107,15 +107,22 @@ window.addEventListener("load", function() {
       var current_cape_term = rv.courseprof.current_cape_term;
       var capes = rv.courseprof.data.capes;
 
+      var found = false;
       // search through capes to find new one
       for (var i = 0; i < capes.length; i++) {
         if (capes[i].term === current_cape_term){
 
           rv.courseprof.current_cape = capes[i];  
-          
+          update_grade_distribution(course_id, prof_id, current_cape_term);
+          found = true;
         }
       }
-
+      if(found){
+        console.log("found cape");
+      }
+      else{
+        console.log("couldn't find cape");
+      }
     },
 
     add_course: function () {
@@ -207,6 +214,7 @@ function load_profs (course_id) {
   xhr.onload = function (e) {
     // async prevent double-run
     if (app.profs.length) return;
+    app.profs = [];
     var profs = JSON.parse(e.target.response);
     app.profs = profs;
   };
@@ -224,7 +232,6 @@ function load_course_prof () {
     // async prevent double-run
     if (app.current_course_prof.data) return;
     var course_prof_data = JSON.parse(e.target.response);
-    console.log(course_prof_data);
     populate_course_prof(course_prof_data);
   };
   xhr.open("GET", url);
@@ -300,7 +307,7 @@ function populate_course_prof(course_data){
       // combine two capes
       if(course_data.capes[k].term === course_data.capes[n].term){
 
-        course_data.capes[k].num_evals = (course_data.capes[k].num_evals + course_data.capes[n].num_evals)/2;
+        course_data.capes[k].num_evals = course_data.capes[k].num_evals + course_data.capes[n].num_evals
         course_data.capes[k].study_hrs = ((course_data.capes[k].study_hrs * course_data.capes[k].num_evals) + (course_data.capes[n].study_hrs * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
         course_data.capes[k].prof_gpa = ((course_data.capes[k].prof_gpa * course_data.capes[k].num_evals) + (course_data.capes[n].prof_gpa * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
         course_data.capes[k].rec_prof = ((course_data.capes[k].rec_prof * course_data.capes[k].num_evals) + (course_data.capes[n].rec_prof * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
@@ -344,16 +351,16 @@ function populate_course_prof(course_data){
   app.current_course_prof.current_cape = avg_cape;
   app.current_course_prof.current_cape_term = avg_cape.term;
   app.current_course_prof.grade_dist_chart = 0;
+  app.current_course_prof.show = true;
 
   app.displayed_course_profs.push(app.current_course_prof);
-  console.log(app.displayed_course_profs);
+
 
   update_grade_distribution(app.current_course_prof.course.id, app.current_course_prof.prof.id,
                             app.current_course_prof.current_cape_term);
 
   app.course_search = "";
   app.prof_search = "";
-  app.show_course_prof = true;
   app.current_course_prof = {};
   
 }
@@ -364,10 +371,11 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var course_prof_to_update;
   for(var i = 0; i < app.displayed_course_profs.length; i++){
     if(app.displayed_course_profs[i].course.id === course_id &&
-        app.displayed_course_profs[i].prof.id === prof_id){ 
+      app.displayed_course_profs[i].prof.id === prof_id){ 
       course_prof_to_update = app.displayed_course_profs[i];
     }
   }
+  console.log("course_prof_to_update: " + course_prof_to_update);
 
   var a_percentage = course_prof_to_update.current_cape.a_percentage;
   var b_percentage = course_prof_to_update.current_cape.b_percentage;
@@ -377,8 +385,11 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var grade_dist_chart = course_prof_to_update.grade_dist_chart;
   var grade_dist_chart_id = course_prof_to_update.course.id; //+ " " + course_prof_to_update.prof.id;
 
-  
-  grade_dist_chart = new d3pie(grade_dist_chart_id, {
+  console.log("grade_dist_chart: " + grade_dist_chart);
+  if(grade_dist_chart !== 0){
+    course_prof_to_update.grade_dist_chart.destroy();
+  }
+  course_prof_to_update.grade_dist_chart = new d3pie(grade_dist_chart_id, {
     "header": {
         "title": {
             "fontSize": 41,
@@ -400,7 +411,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     "size": {
         "canvasHeight": 250,
         "canvasWidth": 250,
-        "pieOuterRadius": "90%"
+        "pieOuterRadius": "70%"
     },
     "data": {
         "sortOrder": "label-asc",
@@ -436,11 +447,11 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     "labels": {
         "outer": {
             "format":"percentage",
-            "pieDistance": 10
+            "pieDistance": 5
         },
         "inner": {
-          "format":"label"
-            //"hideWhenLessThanPercentage": 3
+          "format":"label",
+            "hideWhenLessThanPercentage": 1
         },
         "mainLabel": {
             "fontSize": 11
