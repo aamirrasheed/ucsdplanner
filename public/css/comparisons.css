@@ -7,6 +7,16 @@
   	border: 2px solid #00457A;
   	padding: 8px;
   	margin: 5px;
+  	text-align: center;
+}
+
+.grade {
+	margin: 5px;
+	font-size: 30px;
+}
+
+.data-cell {
+	text-align: left;
 }
 
 .course-dept {
