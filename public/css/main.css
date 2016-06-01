@@ -275,7 +275,7 @@ ul {
 }
 
 #term_list li:nth-child(2n+1) {
-	background-color: rgba(0, 0, 0, 0.1)
+  background-color: rgba(0, 0, 0, 0.1)
 }
 
 #term_list li:hover {
@@ -444,62 +444,62 @@ ul {
 }
 
 #sections_table tr br {
-	background: #f00;
-	height: 0.75em;
+  background: #f00;
+  height: 0.75em;
 }
 
 #sections_table tr.section {
-	background-color: #176c96;
-	color: #fff;
-	font-weight: 400;
+  background-color: #176c96;
+  color: #fff;
+  font-weight: 400;
 }
 
 #sections_table tr.subsection:hover {
-/* 	background-color: #176c96; */
-/* 	color: #fff; */
-	background-color: #fbbb18;
+/*   background-color: #176c96; */
+/*   color: #fff; */
+  background-color: #fbbb18;
 }
 
 #sections_table tr.subsection td:first-child,
 #sections_table tr.subsection td:last-child {
-	background-color: #fff;
+  background-color: #fff;
 }
 
 #sections_table i {
-	line-height: 1.2em;
+  line-height: 1.2em;
 }
 
 .comps {
-	width: 100%;
-	overflow-x: scroll;
+  width: 100%;
+  overflow-x: scroll;
   text-align: center;
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 .comp {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 220px;
-	display: inline-block;
-	margin: 0.25em;
-	vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 220px;
+  display: inline-block;
+  margin: 0.25em;
+  vertical-align: top;
   background-color: #176c96;
   color: #fff;
 /*  border: 3px solid #176c96;*/
 }
 
 .comp:first-child {
-	margin-left: 0;
+  margin-left: 0;
 }
 
 .comp .prof_name {
-	width: 100%;
-	background-color: #176c96;
-	color: #fff;
-	padding: 0.25em 0;
-	font-weight: 400;
-	border-bottom: 1px solid rgba(255,255,255,0.5);
-	margin-bottom: 0.75em;
+  width: 100%;
+  background-color: #176c96;
+  color: #fff;
+  padding: 0.5em 0.25em;
+  font-weight: 400;
+  border-bottom: 2px solid #fbbb18;
+  margin-bottom: 0.75em;
 }
 
 .data-cell {
@@ -507,28 +507,28 @@ ul {
 }
 
 .data-title {
-	font-size: 0.9em;
-	line-height: 0.5em;
+  font-size: 0.9em;
+  line-height: 0.5em;
 }
 
 .grade-dist-chart {
-	position: relative;
+  position: relative;
 }
 
 .grade-dist-chart svg {
-	position: relative;
-	z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .grade-dist-chart::after {
-	content: "no grade distribution";
-	color: #fff;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 100%;
-	z-index: 0;
-	transform: translate(-50%, -50%);
+  content: "no grade distribution";
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
 }
 
 #comp_link {
