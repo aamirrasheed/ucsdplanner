@@ -36,7 +36,7 @@
   </div>
 
 
-  <div rv-each-courseprof="app.displayed_course_profs" class="course-prof" rv-show="app.show_course_prof">
+  <div rv-each-courseprof="app.displayed_course_profs" class="course-prof" rv-show="courseprof.show">
     <div class="course-prof-header">
       <div class="course-title">
         <span class="dept"><b>{courseprof.course.dept}</b></span>
@@ -57,7 +57,7 @@
       <span class="grade">{courseprof.current_cape.cape_prof_gpa | fixed 2} / {courseprof.current_cape.cape_prof_gpa | letter}</span>
       <br>
 
-      <div rv-id="courseprof.course.id" class="grade-dist-chart"></div>
+      <div rv-id="courseprof | grade_dist_chart_id_generator" class="grade-dist-chart"></div>
 
       <div class="cape-data-entries">
         <div class="data-cell">
@@ -103,7 +103,11 @@
         </div>
         <div class="data-cell">
           <h4 class="data-title">Comments</h4>
-          <a target="_blank" href="http://www.ratemyprofessors.com"><p class="data-info">Link</p></a>
+          <a target="_blank" rv-if="courseprof.data.rmp.url" rv-href="courseprof.data.rmp.url">
+          	<p class="data-info">Link</p>
+          </a>
+          <p rv-if="courseprof.data.rmp.url | not" class="data-info">N/A</p>
+
         </div>
       </div>
     </div>
