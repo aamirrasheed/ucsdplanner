@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
       
       document.body.scrollTop = 0;
       
-      if (!app.show_catalog && !app.course.details)
+      if (!app.show_catalog)
         load_course(app.course);
     },
     select_cape: function (e, rv) {
@@ -145,6 +145,10 @@ function setup_rivets () {
   
   rivets.formatters.na = function (val) {
     return (!val && val !== 0 || val < 0) ? "N/A" : val;
+  }
+  
+  rivets.formatters.is_na = function (val) {
+    return (!val && val !== 0 || val < 0);
   }
   
   rivets.formatters.blank = function (val, n) {
@@ -262,7 +266,7 @@ function cape_average (cape_a, cape_b) {
 function capes_transform (capes) {
   if (!capes.length) return [];
   
-  var terms = {"WI": 0, "SP":1, "FA":2, "S1":3, "S2":4};
+  var terms = {"WI": 0, "SP":1, "S1":2, "S2":3, "FA":4};
   var term_regex = /([A-Z0-9]{2})([0-9]{2})/;
 
   var term_sort = function (a, b) {
@@ -279,8 +283,8 @@ function capes_transform (capes) {
   
   capes.sort(term_sort);
   
-  for (var i=0; i<capes.length-1; i++) {
-    for (var j=i+1; j<capes.length; j++) {
+  for (var i = 0; i < capes.length - 1; i++) {
+    for (var j = i + 1; j < capes.length; j++) {
       if (capes[i].term != capes[j].term) continue;
       capes[i] = cape_average(capes[i], capes[j]);
       capes.splice(j--, 1);
@@ -290,7 +294,7 @@ function capes_transform (capes) {
   var avg = JSON.parse(JSON.stringify(capes[0]));
   avg.term = "average";
   
-  for (var i=1; i<capes.length; i++)
+  for (var i = 1; i < capes.length; i++)
     avg = cape_average(avg, capes[i]);
   
   capes.unshift(avg);
@@ -365,6 +369,13 @@ function update_pie_chart (comp) {
 }
 
 function load_course (course) {
+  if (course.details) {
+    console.log("hi mom");
+    for (var i = 0; i < course.details.comparisons.length; i++)
+      update_pie_chart(course.details.comparisons[i]);
+    return;
+  }
+  
   var url = api.details + course.id;
   
   app.details_loading = true;

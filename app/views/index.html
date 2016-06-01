@@ -186,13 +186,13 @@
               </div>
               <div class="data-cell">
                 <div class="data-info">
-                  <span class="big">{comp.current_cape.cape_rec_prof | fixed 1 | na}<span rv-hide="comp.current_cape.cape_rec_prof | eq -1">%</span></span>
+                  <span class="big">{comp.current_cape.cape_rec_prof | fixed 1 | na}<span rv-hide="comp.current_cape.cape_rec_prof | is_na">%</span></span>
                 </div>
                 <div class="data-title">rcmnd instr</div>
               </div>
               <div class="data-cell">
                 <div class="data-info">
-                  <span class="big">{comp.current_cape.cape_rec_course | fixed 1 | na}<span rv-hide="comp.current_cape.cape_rec_course | eq -1">%</span></span>
+                  <span class="big">{comp.current_cape.cape_rec_course | fixed 1 | na}<span rv-hide="comp.current_cape.cape_rec_course | is_na">%</span></span>
                 </div>
                 <div class="data-title">rcmnd class</div>
               </div>
