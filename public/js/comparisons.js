@@ -36,6 +36,7 @@ window.addEventListener("load", function() {
         }
         data: {
           rmp: {
+            "rmp_tip":1744551
             "overall":0,
             "helpful":0,
             "clarity":0,
@@ -44,6 +45,7 @@ window.addEventListener("load", function() {
           }
           capes: [
             {
+              "cape_id":"B8EEFDE7-65D1-4035-9744-182935EB4DD0"
               "cape_study_hrs":1237,
               "cape_prof_gpa":345,
               "cape_num_evals":85,
@@ -57,7 +59,7 @@ window.addEventListener("load", function() {
               "p_percentage":100,
               "np_percentage":100,
               "cape_url":"https://cape.ucsd.edu/responses/CAPEReport.aspx?sectionid=849755",
-              "rcmnd_class":9130
+              "cape_rec_course":9130
             },
             {
               "cape_study_hrs":1237,
@@ -100,10 +102,10 @@ window.addEventListener("load", function() {
     course_data: [],
     
     change_cape: function(e, rv){
-      // var course_id = rv.courseprof.course.id;
-      // var prof_id = rv.courseprof.prof.id;
-      var capes = rv.courseprof.data.capes;
+      var course_id = rv.courseprof.course.id;
+      var prof_id = rv.courseprof.prof.id;
       var current_cape_term = rv.courseprof.current_cape_term;
+      var capes = rv.courseprof.data.capes;
 
       // search through capes to find new one
       for (var i = 0; i < capes.length; i++) {
@@ -240,7 +242,8 @@ function populate_course_prof(course_data){
       helpfulness: course_data.rmp_helpful,
       clarity: course_data.rmp_clarity,
       easiness: course_data.rmp_easiness,
-      hot: course_data.rmp_hot
+      hot: course_data.rmp_hot,
+      url: "http://www.ratemyprofessors.com/ShowRatings.jsp?tid="+ course_data.rmp_tip
     },
     capes: course_data.capes,
   };
@@ -250,7 +253,7 @@ function populate_course_prof(course_data){
   var total_study_hrs = 0;
   var total_prof_gpa = 0;
   var total_rec_prof = 0;
-  var total_rcmnd_class = 0;
+  var total_rec_course = 0;
   var total_as = 0;
   var total_bs = 0;
   var total_cs = 0;
@@ -265,7 +268,7 @@ function populate_course_prof(course_data){
     total_study_hrs += course_data.capes[i].cape_study_hrs * course_data.capes[i].cape_num_evals;
     total_prof_gpa += course_data.capes[i].cape_prof_gpa * course_data.capes[i].cape_num_evals;
     total_rec_prof += course_data.capes[i].cape_rec_prof * course_data.capes[i].cape_num_evals;
-    total_rcmnd_class += course_data.capes[i].rcmnd_class * course_data.capes[i].cape_num_evals;
+    total_rec_course += course_data.capes[i].cape_rec_course * course_data.capes[i].cape_num_evals;
     total_as += course_data.capes[i].a_percentage * course_data.capes[i].cape_num_evals;
     total_bs += course_data.capes[i].b_percentage * course_data.capes[i].cape_num_evals;
     total_cs += course_data.capes[i].c_percentage * course_data.capes[i].cape_num_evals;
@@ -281,16 +284,50 @@ function populate_course_prof(course_data){
   var prof_last_name = prof_names[prof_names.length - 1].toLowerCase();
   var course_dept = app.current_course_prof.course.dept.toLowerCase();
   var course_code = app.current_course_prof.course.code;
+  var all_capes_url = "http://cape.ucsd.edu/responses/Results.aspx?Name="+ prof_last_name + 
+                  "%2C+"+ prof_first_name + "&CourseNumber="+ course_dept +"+" + course_code;
 
+  // update cape_urls to all_capes_url for all the capes
+  for(var j = 0; j < course_data.capes.length; j++){
+    course_data.capes[j].cape_url = all_capes_url;
+  }
+
+  // combine capes with the same term
+  for(var k = 0; k < course_data.capes.length-1; k++){
+    
+    for(var n = k + 1; n < course_data.capes.length; n++){
+      
+      // combine two capes
+      if(course_data.capes[k].term === course_data.capes[n].term){
+
+        course_data.capes[k].num_evals = (course_data.capes[k].num_evals + course_data.capes[n].num_evals)/2;
+        course_data.capes[k].study_hrs = ((course_data.capes[k].study_hrs * course_data.capes[k].num_evals) + (course_data.capes[n].study_hrs * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].prof_gpa = ((course_data.capes[k].prof_gpa * course_data.capes[k].num_evals) + (course_data.capes[n].prof_gpa * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].rec_prof = ((course_data.capes[k].rec_prof * course_data.capes[k].num_evals) + (course_data.capes[n].rec_prof * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].rec_course = ((course_data.capes[k].rec_course * course_data.capes[k].num_evals) + (course_data.capes[n].rec_course * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].a_percentage = ((course_data.capes[k].a_percentage * course_data.capes[k].num_evals) + (course_data.capes[n].a_percentage * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].b_percentage = ((course_data.capes[k].b_percentage * course_data.capes[k].num_evals) + (course_data.capes[n].b_percentage * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].c_percentage = ((course_data.capes[k].c_percentage * course_data.capes[k].num_evals) + (course_data.capes[n].c_percentage * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].d_percentage = ((course_data.capes[k].d_percentage * course_data.capes[k].num_evals) + (course_data.capes[n].d_percentage * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].f_percentage = ((course_data.capes[k].f_percentage * course_data.capes[k].num_evals) + (course_data.capes[n].f_percentage * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].p_percentage = ((course_data.capes[k].p_percentage * course_data.capes[k].num_evals) + (course_data.capes[n].p_percentage * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+        course_data.capes[k].np_percentage = ((course_data.capes[k].np_percentage * course_data.capes[k].num_evals) + (course_data.capes[n].np_percentage * course_data.capes[n].num_evals))/(course_data.capes[k].num_evals + course_data.capes[n].num_evals);
+
+        course_data.capes.splice(n--,1);
+
+      } 
+    }
+  }
+  
   // populate with the average cape
   var avg_cape = {
+    cape_id:"avg",
     cape_num_evals: total_num_evals/course_data.capes.length,
     cape_study_hrs: total_study_hrs/total_num_evals,
     cape_prof_gpa: total_prof_gpa/total_num_evals,
     cape_rec_prof: total_rec_prof/total_num_evals,
-    cape_url: "http://cape.ucsd.edu/responses/Results.aspx?Name="+ prof_last_name + 
-                  "%2C+"+ prof_first_name + "&CourseNumber="+ course_dept +"+" + course_code,
-    rcmnd_class: total_rcmnd_class/total_num_evals,
+    cape_url: all_capes_url,
+    cape_rec_course: total_rec_course/total_num_evals,
     term:"Average",
     "a_percentage": total_as/total_num_evals,
     "b_percentage": total_bs/total_num_evals,
@@ -309,8 +346,7 @@ function populate_course_prof(course_data){
   app.current_course_prof.grade_dist_chart = 0;
 
   app.displayed_course_profs.push(app.current_course_prof);
-
-  console.log(app.current_course_prof);
+  console.log(app.displayed_course_profs);
 
   update_grade_distribution(app.current_course_prof.course.id, app.current_course_prof.prof.id,
                             app.current_course_prof.current_cape_term);
@@ -318,6 +354,7 @@ function populate_course_prof(course_data){
   app.course_search = "";
   app.prof_search = "";
   app.show_course_prof = true;
+  app.current_course_prof = {};
   
 }
 
@@ -331,7 +368,6 @@ function update_grade_distribution(course_id, prof_id, cape_term){
       course_prof_to_update = app.displayed_course_profs[i];
     }
   }
-  console.log(course_prof_to_update);
 
   var a_percentage = course_prof_to_update.current_cape.a_percentage;
   var b_percentage = course_prof_to_update.current_cape.b_percentage;
@@ -464,7 +500,6 @@ rivets.formatters.fixed = function (val, n) {
 };
 
 rivets.formatters.rmpformatter = function (val){
-  console.log(val);
   if (val === 0){
     return "N/A";
   }

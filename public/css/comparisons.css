@@ -1,7 +1,9 @@
 .course-prof {
-  width: 20%;
-  height: 600px;
-  background-color: ;
+	width: 280px;
+	float: left;
+  	width: 20%;
+  	height: 600px;
+  	background-color: ;
 }
 .course-prof-header {
   text-align: center;
