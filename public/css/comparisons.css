@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
 .course-prof {
 	width: 280px;
 	float: left;
@@ -14,3 +17,72 @@
   margin: 0;
   
 }
+
+body {
+  font-family: "Open Sans";
+  font-weight: 300;
+
+}
+
+select {
+  font: inherit;
+}
+
+#search {
+    position: relative;
+    padding: 0 10px;
+    display: inline-block;
+    color: #fff;
+    font-size: 1.25em;
+    height: 50px;
+    line-height: 50px;
+    background-color: #0A4B6A;
+}
+
+.material-icons.left {
+    left: 0;
+    transform: translate(30%, 15%);
+}
+
+#search input {
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  height: 100%;
+  padding: 0 1em;
+}
+
+button {
+  color: #fff;
+  background-color: #176C96;
+  text-shadow: -1px 1px #417cb8;
+  border: none;
+  font: inherit;
+  margin: 10px;
+}
+
+button:hover,
+button.hover {
+  background-color: #1e8fc8;
+  text-shadow: -1px 1px #27496d;
+}
+
+button:active,
+button.active {
+  background-color: #27496d;
+  text-shadow: -1px 1px #193047;
+}
+
+ul {
+  list-style: none;
+}
+
+#close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+}
+
