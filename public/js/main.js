@@ -362,7 +362,10 @@ function update_pie_chart (comp) {
     "effects": {
       "load": {
   			"effect": "none"
-      }
+      },
+  		"pullOutSegmentOnClick": {
+  			"effect": "none"
+  		},
     },
     "callbacks": {}
   });
