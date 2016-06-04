@@ -415,7 +415,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     "size": {
         "canvasHeight": 170,
         "canvasWidth": 170,
-        "pieOuterRadius": "100%"
+        "pieOuterRadius": "80%"
     },
     "data": {
         "sortOrder": "label-asc",
