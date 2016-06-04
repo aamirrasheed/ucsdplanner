@@ -120,18 +120,18 @@ window.addEventListener("load", function() {
           found = true;
         }
       }
-      if(found){
-        console.log("found cape");
-      }
-      else{
-        console.log("couldn't find cape");
-      }
     },
 
     add_course: function () {
       app.show_search = true;
-      load_courses();
+
+      if (!app.have_loaded_courses) {
+        load_courses();
+      }
+      app.have_loaded_courses = true;
     },
+
+    have_loaded_courses: false,
 
     user_selects_course: function (e, rv) {
       app.profs = [];
@@ -220,6 +220,7 @@ function load_profs (course_id) {
     if (app.profs.length) return;
     app.profs = [];
     var profs = JSON.parse(e.target.response);
+    console.log(profs);
     app.profs = profs;
   };
   xhr.open("GET", url);
@@ -379,7 +380,6 @@ function update_grade_distribution(course_id, prof_id, cape_term){
       course_prof_to_update = app.displayed_course_profs[i];
     }
   }
-  console.log("course_prof_to_update: " + course_prof_to_update);
 
   var a_percentage = course_prof_to_update.current_cape.a_percentage;
   var b_percentage = course_prof_to_update.current_cape.b_percentage;
@@ -389,7 +389,6 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var grade_dist_chart = course_prof_to_update.grade_dist_chart;
   var grade_dist_chart_id = course_prof_to_update.course.id + course_prof_to_update.prof.id;
 
-  console.log("grade_dist_chart: " + grade_dist_chart);
   if(grade_dist_chart !== 0){
     course_prof_to_update.grade_dist_chart.destroy();
   }
@@ -415,7 +414,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     "size": {
         "canvasHeight": 170,
         "canvasWidth": 170,
-        "pieOuterRadius": "100%"
+        "pieOuterRadius": "80%"
     },
     "data": {
         "sortOrder": "label-asc",
