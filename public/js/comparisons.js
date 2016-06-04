@@ -205,7 +205,7 @@ function load_courses () {
     app.courses = courses;
 
     app.is_loading = false;
-  }
+  };
   xhr.open("GET", url);
   xhr.send();
 }
@@ -220,7 +220,16 @@ function load_profs (course_id) {
     if (app.profs.length) return;
     app.profs = [];
     var profs = JSON.parse(e.target.response);
-    console.log(profs);
+    
+    // check if professor is already in a previously selected courseprof
+    for(var i = 0; i < app.displayed_course_profs.length; i++){
+      for(var j = 0; j < profs.length; j++){
+        if(app.displayed_course_profs[i].prof.id === profs[j].id){
+          profs.splice(j, 1);
+        }
+      }
+    }
+
     app.profs = profs;
   };
   xhr.open("GET", url);
