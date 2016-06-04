@@ -27,7 +27,7 @@
 
   <div rv-each-courseprof="app.displayed_course_profs" class="course-prof" rv-show="courseprof.show">
     <div class="course-prof-header">
-      <span id="close">&#10006;</span>
+      <span id="close" rv-on-click="app.remove_course">&#10006;</span>
       <div class="course-name">
         <span class="course-dept"><b>{courseprof.course.dept}</b></span>
         <span class="course-code"><b>{courseprof.course.code}</b></span>

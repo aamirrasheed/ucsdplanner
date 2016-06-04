@@ -133,6 +133,16 @@ window.addEventListener("load", function() {
 
     have_loaded_courses: false,
 
+    remove_course: function (e,rv) {
+      var course = rv.courseprof;
+      var index = app.displayed_course_profs.indexOf(course);
+      course.grade_dist_chart.destroy();
+      //var id = rivets.formatters.grade_dist_chart_id_generator(course);
+      //document.getElementById(id).innerHTML = "";
+      app.displayed_course_profs.splice(index,1);
+      update_grade_distribution(course.course.id, course.course.prof.id, course.current_cape_term);
+    },
+
     user_selects_course: function (e, rv) {
       app.profs = [];
 
