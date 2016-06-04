@@ -119,7 +119,7 @@
 
       <select rv-value="app.current_course_prof.prof.id" rv-on-change="app.user_selects_prof">
         <option value="" disabled selected>Professor</option>
-        <option rv-each-prof="app.profs" rv-value="prof.id">{prof.name}</option> 
+        <option rv-each-prof="app.profs" rv-disabled="prof | disable_professor" rv-value="prof.id">{prof.name}</option> 
       </select>
     </div>
   </div>

@@ -221,14 +221,14 @@ function load_profs (course_id) {
     app.profs = [];
     var profs = JSON.parse(e.target.response);
     
-    // check if professor is already in a previously selected courseprof
-    for(var i = 0; i < app.displayed_course_profs.length; i++){
-      for(var j = 0; j < profs.length; j++){
-        if(app.displayed_course_profs[i].prof.id === profs[j].id){
-          profs.splice(j, 1);
-        }
-      }
-    }
+    // // check if professor is already in a previously selected courseprof
+    // for(var i = 0; i < app.displayed_course_profs.length; i++){
+    //   for(var j = 0; j < profs.length; j++){
+    //     if(app.displayed_course_profs[i].prof.id === profs[j].id){
+    //       profs.splice(j, 1);
+    //     }
+    //   }
+    // }
 
     app.profs = profs;
   };
@@ -572,7 +572,7 @@ rivets.formatters.mark = function (arr, val) {
 
 rivets.formatters.not = function (val){
   return !val;
-}
+};
 
 rivets.formatters.grade_dist_chart_id_generator = function (courseprof){
   return courseprof.course.id + courseprof.prof.id;
@@ -580,7 +580,17 @@ rivets.formatters.grade_dist_chart_id_generator = function (courseprof){
 
 rivets.formatters.ne = function (a, b) {
   return a != b;
-}
+};
+
+rivets.formatters.disable_professor  = function (prof){
+  // check if professor is already in a previously selected courseprof
+  for(var i = 0; i < app.displayed_course_profs.length; i++){
+    if(app.displayed_course_profs[i].prof.id === prof.id){
+      return true;
+    }
+  }
+  return false;
+};
 
 
 
