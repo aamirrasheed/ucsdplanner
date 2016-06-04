@@ -77,6 +77,8 @@ window.addEventListener("load", function () {
   courses = {}
 
   document.addEventListener("scroll", function (e) {
+    if (!app.course) return;
+    
     var tabs = ["overview", "sections", "comparisons"];
     if (app.show_catalog) tabs.splice(1, 1);
     
