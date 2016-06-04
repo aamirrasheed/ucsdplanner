@@ -104,6 +104,7 @@ select {
   line-height: 50px;
   background-color: #0A4B6A;
   font-family: inherit;
+  margin-top: 5px;
 }
 
 .md-18 {
@@ -154,24 +155,38 @@ select {
   width: 300px;
 }
 
+#close {
+  cursor: pointer;
+  float:right;
+  display:inline-block;
+  padding:2px 5px;
+}
+
+#close:hover {
+  color: #ff4d4d;
+  background:#e6e6e6;
+}
+
 button {
   color: #fff;
-  background-color: #176C96;
+  background-color: #1c7fb0;
   text-shadow: -1px 1px #417cb8;
   border: none;
   font: inherit;
   margin: 10px;
+  display:inline-block;
+  float:right;
 }
 
 button:hover,
 button.hover {
-  background-color: #153d51;
+  background-color: #256b8e;
   text-shadow: -1px 1px #27496d;
 }
 
 button:active,
 button.active {
-  background-color: #27496d;
+  background-color: #1a4c65;
   text-shadow: -1px 1px #193047;
 }
 

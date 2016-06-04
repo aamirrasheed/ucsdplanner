@@ -130,8 +130,14 @@ window.addEventListener("load", function() {
 
     add_course: function () {
       app.show_search = true;
-      load_courses();
+
+      if (!app.have_loaded_courses) {
+        load_courses();
+      }
+      app.have_loaded_courses = true;
     },
+
+    have_loaded_courses: false,
 
     user_selects_course: function (e, rv) {
       app.profs = [];
