@@ -210,12 +210,8 @@ def get_cape_data_for_dept(dept):
             continue
 
         prof_id = None
-        if instructor in prof_cache:
-            prof_id = prof_cache[prof_id]
-        else:
-            r = requests.get(DB_URL + "/professor/" + instructor)
-            prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
-            prof_cache[instructor] = prof_id
+        r = requests.get(DB_URL + "/professor/" + instructor)
+        prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
         
         if prof_id is None:
             continue
@@ -223,13 +219,8 @@ def get_cape_data_for_dept(dept):
         if course is None:
             continue
 
-        courses = None
-        if course in catalog_cache:
-            courses = catalog_cache[course]
-        else:
-            r = requests.get(DB_URL + "catalog/" + course)
-            courses = json.loads(r.text)
-            catalog_cache[course] = courses
+        r = requests.get(DB_URL + "catalog/" + course)
+        courses = json.loads(r.text)
 
         if len(courses) == 0:
             print "WARNING: Could not find course: " + course
@@ -390,10 +381,10 @@ if __name__ == "__main__":
 
     pool = multiprocessing.Pool(processes=50)
     # get capes for each department
+    
     completed = 0
     num_depts = len(departments)
     for x in pool.imap_unordered(get_cape_data_for_dept, departments):
         completed += 1
         print "{}/{} departments completed".format(completed, num_depts)
         
-
