@@ -422,13 +422,6 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var grade_dist_chart = course_prof_to_update.grade_dist_chart;
   var grade_dist_chart_id = course_prof_to_update.course.id + course_prof_to_update.prof.id;
 
-  if(a_percentage !== -1 &&
-     b_percentage !== -1 &&
-     c_percentage !== -1 &&
-     d_percentage !== -1 &&
-     f_percentage !== -1
-     ){
-
     var t_percentage = 
     a_percentage +
     b_percentage +
@@ -546,7 +539,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     },
     "callbacks": {}
 });
-}
+
 }
 
 rivets.formatters.create_id = function(n) {
