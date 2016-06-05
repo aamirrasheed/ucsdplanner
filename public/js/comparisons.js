@@ -500,11 +500,12 @@ function update_grade_distribution(course_id, prof_id, cape_term){
         }
     },
     "effects": {
-        "pullOutSegmentOnClick": {
-            "effect": "none",
-            "speed": 400,
-            "size": 8
-        }
+      "load": {
+  			"effect": "none"
+      },
+  		"pullOutSegmentOnClick": {
+  			"effect": "none"
+  		},
     },
     "misc": {
         "gradient": {

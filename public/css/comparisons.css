@@ -27,6 +27,7 @@
 	font-size: 20px;
 }
 .course-prof-header {
+  position:relative;
   text-align: center;
   padding-top: 1px;
 }
@@ -156,10 +157,13 @@ select {
 }
 
 #close {
+  position:absolute;
+  top:0;
+  right:0;
   cursor: pointer;
   float:right;
   display:inline-block;
-  padding:0.5px 3px;
+  padding:2px 5px;
 }
 
 #close:hover {
