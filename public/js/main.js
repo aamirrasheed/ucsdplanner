@@ -85,11 +85,13 @@ window.addEventListener("load", function () {
   document.addEventListener("scroll", function (e) {
     if (!app.course) return;
     
-    var tabs = ["overview", "sections", "comparisons"];
-    if (app.show_catalog) tabs.splice(1, 1);
+    if (app.show_catalog) return;
     
+    var tabs = ["overview", "sections", "comparisons"];
     for (var i = 0; i < tabs.length; i++) {
-      if ($("#" + tabs[i])[0].offsetTop + $("#" + tabs[i])[0].clientHeight - document.body.scrollTop > 0) {
+      var t = $("#" + tabs[i])[0];
+      if (!t) continue;
+      if (t.offsetTop + t.clientHeight - document.body.scrollTop > 0) {
         $("#tabs")[0].className = $("#tabs")[0].className.replace(/t[0-9]/g, "t" + (i+1));
         break;
       }
@@ -487,6 +489,9 @@ function load_courses (id) {
   xhr.onload = function (e) {
     // async prevent double-run
     if (courses[id]) return;
+    
+    // another async bug fix
+    if (id != app.term.id) return;
     
     courses[id] = JSON.parse(e.target.response);
     courses[id].sort(course_sort);
