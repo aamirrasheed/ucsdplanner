@@ -29,12 +29,11 @@ window.addEventListener("load", function () {
     select_course: function (e, rv) {
       if (rv.course != app.course)
         app.course.expanded = 0;
+      
       app.course = rv.course;
       rv.course.expanded ^= -1;
       
       load_profs(app.course);
-      // app.course = rv.course;
-      // load_course(app.course);
     },
     select_prof: function (e, rv) {
       e.stopPropagation();
@@ -56,10 +55,6 @@ window.addEventListener("load", function () {
       }
       
       update_pie_chart(comp);
-    },
-    toggle_expand: function (e, rv) {
-      if (!rv.section.no_subsections)
-        rv.section.expanded ^= 1;
     }
   }
   
@@ -74,6 +69,7 @@ window.addEventListener("load", function () {
 function setup_rivets () {
   rivets.formatters.mark = function (arr, val) {
     if (!arr.length) return arr;
+    $("#course_list")[0].scrollTop = 0;
     
     var terms = val.toLowerCase().split(" ");
     app.no_results = true;
@@ -102,11 +98,6 @@ function setup_rivets () {
   rivets.formatters.blank = function (val, n) {
     if (val == n) return "";
     return val;
-  }
-  
-  rivets.formatters.replace = function (val, f, r) {
-    if (!val) return;
-    return val.replace(f, r);
   }
   
   rivets.formatters.grab = function (str, i) {

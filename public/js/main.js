@@ -112,13 +112,13 @@ function scroll_to (id) {
 function setup_rivets () {
   rivets.formatters.mark = function (arr, val) {
     if (!arr.length) return arr;
+    $("#course_list")[0].scrollTop = 0;
     
     var terms = val.toLowerCase().split(" ");
     app.no_results = true;
     
     for (var i = 0; i < arr.length; i++) {
       arr[i].hide = !terms.every(function (term) {
-        // if (/^[0-9]/.test(term)) term = " " + term;
         var combined = " " + (arr[i].course_id||"")
           + " " + (arr[i].course_name||"");
         return ~combined.toLowerCase().indexOf(" " + term);
@@ -162,11 +162,6 @@ function setup_rivets () {
   rivets.formatters.blank = function (val, n) {
     if (val == n) return "";
     return val;
-  }
-  
-  rivets.formatters.replace = function (val, f, r) {
-    if (!val) return;
-    return val.replace(f, r);
   }
   
   rivets.formatters.grab = function (str, i) {
