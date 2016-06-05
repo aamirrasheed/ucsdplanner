@@ -18,12 +18,12 @@
       <div id="searchbar">
         <div id="term" rv-on-click="app.toggle_terms" rv-class-expand="app.terms_expanded">
           {app.term.name}
-          <i rv-hide="app.terms_expanded" class="material-icons md-18 right">expand_more</i>
-          <i rv-show="app.terms_expanded" class="material-icons md-18 right">expand_less</i>
+          <i rv-hide="app.terms_expanded" class="material-icons md-18 right">&#xe5cf;</i>
+          <i rv-show="app.terms_expanded" class="material-icons md-18 right">&#xe5ce;</i>
         </div><div id="search">
-          <i class="material-icons md-18 left">search</i>
+          <i class="material-icons md-18 left">&#xe8b6;</i>
           <input type="text" autocorrect="off" spellcheck="false" rv-value="app.search" placeholder="search..."/>
-          <i id="clear" class="material-icons md-18 right" rv-on-click="app.clear_search" rv-show="app.search | ne ''">close</i>
+          <i id="clear" class="material-icons md-18 right" rv-on-click="app.clear_search" rv-show="app.search | ne ''">&#xe5cd;</i>
         </div>
         <ul id="term_list">
           <li rv-each-term="app.terms" rv-on-click="app.select_term">{term.term_name}</li>
@@ -129,10 +129,10 @@
             <tr class="section">
               <td rv-on-click="app.toggle_expand" rv-class-nosubs="section.no_subsections">
                 <span rv-hide="section.no_subsections">
-                  <i class="material-icons" rv-hide="section.expanded">expand_more</i>
-                  <i class="material-icons" rv-show="section.expanded">expand_less</i>
+                  <i class="material-icons" rv-hide="section.expanded">&#xe5cf;</i>
+                  <i class="material-icons" rv-show="section.expanded">&#xe5ce;</i>
                 </span>
-                <i class="material-icons" rv-show="section.no_subsections">remove</i>
+                <i class="material-icons" rv-show="section.no_subsections">&#xe15b;</i>
               </td>
               <td>{section.section_name}</td>
               <td>{section.section_id | blank 0}</td>
@@ -178,7 +178,7 @@
           <div class="comp" rv-each-comp="app.course.details.comparisons">
             <div class="prof_name">{comp.professor_name}</div>
             <div rv-show="comp.capes | len">
-              <h4>CAPEs <a rv-show="comp.cape_url" rv-href="comp.cape_url" target="_blank"><i class="material-icons">link</i></a></h4>
+              <h4>CAPEs <a rv-show="comp.cape_url" rv-href="comp.cape_url" target="_blank"><i class="material-icons">&#xe157;</i></a></h4>
               <select class="cape_term" rv-value="comp.cape_term" rv-on-change="app.select_cape">
                 <option rv-value="cape.term" rv-each-cape="comp.capes">{cape.term}</option>
               </select>
@@ -216,7 +216,7 @@
               </div>
               
               <br />
-              <h4>Rate My Professor <a rv-show="comp.rmp_url" rv-href="comp.rmp_url" target="_blank"><i class="material-icons">link</i></a></h4>
+              <h4>Rate My Professor <a rv-show="comp.rmp_url" rv-href="comp.rmp_url" target="_blank"><i class="material-icons">&#xe157;</i></a></h4>
               <div class="data-cell">
                 <div class="data-info">
                   <span class="big">{comp.rmp.overall | rmp}</span>
@@ -246,8 +246,8 @@
         </div>
       </div>
     </div>
-    <a href="/comparisons.html" id="comp_link">
-      <i class="material-icons">pie_chart</i>
+    <a href="/comparisons.html" id="link">
+      <i class="material-icons">&#xe6c4;</i>
     </a>
   </div>
 </body>

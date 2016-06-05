@@ -22,6 +22,9 @@ window.addEventListener("load", function () {
     remove_comp: function (e, rv) {
       var i = app.comparisons.indexOf(rv.comp);
       app.comparisons.splice(i, 1);
+      
+      for (var i = 0; i < app.comparisons.length; i++)
+        update_pie_chart(app.comparisons[i]);
     },
     select_course: function (e, rv) {
       if (rv.course != app.course)
@@ -238,13 +241,13 @@ function capes_transform (capes) {
   
   capes.sort(term_sort);
   
-  // for (var i = 0; i < capes.length - 1; i++) {
-  //   for (var j = i + 1; j < capes.length; j++) {
-  //     if (capes[i].term != capes[j].term) continue;
-  //     capes[i] = cape_average(capes[i], capes[j]);
-  //     capes.splice(j--, 1);
-  //   }
-  // }
+  for (var i = 0; i < capes.length - 1; i++) {
+    for (var j = i + 1; j < capes.length; j++) {
+      if (capes[i].term != capes[j].term) continue;
+      capes[i] = cape_average(capes[i], capes[j]);
+      capes.splice(j--, 1);
+    }
+  }
   
   var avg = JSON.parse(JSON.stringify(capes[0]));
   avg.term = "average";
@@ -389,7 +392,7 @@ function load_comp (prof_id, course) {
     comp.cape_term = "average";
     comp.current_cape = comp.capes[0];
     app.comparisons.push(comp);
-    $("#comps")[0].scrollLeft = Infinity;
+    $("#comps")[0].scrollLeft = 1e6;
     update_pie_chart(comp);
   }
   xhr.open("GET", url);

@@ -16,9 +16,9 @@
     <div id="sidebar">
       <div id="logo"></div>
       <div id="search">
-        <i class="material-icons md-18 left">search</i>
+        <i class="material-icons md-18 left">&#xe8b6;</i>
         <input type="text" autocorrect="off" spellcheck="false" rv-value="app.search" placeholder="search..."/>
-        <i id="clear" class="material-icons md-18 right" rv-on-click="app.clear_search" rv-show="app.search | ne ''">close</i>
+        <i id="clear" class="material-icons md-18 right" rv-on-click="app.clear_search" rv-show="app.search | ne ''">&#xe5cd;</i>
       </div>
       <ul id="course_list">
         <div class="center" rv-show="app.sidebar_loading">
@@ -48,12 +48,12 @@
       <div id="comps" rv-show="app.comparisons | len">
         <div class="comp" rv-each-comp="app.comparisons">
           <div class="comp_title">
-            <i class="material-icons close" rv-on-click="app.remove_comp">close</i>
+            <i class="material-icons close" rv-on-click="app.remove_comp">&#xe5cd;</i>
             <span class="big">{comp.class_name}</span><br />
             {comp.prof_name}
           </div>
           <div rv-show="comp.capes | len">
-            <h4>CAPEs <a rv-show="comp.cape_url" rv-href="comp.cape_url" target="_blank"><i class="material-icons">link</i></a></h4>
+            <h4>CAPEs <a rv-show="comp.cape_url" rv-href="comp.cape_url" target="_blank"><i class="material-icons">&#xe157;</i></a></h4>
             <select class="cape_term" rv-value="comp.cape_term" rv-on-change="app.select_cape">
               <option rv-value="cape.term" rv-each-cape="comp.capes">{cape.term}</option>
             </select>
@@ -91,7 +91,7 @@
             </div>
             
             <br />
-            <h4>Rate My Professor <a rv-show="comp.rmp_url" rv-href="comp.rmp_url" target="_blank"><i class="material-icons">link</i></a></h4>
+            <h4>Rate My Professor <a rv-show="comp.rmp_url" rv-href="comp.rmp_url" target="_blank"><i class="material-icons">&#xe157;</i></a></h4>
             <div class="data-cell">
               <div class="data-info">
                 <span class="big">{comp.rmp.overall | rmp}</span>
@@ -121,7 +121,7 @@
       </div>
     </div>
     <a href="/" id="link">
-      <i class="material-icons">home</i>
+      <i class="material-icons">&#xe88a;</i>
     </a>
   </div>
 </body>
