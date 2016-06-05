@@ -246,6 +246,7 @@ function load_course_prof () {
     // async prevent double-run
     if (app.current_course_prof.data) return;
     var course_prof_data = JSON.parse(e.target.response);
+    console.log(course_prof_data);
     populate_course_prof(course_prof_data);
   };
   xhr.open("GET", url);
@@ -398,108 +399,121 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var grade_dist_chart = course_prof_to_update.grade_dist_chart;
   var grade_dist_chart_id = course_prof_to_update.course.id + course_prof_to_update.prof.id;
 
-  if(grade_dist_chart !== 0){
-    course_prof_to_update.grade_dist_chart.destroy();
+  if(a_percentage === -1 &&
+     b_percentage === -1 &&
+     c_percentage === -1 &&
+     d_percentage === -1 &&
+     f_percentage === -1
+     ){
+    // document.getElementById(grade_dist_chart_id).clientWidth = 220;
+    // document.getElementById(grade_dist_chart_id).clientHeight = 175;
+    // document.getElementById(grade_dist_chart_id).innerHTML = "N/A";
   }
-  course_prof_to_update.grade_dist_chart = new d3pie(grade_dist_chart_id, {
-    "header": {
-        "title": {
-            "fontSize": 41,
-            "font": "open sans"
-        },
-        "subtitle": {
-            "color": "#999999",
-            "fontSize": 12,
-            "font": "open sans"
-        },
-        "titleSubtitlePadding": 9
-    },
-    "footer": {
-        "color": "#999999",
-        "fontSize": 10,
-        "font": "open sans",
-        "location": "bottom-left"
-    },
-    "size": {
-        "canvasHeight": 170,
-        "canvasWidth": 170,
-        "pieOuterRadius": "80%"
-    },
-    "data": {
-        "sortOrder": "label-asc",
-        "content":
-        [
-            {
-                "label": "A",
-                "value": a_percentage,
-                "color": "#F38630"
-            },
-            {
-                "label": "B",
-                "value": b_percentage,
-                "color": "#69D2E7"
-            },
-            {
-                "label": "C",
-                "value": c_percentage,
-                "color": "#FA6900"
-            },
-            {
-                "label": "D",
-                "value": d_percentage,
-                "color": "#A7DBD8"
-            },
-            {
-                "label": "F",
-                "value": f_percentage,
-                "color": "#E0E4CC"
-            }
-        ]
-    },
-    "labels": {
-        "outer": {
-            "format":"percentage",
-            "pieDistance": 5,
+  else{
+
+    if(grade_dist_chart !== 0){
+      course_prof_to_update.grade_dist_chart.destroy();
+    }
+    course_prof_to_update.grade_dist_chart = new d3pie(grade_dist_chart_id, {
+      "header": {
+          "title": {
+              "fontSize": 41,
+              "font": "open sans"
+          },
+          "subtitle": {
+              "color": "#999999",
+              "fontSize": 12,
+              "font": "open sans"
+          },
+          "titleSubtitlePadding": 9
+      },
+      "footer": {
+          "color": "#999999",
+          "fontSize": 10,
+          "font": "open sans",
+          "location": "bottom-left"
+      },
+      "size": {
+          "canvasHeight": 170,
+          "canvasWidth": 170,
+          "pieOuterRadius": "80%"
+      },
+      "data": {
+          "sortOrder": "label-asc",
+          "content":
+          [
+              {
+                  "label": "A",
+                  "value": a_percentage,
+                  "color": "#F38630"
+              },
+              {
+                  "label": "B",
+                  "value": b_percentage,
+                  "color": "#69D2E7"
+              },
+              {
+                  "label": "C",
+                  "value": c_percentage,
+                  "color": "#FA6900"
+              },
+              {
+                  "label": "D",
+                  "value": d_percentage,
+                  "color": "#A7DBD8"
+              },
+              {
+                  "label": "F",
+                  "value": f_percentage,
+                  "color": "#E0E4CC"
+              }
+          ]
+      },
+      "labels": {
+          "outer": {
+              "format":"percentage",
+              "pieDistance": 5,
+              "hideWhenLessThanPercentage": 3
+          },
+          "inner": {
+            "format":"label",
             "hideWhenLessThanPercentage": 3
-        },
-        "inner": {
-          "format":"label",
-          "hideWhenLessThanPercentage": 3
-        },
-        "mainLabel": {
-            "fontSize": 11
-        },
-        "percentage": {
-            "color": "#000000",
-            "decimalPlaces": 0
-        },
-        "value": {
-            "color": "#adadad",
-            "fontSize": 11
-        },
-        "lines": {
-            "enabled": true,
-            //"style":"straight"
-        },
-        "truncation": {
-            "enabled": true
-        }
-    },
-    "effects": {
-        "pullOutSegmentOnClick": {
-            "effect": "none",
-            "speed": 400,
-            "size": 8
-        }
-    },
-    "misc": {
-        "gradient": {
-            "enabled": false,
-            "percentage": 100
-        }
-    },
-    "callbacks": {}
-});
+          },
+          "mainLabel": {
+              "fontSize": 11
+          },
+          "percentage": {
+              "color": "#000000",
+              "decimalPlaces": 0
+          },
+          "value": {
+              "color": "#adadad",
+              "fontSize": 11
+          },
+          "lines": {
+              "enabled": true,
+              //"style":"straight"
+          },
+          "truncation": {
+              "enabled": true
+          }
+      },
+      "effects": {
+          "pullOutSegmentOnClick": {
+              "effect": "none",
+              "speed": 400,
+              "size": 8
+          }
+      },
+      "misc": {
+          "gradient": {
+              "enabled": false,
+              "percentage": 100
+          }
+      },
+      "callbacks": {}
+    });
+  }
 
 }
 
@@ -585,8 +599,10 @@ rivets.formatters.ne = function (a, b) {
 rivets.formatters.disable_professor  = function (prof){
   // check if professor is already in a previously selected courseprof
   for(var i = 0; i < app.displayed_course_profs.length; i++){
-    if(app.displayed_course_profs[i].prof.id === prof.id){
-      return true;
+    if(app.displayed_course_profs[i].course.id === app.current_course_prof.course.id){
+      if(app.displayed_course_profs[i].prof.id === prof.id){
+       return true;
+      }
     }
   }
   return false;
