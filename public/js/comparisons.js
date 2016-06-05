@@ -129,6 +129,7 @@ window.addEventListener("load", function() {
         load_courses();
       }
       app.have_loaded_courses = true;
+      document.getElementById('search').focus();
     },
 
     have_loaded_courses: false,
@@ -140,7 +141,19 @@ window.addEventListener("load", function() {
       //var id = rivets.formatters.grade_dist_chart_id_generator(course);
       //document.getElementById(id).innerHTML = "";
       app.displayed_course_profs.splice(index,1);
-      update_grade_distribution(course.course.id, course.course.prof.id, course.current_cape_term);
+      for (var i = index; i < app.displayed_course_profs.length; i++) {
+        console.log("COURSE ID\n");
+        console.log(app.displayed_course_profs[i].course.id);
+
+        console.log("\n\nPROF ID\n");
+        console.log(app.displayed_course_profs[i].prof.id);
+
+        console.log("\n\nCAPE TERM\n");
+        console.log(app.displayed_course_profs[i].current_cape_term);
+        update_grade_distribution(app.displayed_course_profs[i].course.id, 
+                                  app.displayed_course_profs[i].prof.id, 
+                                  app.displayed_course_profs[i].current_cape_term);
+      }
     },
 
     user_selects_course: function (e, rv) {
