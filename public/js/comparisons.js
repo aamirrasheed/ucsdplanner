@@ -137,19 +137,15 @@ window.addEventListener("load", function() {
     remove_course: function (e,rv) {
       var course = rv.courseprof;
       var index = app.displayed_course_profs.indexOf(course);
-      course.grade_dist_chart.destroy();
-      //var id = rivets.formatters.grade_dist_chart_id_generator(course);
-      //document.getElementById(id).innerHTML = "";
+      if (!course.grade_dist_chart) {
+        var id = rivets.formatters.grade_dist_chart_id_generator(course);
+        document.getElementById(id).innerHTML = "";
+      }
+      else {
+        course.grade_dist_chart.destroy();
+      }
       app.displayed_course_profs.splice(index,1);
       for (var i = index; i < app.displayed_course_profs.length; i++) {
-        console.log("COURSE ID\n");
-        console.log(app.displayed_course_profs[i].course.id);
-
-        console.log("\n\nPROF ID\n");
-        console.log(app.displayed_course_profs[i].prof.id);
-
-        console.log("\n\nCAPE TERM\n");
-        console.log(app.displayed_course_profs[i].current_cape_term);
         update_grade_distribution(app.displayed_course_profs[i].course.id, 
                                   app.displayed_course_profs[i].prof.id, 
                                   app.displayed_course_profs[i].current_cape_term);
@@ -422,17 +418,12 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var grade_dist_chart = course_prof_to_update.grade_dist_chart;
   var grade_dist_chart_id = course_prof_to_update.course.id + course_prof_to_update.prof.id;
 
-  if(a_percentage === -1 &&
-     b_percentage === -1 &&
-     c_percentage === -1 &&
-     d_percentage === -1 &&
-     f_percentage === -1
-     ){
-    // document.getElementById(grade_dist_chart_id).clientWidth = 220;
-    // document.getElementById(grade_dist_chart_id).clientHeight = 175;
-    // document.getElementById(grade_dist_chart_id).innerHTML = "N/A";
-  }
-  else{
+    var t_percentage = 
+    a_percentage +
+    b_percentage +
+    c_percentage +
+    d_percentage +
+    f_percentage;
 
     if(grade_dist_chart !== 0){
       course_prof_to_update.grade_dist_chart.destroy();
@@ -459,7 +450,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
       "size": {
           "canvasHeight": 170,
           "canvasWidth": 170,
-          "pieOuterRadius": "80%"
+          "pieOuterRadius": "100%"
       },
       "data": {
           "sortOrder": "label-asc",
@@ -468,39 +459,38 @@ function update_grade_distribution(course_id, prof_id, cape_term){
               {
                   "label": "A",
                   "value": a_percentage,
-                  "color": "#F38630"
+                  "color": "#F38630",
+                  "caption": (100 * a_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "B",
                   "value": b_percentage,
-                  "color": "#69D2E7"
+                  "color": "#69D2E7", 
+                  "caption": (100 * b_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "C",
                   "value": c_percentage,
-                  "color": "#FA6900"
+                  "color": "#FA6900",
+                  "caption": (100 * c_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "D",
                   "value": d_percentage,
-                  "color": "#A7DBD8"
+                  "color": "#A7DBD8",
+                  "caption": (100 * d_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "F",
                   "value": f_percentage,
-                  "color": "#E0E4CC"
+                  "color": "#E0E4CC",
+                  "caption": (100 * f_percentage / t_percentage).toFixed(2) + "%"
               }
           ]
       },
       "labels": {
-          "outer": {
-              "format":"percentage",
-              "pieDistance": 5,
-              "hideWhenLessThanPercentage": 3
-          },
-          "inner": {
-            "format":"label",
-            "hideWhenLessThanPercentage": 3
+        "outer": {
+          "format": "none",
         },
         "inner": {
           "format":"label",
@@ -533,6 +523,10 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   			"effect": "none"
   		},
     },
+    "tooltips": {
+      "enabled": true,
+      "type": "caption"
+    },
     "misc": {
         "gradient": {
             "enabled": false,
@@ -541,7 +535,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
     },
     "callbacks": {}
 });
-}
+
 }
 
 rivets.formatters.create_id = function(n) {
@@ -601,8 +595,8 @@ rivets.formatters.mark = function (arr, val) {
   for (var i = 0; i < arr.length; i++) {
     var show = terms.every(function (term) {
       if (/^[0-9]/.test(term)) term = " " + term;
-      var combined = (arr[i].course_id||"")
-        + " " + (arr[i].course_name||"");
+      var combined = (arr[i].course_id||"");/*
+        + " " + (arr[i].course_name||"")*/
       return ~combined.toLowerCase().indexOf(term);
     });
     arr[i].hide = !show;
@@ -635,7 +629,14 @@ rivets.formatters.disable_professor  = function (prof){
   return false;
 };
 
-
+rivets.formatters.gradeshow = function (val){
+  console.log(val);
+  if(val < 0){
+    return false;
+  }
+  return true;
+}
+  
 
 
 
