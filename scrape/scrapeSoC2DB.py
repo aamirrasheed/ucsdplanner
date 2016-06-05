@@ -5,6 +5,7 @@ import re
 import csv
 from datetime import datetime
 import time
+from multiprocessing import Pool, TimeoutError
 
 # POST url to get the schedule of classes
 GET_DEPT_URL = "https://act.ucsd.edu/scheduleOfClasses/department-list.json"
@@ -15,7 +16,7 @@ RMP_SEARCH = "http://search.mtvnservices.com/typeahead/suggest/?solrformat=true&
 COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili pepper
 
 
-AUX_TYPES = ["DI", "LA"]
+AUX_TYPES = ["DI", "LA", "ST"]
 NO_SEATS = ["", "Unlim "]
 
 # All not-class parameters to use in the POST request.
@@ -64,7 +65,7 @@ def split_course_name(name):
 
 def parse_seats(string):
     if string in NO_SEATS:
-        return -1, -1
+        return -1, 0 
 
     s = re.match("FULL Waitlist\(([0-9]+)\)", string)
 
@@ -110,10 +111,10 @@ def make_RMP_prof(fname, lname, cape_name):
     r = requests.get(RMP_SEARCH.format(fname = fname, lname = lname))
     profs = json.loads(r.text)["grouped"]["content_type_s"]["groups"]
 
-    if len(profs) == 0:
-        r = requests.post(DB_URL + "/professor", professor)
-        print r.text
-        return json.loads(r.text)[0]["id"]
+    #RMP is broken
+    #if len(profs) == 0:
+    r = requests.post(DB_URL + "/professor", professor)
+    return json.loads(r.text)[0]["id"]
     
     profs = profs[0]["doclist"]["docs"]
 
@@ -121,7 +122,6 @@ def make_RMP_prof(fname, lname, cape_name):
 
     if len(profs) == 0:
         r = requests.post(DB_URL + "/professor", professor)
-        print r.text
         return json.loads(r.text)[0]["id"]
 
     else:
@@ -153,7 +153,7 @@ def make_RMP_prof(fname, lname, cape_name):
         r = requests.post(DB_URL + "/professor", professor)
         return json.loads(r.text)[0]["id"]
 
-def getDepartments(term="SP16"):
+def getDepartments(term="FA16"):
     """
     Returns a list of department codes for all departments teaching a class in the chosen term. 
     """
@@ -165,7 +165,7 @@ def getDepartments(term="SP16"):
         depts.append(dept["code"])
     return depts
 
-def getSoCPage(departments, pagenumber, term="SP16"):
+def getSoCPage(departments, pagenumber, term="FA16"):
     """
     Returns HTML for a page in the schedule of classes
     """
@@ -217,7 +217,7 @@ def getExamOrSection(tr, fieldnames, initCol):
     return section_dict
 
 
-def parsePage(html, ID, term="SP16"):
+def parsePage(html, term="FA16"):
     """
     Parses a list of course Dicts extracted from the provided HTML, as well as the
     corresponding sections and exams.
@@ -225,13 +225,6 @@ def parsePage(html, ID, term="SP16"):
 
     soup = BeautifulSoup(html, "html.parser")
     course_titles = soup.find_all("td", class_="crsheader", colspan="5")
-
-    epoch = datetime.utcfromtimestamp(0)
-    dt = int((datetime.utcnow() - epoch).total_seconds() * 1000.0)
-    
-    courses = []
-    sections = []
-    exams = []
 
     for course in course_titles:
         course_dict = {}
@@ -241,11 +234,17 @@ def parsePage(html, ID, term="SP16"):
         dept = re.search(r"\((.*)\)", course.find_previous("h2")("span")[0].string).group(1)
         num = course.find_previous_sibling("td", class_="crsheader").string
 
-        course_dict["Title"] = course.find("span", class_="boldtxt").string.strip()
+        title = course.find("span", class_="boldtxt")
+        course_dict["Title"] = title.string.strip()
         course_dict["Code"] = dept.strip() + num.strip()
         course_dict["Term"] = term.strip()
-        course_dict["ID"] = ID
-        courses.append(course_dict)
+
+        # Abuse try-catch to avoid dealing with UCSD's lack of consistency
+        try:
+            course_dict["Units"] = int(re.search("\([\s]*([0-9])[\s]*Units\)", title.parent.next_sibling.string).group(1))
+        except Exception:
+            course_dict["Units"] = -1
+        
 
         tr = course.parent.next_sibling.next_sibling
         while(tr):
@@ -257,9 +256,6 @@ def parsePage(html, ID, term="SP16"):
                 if section_dict is None:
                     tr = tr.find_next_sibling("tr")
                     continue
-                section_dict["ID"] = ID
-                section_dict["datetime"] = dt
-                sections.append(section_dict)
                 course_sections.append(section_dict)
 
             elif "nonenrtxt" in tr['class']:
@@ -270,36 +266,29 @@ def parsePage(html, ID, term="SP16"):
                     continue
                 if exam_dict["Type"] == "LE":
                     section_dict = getExamOrSection(tr, SECTION_FIELDS, EXAM_INIT_COL)
-                    section_dict["ID"] = ID
-                    section_dict["datetime"] = dt
-                    sections.append(section_dict)
                     tr = tr.find_next_sibling("tr")
                     continue
-                exam_dict["ID"] = ID
-                exams.append(exam_dict)
                 course_exams.append(exam_dict)
 
             else:
                 break
 
             tr = tr.find_next_sibling("tr")
-        ID += 1
         postCourse(course_dict, course_sections, course_exams)
 
-    return (courses, sections, exams)
+    return True
 
 def postCourse(course, sections, exams):
-    print ""
-    print course
-    print sections
-    print exams
 
     course_name = split_course_name(course["Code"])
 
-    r = requests.get(DB_URL + "/catalog/" + course_name)
-    if r.text == "[]":
-        print "ERROR: Could not find course: " + course_name
-        return None
+    course_info = {};
+    course_info["course_id"] = course_name
+    course_info["course_name"] = course["Title"]
+    course_info["description"] = "no description is available for this course."
+    course_info["prereqs"] = "none."
+    course_info["units"] = course["Units"] 
+    r = requests.post(DB_URL + "/catalog/forceget",  course_info)
     response = json.loads(r.text)[0]
 
     catalog_course_id = response["id"]
@@ -308,13 +297,8 @@ def postCourse(course, sections, exams):
     prereqs = response["prereqs"]
     units = response["units"]
 
-    term_id = None
-    r = requests.get(DB_URL + "/term/" + term_data["term_name"])
-    if r.text == "[]":
-        r = requests.post(TERM_API, term_data)
-        term_id = json.loads(r.text)[0]["term_id"]
-    else:
-        term_id = json.loads(r.text)[0]["id"]
+    r = requests.post(DB_URL + "/term/update", term_data)
+    term_id = json.loads(r.text)[0]["id"]
 
 
     r = requests.get(DB_URL + "/courses/specific/" + catalog_course_id + "/" + term_id)
@@ -335,21 +319,20 @@ def postCourse(course, sections, exams):
         course_id = json.loads(r.text)[0]["id"]
 
 
-    lecture_id = None
+    section = None
     prev_lecture_code = None
-    discussions = []
-    course_exams = []
     for meeting in sections:
         if meeting["Days"] == "Cancelled":
             continue
         if (meeting["Type"] not in AUX_TYPES and  \
             meeting["Code"] != prev_lecture_code)  or \
-            lecture_id is None:
+            section is None:
+
             section = {}
             section["course_id"] = course_id
             section["section_id"] = int(meeting["Id"]) if meeting["Id"] != "" else 0
             section["section_name"] = meeting["Code"]
-            section["term_name"] = term_data["term_name"]
+            section["term_name"] = "FA16"
             section["term_id"] = term_id
             section["type"] = meeting["Type"]
             section["section_days"] = meeting["Days"]
@@ -359,37 +342,19 @@ def postCourse(course, sections, exams):
             section["sec_seats_avail"] = parse_seats(meeting["SeatsOpen"])[0]
             section["sec_seats_total"] = parse_seats(meeting["TotalSeats"])[0]
             section["sec_waitlist"] = parse_seats(meeting["SeatsOpen"])[1]
+            section["discussions"] = []
+            section["exams"] = []
 
             fname, lname, professor = format_prof_name(meeting["Professor"])
            
             r = requests.get(DB_URL + "/professor/" + professor)
-
             prof_id = make_RMP_prof(fname, lname, professor) if r.text == "[]" else json.loads(r.text)[0]["id"]
             section["professor_id"] = prof_id
 
-            # find the corresponding section_id
-            r = requests.get(DB_URL + "/section/" + course_id + "/" + prof_id)
-            section_ids = [x["id"] for x in json.loads(r.text)]
-            for section_id in section_ids:
-                r = requests.get(DB_URL + "/section/" + section_id)
-                print r.text
-                if json.loads(r.text)[0]["section_name"] == section["section_name"]:
-                    r = requests.put(DB_URL + "/section/" + section_id, section)
-                    lecture_id = section_id
-
-                    r = requests.get(DB_URL + "/discussions/" + section_id)
-                    discussions = [x["id"] for x in json.loads(r.text)]
-
-                    r = requests.get(DB_URL + "/exams/" + section_id)
-                    course_exams = [x["id"] for x in json.loads(r.text)]
-
-                    prev_lecture_code = meeting["Code"]
+            prev_lecture_code = meeting["Code"]
 
         else:
             discussion = {}
-            assert lecture_id is not None
-
-            discussion["section_id"] = lecture_id
             discussion["disc_id"]  = int(meeting["Id"]) if meeting["Id"] != "" else 0
             discussion["disc_name"] = meeting["Code"]
             discussion["type"] = meeting["Type"]
@@ -400,62 +365,45 @@ def postCourse(course, sections, exams):
             discussion["disc_seats_avail"] = parse_seats(meeting["SeatsOpen"])[0]
             discussion["disc_seats_total"] = parse_seats(meeting["TotalSeats"])[0]
             discussion["disc_waitlist"] = parse_seats(meeting["SeatsOpen"])[1]
-
-            if len(discussions) > 0:
-                discussion_id, discussions = discussions[0], discussions[1:]
-                r = requests.put(DB_URL + "/discussions" + discussion_id, discussion)
-            else:
-                r = requests.post(DB_URL + "/discussions", discussion)
+            
+            section["discussions"].append(discussion)
 
     for exam in exams:
         exam_data = {}
-        exam_data["section_id"] = lecture_id
+        if section is None:
+            break
         exam_data["exam_type"] = exam["Type"]
         exam_data["exam_start_time"] = exam["Time"].split("-")[0] if exam["Time"] != "TBA" else "TBA"
         exam_data["exam_end_time"] = exam["Time"].split("-")[1] if exam["Time"] != "TBA" else "TBA"
         exam_data["exam_location"] = exam["Building"] + " " + exam["Room"] if exam["Building"] != "TBA" else "TBA"
         exam_data["exam_date"] = exam["Date"]
 
-        if len(course_exams) > 0:
-            exam_id, course_exams = course_exams[0], course_exams[1:]
-            r = requests.put(DB_URL + "/exams" + exam_id, exam_data)
-        else:
-            r = requests.post(DB_URL + "/exams", exam_data)
+        section["exams"].append(exam_data)
 
-depts = getDepartments("FA16")
-page = 1
-all_courses = []
-all_sections = []
-all_exams = []
-ID = 0
+    r = requests.post(DB_URL + "/section/batch", json=section)
+    return True
 
-html = getSoCPage(depts, page, "FA16")
-   
-while "Exception report" not in html:
-    print(page)
-    courses, sections, exams = parsePage(html, ID, "FA16")
-    ID += len(courses)
-    all_courses += courses
-    all_sections += sections
-    all_exams += exams
+# Strictly so we can pickle this for the pool.map
+def getAndParsePage(x):
+    parsePage(getSoCPage(getDepartments("FA16"), x, "FA16"), "FA16")
+    return x
 
-    page += 1
-    try:
-	html = getSoCPage(depts, page, "FA16")
-    except Exception:
-	break
+if __name__ == "__main__":
+    depts = getDepartments("FA16")
+    page = 1
 
-f = open("courses.csv", "w")
-csv_courses = csv.DictWriter(f, fieldnames = ["Title", "Code", "Term", "ID"])
-csv_courses.writeheader()
-csv_courses.writerows(all_courses)
+    html = getSoCPage(depts, page, "FA16")
+    num_pages = int(re.search(r"Page  \(1&nbsp;of&nbsp;([0-9]*)\)", html).group(1))
+    print "Scraping {} pages from the Schedule of Classes".format(num_pages)
 
-f = open("sections.csv", "a")
-csv_sections = csv.DictWriter(f, fieldnames = SECTION_FIELDS + ["ID", "datetime"])
-csv_sections.writeheader()
-csv_sections.writerows(all_sections)
+    pool = Pool(processes = 50)
 
-f = open("exams.csv", "w")
-csv_exams = csv.DictWriter(f, fieldnames = EXAM_FIELDS + ["ID"])
-csv_exams.writeheader()
-csv_exams.writerows(all_exams)
+    count = 0
+    pages = range(1, num_pages + 1)
+    for x in pool.imap_unordered(getAndParsePage, range(1, num_pages + 1)):
+        count += 1
+        pages.remove(x)
+        print "{}/{} pages completed".format(count, num_pages)
+
+        if len(pages) < 10:
+            print "Pages remaining: ", pages
