@@ -16,7 +16,7 @@ RMP_SEARCH = "http://search.mtvnservices.com/typeahead/suggest/?solrformat=true&
 COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili pepper
 
 
-AUX_TYPES = ["DI", "LA"]
+AUX_TYPES = ["DI", "LA", "ST"]
 NO_SEATS = ["", "Unlim "]
 
 # All not-class parameters to use in the POST request.
@@ -42,7 +42,7 @@ data = {
 }
 
 term_data = {
-    "term_name":"FA16",
+    "term_name":term_data["term_name"],
     "quarter":"Fall",
     "year":"2016"
 }
@@ -239,6 +239,13 @@ def parsePage(html, term="SP16"):
         course_dict["Code"] = dept.strip() + num.strip()
         course_dict["Term"] = term.strip()
 
+        # Abuse try-catch to avoid dealing with UCSD's lack of consistency
+        try:
+            course_dict["Units"] = int(re.search("\([\s]*([0-9])[\s]*Units\)", title.parent.next_sibling.string).group(1))
+        except Exception:
+            course_dict["Units"] = -1
+        
+
         tr = course.parent.next_sibling.next_sibling
         while(tr):
             if tr.get("class") is None:
@@ -280,11 +287,9 @@ def postCourse(course, sections, exams):
     course_info["course_name"] = course["Title"]
     course_info["description"] = "No catalog information is available for this course"
     course_info["prereqs"] = ""
-    course_info["units"] = -1
+    course_info["units"] = course["Units"] 
     r = requests.post(DB_URL + "/catalog/forceget",  course_info)
-    response = json.loads(r.text)
-    print response
-    response = response[0]
+    response = json.loads(r.text)[0]
 
     catalog_course_id = response["id"]
     course_title = response["course_name"]
@@ -292,13 +297,8 @@ def postCourse(course, sections, exams):
     prereqs = response["prereqs"]
     units = response["units"]
 
-    term_id = None
-    r = requests.get(DB_URL + "/term/" + term_data["term_name"])
-    if r.text == "[]":
-        r = requests.post(TERM_API, term_data)
-        term_id = json.loads(r.text)[0]["term_id"]
-    else:
-        term_id = json.loads(r.text)[0]["id"]
+    r = requests.post(DB_URL + "/term/update", term_data)
+    term_id = json.loads(r.text)[0]["id"]
 
 
     r = requests.get(DB_URL + "/courses/specific/" + catalog_course_id + "/" + term_id)
@@ -319,16 +319,14 @@ def postCourse(course, sections, exams):
         course_id = json.loads(r.text)[0]["id"]
 
 
-    lecture_id = None
+    section = None
     prev_lecture_code = None
-    discussions = []
-    course_exams = []
     for meeting in sections:
         if meeting["Days"] == "Cancelled":
             continue
         if (meeting["Type"] not in AUX_TYPES and  \
             meeting["Code"] != prev_lecture_code)  or \
-            lecture_id is None:
+            section is None:
 
             section = {}
             section["course_id"] = course_id
@@ -344,42 +342,19 @@ def postCourse(course, sections, exams):
             section["sec_seats_avail"] = parse_seats(meeting["SeatsOpen"])[0]
             section["sec_seats_total"] = parse_seats(meeting["TotalSeats"])[0]
             section["sec_waitlist"] = parse_seats(meeting["SeatsOpen"])[1]
+            section["discussions"] = []
+            section["exams"] = []
 
             fname, lname, professor = format_prof_name(meeting["Professor"])
            
             r = requests.get(DB_URL + "/professor/" + professor)
-
             prof_id = make_RMP_prof(fname, lname, professor) if r.text == "[]" else json.loads(r.text)[0]["id"]
             section["professor_id"] = prof_id
 
-            # find the corresponding section_id
-            #TODO: DEBUG THIS AND MAKE SURE IT WORKS - CSE 170
-            r = requests.get(DB_URL + "/section/" + course_id + "/" + prof_id)
-            section_ids = [x["id"] for x in json.loads(r.text)]
-            for section_id in section_ids:
-                r = requests.get(DB_URL + "/section/" + section_id)
-                if json.loads(r.text)[0]["section_name"] == section["section_name"]:
-                    r = requests.put(DB_URL + "/section/" + section_id, section)
-                    lecture_id = section_id
-
-                    r = requests.get(DB_URL + "/discussions/" + section_id)
-                    discussions = [x["id"] for x in json.loads(r.text)]
-
-                    r = requests.get(DB_URL + "/exams/" + section_id)
-                    course_exams = [x["id"] for x in json.loads(r.text)]
-
-                    prev_lecture_code = meeting["Code"]
-                    break
-            else:
-                r = requests.post(DB_URL + "/section", section)
-                lecture_id = json.loads(r.text)[0]["id"]
-
+            prev_lecture_code = meeting["Code"]
 
         else:
             discussion = {}
-            assert lecture_id is not None
-
-            discussion["section_id"] = lecture_id
             discussion["disc_id"]  = int(meeting["Id"]) if meeting["Id"] != "" else 0
             discussion["disc_name"] = meeting["Code"]
             discussion["type"] = meeting["Type"]
@@ -390,45 +365,43 @@ def postCourse(course, sections, exams):
             discussion["disc_seats_avail"] = parse_seats(meeting["SeatsOpen"])[0]
             discussion["disc_seats_total"] = parse_seats(meeting["TotalSeats"])[0]
             discussion["disc_waitlist"] = parse_seats(meeting["SeatsOpen"])[1]
-
-            if len(discussions) > 0:
-                discussion_id, discussions = discussions[0], discussions[1:]
-                r = requests.put(DB_URL + "/discussions" + discussion_id, discussion)
-            else:
-                r = requests.post(DB_URL + "/discussions", discussion)
+            
+            section["discussions"].append(discussion)
 
     for exam in exams:
         exam_data = {}
-        if lecture_id is None:
+        if section is None:
             break
-        exam_data["section_id"] = lecture_id
         exam_data["exam_type"] = exam["Type"]
         exam_data["exam_start_time"] = exam["Time"].split("-")[0] if exam["Time"] != "TBA" else "TBA"
         exam_data["exam_end_time"] = exam["Time"].split("-")[1] if exam["Time"] != "TBA" else "TBA"
         exam_data["exam_location"] = exam["Building"] + " " + exam["Room"] if exam["Building"] != "TBA" else "TBA"
         exam_data["exam_date"] = exam["Date"]
 
-        if len(course_exams) > 0:
-            exam_id, course_exams = course_exams[0], course_exams[1:]
-            r = requests.put(DB_URL + "/exams" + exam_id, exam_data)
-        else:
-            r = requests.post(DB_URL + "/exams", exam_data)
+        section["exams"].append(exam_data)
+
+    #TODO: Insert request here
+    print json.dumps(section, indent=4)
+    print ""
     return True
 
+# Strictly so we can pickle this for the pool.map
 def getAndParsePage(x):
-    parsePage(getSoCPage(getDepartments("FA16"), x, "FA16"), "FA16")
+    parsePage(getSoCPage(getDepartments(term_data["term_name"]), x, term_data["term_name"]), term_data["term_name"])
     return x
 
 if __name__ == "__main__":
-    depts = getDepartments("FA16")
+    depts = getDepartments(term_data["term_name"])
     page = 1
 
-    html = getSoCPage(depts, page, "FA16")
+    html = getSoCPage(depts, page, term_data["term_name"])
     num_pages = int(re.search(r"Page  \(1&nbsp;of&nbsp;([0-9]*)\)", html).group(1))
     print "Scraping {} pages from the Schedule of Classes".format(num_pages)
 
     pool = Pool(processes = 20)
 
+    getAndParsePage(8)
+    raw_input()
     count = 0
     pages = range(1, num_pages + 1)
     for x in pool.imap_unordered(getAndParsePage, range(1, num_pages + 1)):

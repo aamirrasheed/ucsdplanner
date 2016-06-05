@@ -117,6 +117,7 @@ var get_courses = function () {
       
       var i = full[0].indexOf(" ");
       course.dept = full[0].substr(0, i);
+      if (course.dept == "LING") course.dept = "LIGN";
             
       desc = $(this).next("p:not(.course-name)");
       while (!desc.text()) desc = desc.next("p");
@@ -136,9 +137,18 @@ var get_courses = function () {
         course.prereqs = "none.";
       }
 
-      var match = /([0-9]+)((?:[A-Z]-?)*)/.exec(num[1])
+      var match = /0*([1-9][0-9]*)\s*((?:[A-Z]-?(?: , )?(?: or )?)*)/.exec(num[1])
       if (!match[2]) match[2] = "";
-      var nums = match[2].split("-");
+      var nums = match[2].split(/-?(?: or )?(?: , )?/);
+      if (nums.length == 2 && nums[1].charAt(0) != String.fromCharCode(nums[0].charCodeAt(0) + 1)) {
+        var cur_char = nums[0].charAt(0);
+        var rest = nums[0].substring(1);
+        while (cur_char != nums[1].charAt(0)) {
+            cur_char = String.fromCharCode(cur_char.charCodeAt(0) + 1);
+            nums.push(cur_char + rest);
+        }
+      }
+
       var number = match[1];
       for (var i = 0; i < nums.length; i++) {
           course.num = number + nums[i];
@@ -156,12 +166,11 @@ var check_is_done = function () {
   if (index != dept_urls.length || current) return;
   
   // this is where the scrape finishes
-
-  //var catalog = "catalog = " + JSON.stringify(courses);
-  //fs.writeFile("catalog.json", catalog, function (err) {
-  //  console.log(!err);
-  //});
-  post_course();
+  var catalog = "catalog = " + JSON.stringify(courses);
+  fs.writeFile("catalog.json", catalog, function (err) {
+    console.log(!err);
+  });
+  //post_course();
 }
 
 var post_course = function () {

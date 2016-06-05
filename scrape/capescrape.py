@@ -244,9 +244,11 @@ def get_cape_data_for_dept(dept):
             'cape_url':  site
         }
         
-        r = requests.post(DB_URL + "/cape/update", entry)
         
+        cape_data.append(entry)
         row = row.next_sibling
+    print "Making request"
+    r = requests.post(DB_URL + "cape/batch", {"capes":cape_data})
 
 def format_float(fstring):
     if fstring == "N/A":
@@ -369,5 +371,5 @@ if __name__ == "__main__":
 
     pool = multiprocessing.Pool(processes=50)
     # get capes for each department
-    get_cape_data_for_dept("CSE")
+    get_cape_data_for_dept("CAT")
     #pool.map(get_cape_data_for_dept, departments)
