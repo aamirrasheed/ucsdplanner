@@ -257,7 +257,8 @@ def get_cape_data_for_dept(dept):
         
         cape_data.append(entry)
         row = row.next_sibling
-    r = requests.post(DB_URL + "cape/batch", {"capes":cape_data})
+    r = requests.post(DB_URL + "cape/batch", json={"capes":cape_data})
+    print json.dumps(cape_data)
     return dept
 
 def format_float(fstring):
@@ -382,9 +383,13 @@ if __name__ == "__main__":
     pool = multiprocessing.Pool(processes=50)
     # get capes for each department
     
+    get_cape_data_for_dept("AIP")
+
+    """
+
     completed = 0
     num_depts = len(departments)
     for x in pool.imap_unordered(get_cape_data_for_dept, departments):
         completed += 1
         print "{}/{} departments completed".format(completed, num_depts)
-        
+   """ 
