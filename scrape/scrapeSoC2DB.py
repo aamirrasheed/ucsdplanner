@@ -42,7 +42,7 @@ data = {
 }
 
 term_data = {
-    "term_name":term_data["term_name"],
+    "term_name":"FA16",
     "quarter":"Fall",
     "year":"2016"
 }
@@ -153,7 +153,7 @@ def make_RMP_prof(fname, lname, cape_name):
         r = requests.post(DB_URL + "/professor", professor)
         return json.loads(r.text)[0]["id"]
 
-def getDepartments(term="SP16"):
+def getDepartments(term="FA16"):
     """
     Returns a list of department codes for all departments teaching a class in the chosen term. 
     """
@@ -165,7 +165,7 @@ def getDepartments(term="SP16"):
         depts.append(dept["code"])
     return depts
 
-def getSoCPage(departments, pagenumber, term="SP16"):
+def getSoCPage(departments, pagenumber, term="FA16"):
     """
     Returns HTML for a page in the schedule of classes
     """
@@ -217,7 +217,7 @@ def getExamOrSection(tr, fieldnames, initCol):
     return section_dict
 
 
-def parsePage(html, term="SP16"):
+def parsePage(html, term="FA16"):
     """
     Parses a list of course Dicts extracted from the provided HTML, as well as the
     corresponding sections and exams.
@@ -285,8 +285,8 @@ def postCourse(course, sections, exams):
     course_info = {};
     course_info["course_id"] = course_name
     course_info["course_name"] = course["Title"]
-    course_info["description"] = "No catalog information is available for this course"
-    course_info["prereqs"] = ""
+    course_info["description"] = "no description is available for this course."
+    course_info["prereqs"] = "none."
     course_info["units"] = course["Units"] 
     r = requests.post(DB_URL + "/catalog/forceget",  course_info)
     response = json.loads(r.text)[0]
@@ -332,7 +332,7 @@ def postCourse(course, sections, exams):
             section["course_id"] = course_id
             section["section_id"] = int(meeting["Id"]) if meeting["Id"] != "" else 0
             section["section_name"] = meeting["Code"]
-            section["term_name"] = term_data["term_name"]
+            section["term_name"] = "FA16"
             section["term_id"] = term_id
             section["type"] = meeting["Type"]
             section["section_days"] = meeting["Days"]
@@ -380,28 +380,24 @@ def postCourse(course, sections, exams):
 
         section["exams"].append(exam_data)
 
-    #TODO: Insert request here
-    print json.dumps(section, indent=4)
-    print ""
+    r = requests.post(DB_URL + "/section/batch", json=section)
     return True
 
 # Strictly so we can pickle this for the pool.map
 def getAndParsePage(x):
-    parsePage(getSoCPage(getDepartments(term_data["term_name"]), x, term_data["term_name"]), term_data["term_name"])
+    parsePage(getSoCPage(getDepartments("FA16"), x, "FA16"), "FA16")
     return x
 
 if __name__ == "__main__":
-    depts = getDepartments(term_data["term_name"])
+    depts = getDepartments("FA16")
     page = 1
 
-    html = getSoCPage(depts, page, term_data["term_name"])
+    html = getSoCPage(depts, page, "FA16")
     num_pages = int(re.search(r"Page  \(1&nbsp;of&nbsp;([0-9]*)\)", html).group(1))
     print "Scraping {} pages from the Schedule of Classes".format(num_pages)
 
-    pool = Pool(processes = 20)
+    pool = Pool(processes = 50)
 
-    getAndParsePage(8)
-    raw_input()
     count = 0
     pages = range(1, num_pages + 1)
     for x in pool.imap_unordered(getAndParsePage, range(1, num_pages + 1)):

@@ -30,7 +30,7 @@ def get_soup(url):
 # Purpose: Gets list of UCSD departments
 # ======================================== 
 def get_departments():
-    return ['AIP', 'ANBI', 'ANAR', 'ANTH', 'ANSC', 'AESE', 'BENG', 'BNFO', 'BIEB', 'BICD', 'BIPN', 'BIBC', 'BGGN', 'BGSE', 'BILD', 'BIMM', 'BISP', 'BIOM', 'CENG', 'CHEM', 'CHIN', 'CLAS', 'CLIN', 'COGS', 'COMM', 'COGR', 'CSE', 'ICAM', 'CONT', 'CGS', 'CAT', 'TDCH', 'TDHD', 'TDMV', 'TDTR', 'DOC', 'ECON', 'EAP', 'EDS', 'ERC', 'ECE', 'ENG', 'ENVR', 'ESYS', 'ETHN', 'EXPR', 'FPMU', 'FILM', 'HITO', 'HIAF', 'HIEA', 'HIEU', 'HILA', 'HISC', 'HINE', 'HIUS', 'HIGR', 'HILD', 'HDP', 'HUM', 'INTL', 'IRCO', 'IRGN', 'IRLA', 'JAPN', 'JUDA', 'LATI', 'LAWS', 'LISL', 'LIAB', 'LIFR', 'LIGN', 'LIGM', 'LIHL', 'LIIT', 'LIPO', 'LISP', 'LTCH', 'LTCO', 'LTCS', 'LTEU', 'LTFR', 'LTGM', 'LTGK', 'LTIT', 'LTKO', 'LTLA', 'LTRU', 'LTSP', 'LTTH', 'LTWR', 'LTEN', 'LTWL', 'LTEA', 'MMW', 'MBC', 'MATS', 'MATH', 'MSED', 'MAE', 'MUIR', 'MCWP', 'MUS', 'NANO', 'PHAR', 'SPPS', 'PHIL', 'PHYS', 'POLI', 'PSYC', 'MGT', 'RELI', 'REV', 'SDCC', 'SIOC', 'SIOG', 'SIOB', 'SIO', 'SXTH', 'SOCG', 'SOCE', 'SOCI', 'SE', 'TDAC', 'TDDE', 'TDDR', 'TDGE', 'TDGR', 'TDHT', 'TDPW', 'TDPR', 'TWS', 'TMC', 'USP', 'VIS', 'WARR', 'WCWP']
+    return ['AIP', 'ANBI', 'ANAR', 'ANTH', 'ANSC', 'AESE', 'BNFO', 'BIEB', 'BICD', 'BIPN', 'BIBC', 'BGGN', 'BGSE', 'BILD', 'BIMM', 'BISP', 'BIOM',  'CHEM', 'CHIN', 'CLAS', 'CLIN', 'COGS', 'COMM', 'COGR', 'ICAM', 'CONT', 'CGS', 'CAT', 'TDCH', 'TDHD', 'TDMV', 'TDTR', 'DOC', 'ECON', 'EAP', 'EDS', 'ERC', 'ECE', 'ENG', 'ENVR', 'ESYS', 'ETHN', 'EXPR', 'FPMU', 'FILM', 'HITO', 'HIAF', 'HIEA', 'HIEU', 'HILA', 'HISC', 'HINE', 'HIUS', 'HIGR', 'HILD', 'HDP', 'HUM', 'INTL', 'IRCO', 'IRGN', 'IRLA', 'JAPN', 'JUDA', 'LATI', 'LAWS', 'LISL', 'LIAB', 'LIFR', 'LIGN', 'LIGM', 'LIHL', 'LIIT', 'LIPO', 'LISP', 'LTCH', 'LTCO', 'LTCS', 'LTEU', 'LTFR', 'LTGM', 'LTGK', 'LTIT', 'LTKO', 'LTLA', 'LTRU', 'LTSP', 'LTTH', 'LTWR', 'LTEN', 'LTWL', 'LTEA', 'MMW', 'MBC', 'MATS', 'MATH', 'MSED', 'MAE', 'MUIR', 'MCWP', 'MUS', 'NANO', 'PHAR', 'SPPS', 'PHIL', 'PHYS', 'POLI', 'PSYC', 'MGT', 'RELI', 'REV', 'SDCC', 'SIO', 'SXTH', 'SOCG', 'SOCE', 'SOCI', 'SE', 'TDAC', 'TDDE', 'TDDR', 'TDGE', 'TDGR', 'TDHT', 'TDPW', 'TDPR', 'TWS', 'TMC', 'USP', 'VIS', 'WARR', 'WCWP']
      
 
 def get_gradedistributions(url):
@@ -100,6 +100,9 @@ def get_gradedistributions(url):
 # 		   specified department
 # ======================================== 
 def get_cape_data_for_dept(dept):
+    prof_cache = {}
+    catalog_cache = {}
+
     # gets soup
     soup = get_soup(BASE_URL+dept)
     row = None
@@ -203,14 +206,24 @@ def get_cape_data_for_dept(dept):
         lname = ln
         fname = names[1].split(" ")[0]
         
-        r = requests.get(DB_URL + "/professor/" + instructor)
-        prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
+        prof_id = None
+        if instructor not in prof_cache:
+            r = requests.get(DB_URL + "/professor/" + instructor)
+            prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
+            prof_cache[instructor] = prof_id
+        else:
+            prof_id = prof_cache[prof_id]
         
         if prof_id is None:
             continue
 
-        r = requests.get(DB_URL + "catalog/" + course)
-        courses = json.loads(r.text)
+        courses = None
+        if course not in catalog_cache:
+            r = requests.get(DB_URL + "catalog/" + course)
+            courses = json.loads(r.text)
+            catalog_cache[instructor] = courses
+        else:
+            courses = catalog_cache[course]
 
         if len(courses) == 0:
             print "WARNING: Could not find course: " + course
@@ -247,8 +260,8 @@ def get_cape_data_for_dept(dept):
         
         cape_data.append(entry)
         row = row.next_sibling
-    print "Making request"
     r = requests.post(DB_URL + "cape/batch", {"capes":cape_data})
+    return dept
 
 def format_float(fstring):
     if fstring == "N/A":
@@ -371,5 +384,10 @@ if __name__ == "__main__":
 
     pool = multiprocessing.Pool(processes=50)
     # get capes for each department
-    get_cape_data_for_dept("CAT")
-    #pool.map(get_cape_data_for_dept, departments)
+    completed = 0
+    num_depts = len(departments)
+    for x in pool.imap_unordered(get_cape_data_for_dept, departments):
+        completed += 1
+        print "{}/{} departments completed".format(completed, num_depts)
+        
+

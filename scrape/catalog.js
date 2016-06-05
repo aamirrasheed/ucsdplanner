@@ -1,3 +1,5 @@
+var api = "https://ucsdplanner-api.azure-mobile.net/api/catalog"
+
 var
   fs = require("fs"),
   request = require("request"),
@@ -29,7 +31,7 @@ var get_depts = function () {
     while (m = reg.url.exec(body)) 
       dept_urls.push(dept_url + m[1]);
     
-    // console.log(dept_urls.length);
+     console.log(dept_urls.length);
     get_courses();
   });
 }
@@ -94,6 +96,8 @@ var get_courses = function () {
       if (units) {
         full[1] = full[1].split(units[0])[0];
         units = units[1];
+        if (units.split("-").length > 1)
+            units = units.split("-")[0];
       }
       
       course.units = units;
@@ -132,6 +136,7 @@ var get_courses = function () {
       var i = desc.indexOf("Prerequisites: ");
       if (~i) {
         course.desc = desc.substr(0, i);
+        if (/^\s*$/.test(course.desc)) course.desc = "no description is available for this course";
         course.prereqs = desc.substr(i + 15);
       } else {
         course.prereqs = "none.";
@@ -139,21 +144,24 @@ var get_courses = function () {
 
       var match = /0*([1-9][0-9]*)\s*((?:[A-Z]-?(?: , )?(?: or )?)*)/.exec(num[1])
       if (!match[2]) match[2] = "";
-      var nums = match[2].split(/-?(?: or )?(?: , )?/);
+      var nums = match[2].split(/-|(?: or )|(?: , )/);
       if (nums.length == 2 && nums[1].charAt(0) != String.fromCharCode(nums[0].charCodeAt(0) + 1)) {
+        console.log(nums[0]);
+        console.log(nums[1]);
         var cur_char = nums[0].charAt(0);
+        cur_char = String.fromCharCode(cur_char.charCodeAt(0) + 1);
         var rest = nums[0].substring(1);
         while (cur_char != nums[1].charAt(0)) {
-            cur_char = String.fromCharCode(cur_char.charCodeAt(0) + 1);
             nums.push(cur_char + rest);
+            cur_char = String.fromCharCode(cur_char.charCodeAt(0) + 1);
         }
       }
 
       var number = match[1];
       for (var i = 0; i < nums.length; i++) {
-          course.num = number + nums[i];
-          if (nums.length > 1) console.log(course.num);
-          courses.push(course);
+          course1 = JSON.parse(JSON.stringify(course));
+          course1.num = number + nums[i];
+          courses.push(course1);
       }
     });
     check_is_done();
@@ -170,7 +178,8 @@ var check_is_done = function () {
   fs.writeFile("catalog.json", catalog, function (err) {
     console.log(!err);
   });
-  //post_course();
+  index = 0;
+  post_course();
 }
 
 var post_course = function () {
