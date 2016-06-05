@@ -196,6 +196,22 @@ ul {
   overflow: scroll;
 }
 
-#id {
+.grade-dist-chart {
+  position: relative;
 }
 
+.grade-dist-chart svg {
+  position: relative;
+  z-index: 1;
+}
+
+.grade-dist-chart::after {
+  content: "no grade information";
+  color: #000000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+}

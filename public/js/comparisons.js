@@ -592,7 +592,14 @@ rivets.formatters.disable_professor  = function (prof){
   return false;
 };
 
-
+rivets.formatters.gradeshow = function (val){
+  console.log(val);
+  if(val < 0){
+    return false;
+  }
+  return true;
+}
+  
 
 
 
