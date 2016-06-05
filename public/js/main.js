@@ -19,6 +19,7 @@ window.addEventListener("load", function () {
       term_name: "catalog"
     }],
     terms_expanded: 0,
+    num_tabs: 1,
     no_results: false,
     sidebar_loading: false,
     details_loading: false,
@@ -34,13 +35,14 @@ window.addEventListener("load", function () {
       app.course.selected = true;
       
       document.body.scrollTop = 0;
+      app.num_tabs = app.show_catalog ? 1 : 2;
       
       if (!app.show_catalog)
         load_course(app.course);
     },
     select_cape: function (e, rv) {
       var comp = rv.comp;
-      for (var i=0; i<comp.capes.length; i++) {
+      for (var i = 0; i < comp.capes.length; i++) {
         if (comp.capes[i].term == comp.cape_term) {
           comp.current_cape = comp.capes[i];
           break;
@@ -55,11 +57,15 @@ window.addEventListener("load", function () {
         app.course.selected = false;
       if (app.term.id == e.target.dataset["value"])
         return;
+      
       app.term = {
         id: rv.term.term_id,
         name: rv.term.term_name
       };
+      
       app.show_catalog = app.term.id == "catalog";
+      app.num_tabs = app.show_catalog ? 1 : 2;
+      
       app.course = null;
       app.courses = [];
       app.clear_search();
@@ -308,6 +314,13 @@ function update_pie_chart (comp) {
   var id = rivets.formatters.pie(comp);
   var cape = comp.current_cape;
   
+  var t_percentage = 
+    cape.a_percentage +
+    cape.b_percentage +
+    cape.c_percentage +
+    cape.d_percentage +
+    cape.f_percentage;
+  
   $("#" + id)[0].innerHTML = "";
   
   var grade_dist_chart = new d3pie(id, {
@@ -322,23 +335,29 @@ function update_pie_chart (comp) {
         {
           "label": "A",
           "value": cape.a_percentage,
-          "color": "#F38630"
+          "color": "#F38630",
+          // "caption": "hi mom"
+          "caption": (100 * cape.a_percentage / t_percentage).toFixed(2) + "%"
         }, {
           "label": "B",
           "value": cape.b_percentage,
-          "color": "#69D2E7"
+          "color": "#69D2E7",
+          "caption": (100 * cape.b_percentage / t_percentage).toFixed(2) + "%"
         }, {
           "label": "C",
           "value": cape.c_percentage,
-          "color": "#FA6900"
+          "color": "#FA6900",
+          "caption": (100 * cape.c_percentage / t_percentage).toFixed(2) + "%"
         }, {
           "label": "D",
           "value": cape.d_percentage,
-          "color": "#A7DBD8"
+          "color": "#A7DBD8",
+          "caption": (100 * cape.d_percentage / t_percentage).toFixed(2) + "%"
         }, {
           "label": "F",
           "value": cape.f_percentage,
-          "color": "#E0E4CC"
+          "color": "#E0E4CC",
+          "caption": (100 * cape.f_percentage / t_percentage).toFixed(2) + "%"
         }
       ]
     },
@@ -369,13 +388,18 @@ function update_pie_chart (comp) {
   			"effect": "none"
   		},
     },
+    "tooltips": {
+      "enabled": true,
+      "type": "caption"
+    },
     "callbacks": {}
   });
 }
 
 function load_course (course) {
   if (course.details) {
-    console.log("hi mom");
+    if (course.details.comparisons.length) 
+      app.num_tabs = 3;
     for (var i = 0; i < course.details.comparisons.length; i++)
       update_pie_chart(course.details.comparisons[i]);
     return;
@@ -418,6 +442,7 @@ function load_course (course) {
         }
         
         if (comp.capes.length) {
+          app.num_tabs = 3;
           comp.cape_term = "average";
           comp.current_cape = comp.capes[0];
           course.details.comparisons.push(comp);
