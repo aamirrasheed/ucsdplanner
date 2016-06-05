@@ -601,8 +601,8 @@ rivets.formatters.mark = function (arr, val) {
   for (var i = 0; i < arr.length; i++) {
     var show = terms.every(function (term) {
       if (/^[0-9]/.test(term)) term = " " + term;
-      var combined = (arr[i].course_id||"")
-        + " " + (arr[i].course_name||"");
+      var combined = (arr[i].course_id||"");/*
+        + " " + (arr[i].course_name||"")*/
       return ~combined.toLowerCase().indexOf(term);
     });
     arr[i].hide = !show;
