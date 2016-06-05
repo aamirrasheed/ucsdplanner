@@ -422,17 +422,19 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   var grade_dist_chart = course_prof_to_update.grade_dist_chart;
   var grade_dist_chart_id = course_prof_to_update.course.id + course_prof_to_update.prof.id;
 
-  if(a_percentage === -1 &&
-     b_percentage === -1 &&
-     c_percentage === -1 &&
-     d_percentage === -1 &&
-     f_percentage === -1
+  if(a_percentage !== -1 &&
+     b_percentage !== -1 &&
+     c_percentage !== -1 &&
+     d_percentage !== -1 &&
+     f_percentage !== -1
      ){
-    // document.getElementById(grade_dist_chart_id).clientWidth = 220;
-    // document.getElementById(grade_dist_chart_id).clientHeight = 175;
-    // document.getElementById(grade_dist_chart_id).innerHTML = "N/A";
-  }
-  else{
+
+    var t_percentage = 
+    a_percentage +
+    b_percentage +
+    c_percentage +
+    d_percentage +
+    f_percentage;
 
     if(grade_dist_chart !== 0){
       course_prof_to_update.grade_dist_chart.destroy();
@@ -459,7 +461,7 @@ function update_grade_distribution(course_id, prof_id, cape_term){
       "size": {
           "canvasHeight": 170,
           "canvasWidth": 170,
-          "pieOuterRadius": "80%"
+          "pieOuterRadius": "100%"
       },
       "data": {
           "sortOrder": "label-asc",
@@ -468,39 +470,38 @@ function update_grade_distribution(course_id, prof_id, cape_term){
               {
                   "label": "A",
                   "value": a_percentage,
-                  "color": "#F38630"
+                  "color": "#F38630",
+                  "caption": (100 * a_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "B",
                   "value": b_percentage,
-                  "color": "#69D2E7"
+                  "color": "#69D2E7", 
+                  "caption": (100 * b_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "C",
                   "value": c_percentage,
-                  "color": "#FA6900"
+                  "color": "#FA6900",
+                  "caption": (100 * c_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "D",
                   "value": d_percentage,
-                  "color": "#A7DBD8"
+                  "color": "#A7DBD8",
+                  "caption": (100 * d_percentage / t_percentage).toFixed(2) + "%"
               },
               {
                   "label": "F",
                   "value": f_percentage,
-                  "color": "#E0E4CC"
+                  "color": "#E0E4CC",
+                  "caption": (100 * f_percentage / t_percentage).toFixed(2) + "%"
               }
           ]
       },
       "labels": {
-          "outer": {
-              "format":"percentage",
-              "pieDistance": 5,
-              "hideWhenLessThanPercentage": 3
-          },
-          "inner": {
-            "format":"label",
-            "hideWhenLessThanPercentage": 3
+        "outer": {
+          "format": "none",
         },
         "inner": {
           "format":"label",
@@ -532,6 +533,10 @@ function update_grade_distribution(course_id, prof_id, cape_term){
   		"pullOutSegmentOnClick": {
   			"effect": "none"
   		},
+    },
+    "tooltips": {
+      "enabled": true,
+      "type": "caption"
     },
     "misc": {
         "gradient": {
