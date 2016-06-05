@@ -20,6 +20,7 @@ COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili 
 # Purpose: Gets soup for a website
 # ======================================== 
 def get_soup(url):
+    print url
     r = requests.get(url, headers={"User-agent":'Mozilla'})
     html = r.text
     soup = BeautifulSoup(html, "html.parser");
@@ -203,7 +204,6 @@ def get_cape_data_for_dept(dept):
         fname = names[1].split(" ")[0]
         
         r = requests.get(DB_URL + "/professor/" + instructor)
-        print instructor
         prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
         
         if prof_id is None:
@@ -369,4 +369,5 @@ if __name__ == "__main__":
 
     pool = multiprocessing.Pool(processes=50)
     # get capes for each department
-    pool.map(get_cape_data_for_dept, departments)
+    get_cape_data_for_dept("CSE")
+    #pool.map(get_cape_data_for_dept, departments)

@@ -111,9 +111,10 @@ def make_RMP_prof(fname, lname, cape_name):
     r = requests.get(RMP_SEARCH.format(fname = fname, lname = lname))
     profs = json.loads(r.text)["grouped"]["content_type_s"]["groups"]
 
-    if len(profs) == 0:
-        r = requests.post(DB_URL + "/professor", professor)
-        return json.loads(r.text)[0]["id"]
+    #RMP is broken
+    #if len(profs) == 0:
+    r = requests.post(DB_URL + "/professor", professor)
+    return json.loads(r.text)[0]["id"]
     
     profs = profs[0]["doclist"]["docs"]
 
@@ -233,7 +234,8 @@ def parsePage(html, term="SP16"):
         dept = re.search(r"\((.*)\)", course.find_previous("h2")("span")[0].string).group(1)
         num = course.find_previous_sibling("td", class_="crsheader").string
 
-        course_dict["Title"] = course.find("span", class_="boldtxt").string.strip()
+        title = course.find("span", class_="boldtxt")
+        course_dict["Title"] = title.string.strip()
         course_dict["Code"] = dept.strip() + num.strip()
         course_dict["Term"] = term.strip()
 
@@ -273,11 +275,16 @@ def postCourse(course, sections, exams):
 
     course_name = split_course_name(course["Code"])
 
-    r = requests.get(DB_URL + "/catalog/" + course_name)
-    if r.text == "[]":
-        #print "ERROR: Could not find course: " + course_name
-        return None
-    response = json.loads(r.text)[0]
+    course_info = {};
+    course_info["course_id"] = course_name
+    course_info["course_name"] = course["Title"]
+    course_info["description"] = "No catalog information is available for this course"
+    course_info["prereqs"] = ""
+    course_info["units"] = -1
+    r = requests.post(DB_URL + "/catalog/forceget",  course_info)
+    response = json.loads(r.text)
+    print response
+    response = response[0]
 
     catalog_course_id = response["id"]
     course_title = response["course_name"]
