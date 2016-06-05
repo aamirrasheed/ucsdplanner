@@ -137,19 +137,15 @@ window.addEventListener("load", function() {
     remove_course: function (e,rv) {
       var course = rv.courseprof;
       var index = app.displayed_course_profs.indexOf(course);
-      course.grade_dist_chart.destroy();
-      //var id = rivets.formatters.grade_dist_chart_id_generator(course);
-      //document.getElementById(id).innerHTML = "";
+      if (!course.grade_dist_chart) {
+        var id = rivets.formatters.grade_dist_chart_id_generator(course);
+        document.getElementById(id).innerHTML = "";
+      }
+      else {
+        course.grade_dist_chart.destroy();
+      }
       app.displayed_course_profs.splice(index,1);
       for (var i = index; i < app.displayed_course_profs.length; i++) {
-        console.log("COURSE ID\n");
-        console.log(app.displayed_course_profs[i].course.id);
-
-        console.log("\n\nPROF ID\n");
-        console.log(app.displayed_course_profs[i].prof.id);
-
-        console.log("\n\nCAPE TERM\n");
-        console.log(app.displayed_course_profs[i].current_cape_term);
         update_grade_distribution(app.displayed_course_profs[i].course.id, 
                                   app.displayed_course_profs[i].prof.id, 
                                   app.displayed_course_profs[i].current_cape_term);
@@ -599,8 +595,8 @@ rivets.formatters.mark = function (arr, val) {
   for (var i = 0; i < arr.length; i++) {
     var show = terms.every(function (term) {
       if (/^[0-9]/.test(term)) term = " " + term;
-      var combined = (arr[i].course_id||"")
-        + " " + (arr[i].course_name||"");
+      var combined = (arr[i].course_id||"");/*
+        + " " + (arr[i].course_name||"")*/
       return ~combined.toLowerCase().indexOf(term);
     });
     arr[i].hide = !show;
