@@ -28,6 +28,45 @@ exports.post = function(request, response) {
 exports.register = 
     function(app)
     {
+        app.post('/forceget', function(request, response) {
+            var sql = "set nocount on; select c.id, c.course_name, c.course_id, c.description, c.prereqs, c.units from catalog_courses as c where c.course_id = ?;";
+
+            request.service.mssql.query(sql, request.body.course_id, {
+
+                success: function(results) {
+
+                    // IF ENTRY DOES NOT EXIST, CREATE ENTRY
+                    if (results.length === 0) {
+                        var sql = "DECLARE @table table (id nvarchar(255)); set nocount on; insert into catalog_courses (course_name, course_id, description, prereqs, units) OUTPUT inserted.id into @table values (?, ?, ?, ?, ?); select id from @table;";
+                        var params = [request.body.course_name, request.body.course_id, request.body.description, request.body.prereqs, request.body.units];
+                        request.service.mssql.query(sql, params, {
+                            success: function(results) {
+                                results[0].course_name = request.body.course_name;
+                                results[0].course_id = request.body.course_id;
+                                results[0].description = request.body.description;
+                                results[0].prereqs = request.body.prereqs;
+                                results[0].units = request.body.units;
+                                response.json(statusCodes.OK, results);
+                            },
+                            error: function(results) {
+                                console.error("POST /catalog error: " + results);
+                                response.json(statusCodes.INTERNAL_SERVER_ERROR);
+                            }
+                        });
+                    }
+
+                    // IF ENTRY ALREADY EXISTS, UPDATE CURRENT ENTRY
+                    else {
+                        response.json(statusCodes.OK, results);
+                    }
+                },
+
+                error: function(results) {
+                    console.error("GET /professor/:name : " + results);
+                    response.json(statusCodes.INTERNAL_SERVER_ERROR);
+                }
+            });
+        });
         app.get('/:course_id', function (request, response) {
             var sql = "set nocount on; select c.id, c.course_name, c.course_id, c.description, c.prereqs, c.units from catalog_courses as c where c.course_id = ?;";
             request.service.mssql.query(sql, request.params.course_id, {

@@ -72,32 +72,7 @@ exports.register =
 
                     // IF ENTRY DOES EXIST, UPDATE ENTRY
                     else {
-                        var updates = [quarter, year, term_name].filter(function(val) {return val;}).join(', ');
-                        var params = [request.body.quarter, request.body.year, request.body.term_name].filter(function(val) {return val;});
-
-                        if (params.length === 0) {
-                            response.json(statusCodes.OK, "No changes made.");
-                            return;
-                        }
-
-                        for (var i = 0; i < params.length; i++) {
-                            if (params[i] === ' ')
-                                params[i] = null;
-                        }
-
-                        params.push(results[0].id);
-
-                        var sql = "set nocount on; update term set " + updates + " where id = ?;";
-
-                        request.service.mssql.query(sql, params, {
-                            success: function(results) {
-                                response.json(statusCodes.OK);
-                            },
-                            error: function (results) {
-                                console.error("PUT /term/:id : " + results);
-                                response.json(statusCodes.INTERNAL_SERVER_ERROR);
-                            }
-                        });
+                        response.json(statusCodes.OK, results);
                     }
 
                 },

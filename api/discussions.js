@@ -15,6 +15,29 @@ exports.post = function(request, response) {
 exports.register = 
     function(app)
     {
+        app.post('/batch/:section_id', function(request, response) {
+            var sql = "delete from course_section_discussions where course_section_discussions.section_id = ?; DECLARE @table table (id nvarchar(255)); set nocount on; insert into course_section_discussions (section_id, type, disc_days, disc_start_time, disc_end_time, disc_location, disc_id, disc_name, disc_seats_avail, disc_seats_total, disc_waitlist) OUTPUT inserted.id into @table values ";
+            var params = [request.params.section_id];
+            var paramQs = [];
+            var paramString = "";
+            for (var i = 0; i < request.body.discussions.length; i++) {
+                var r = request.body.discussions[i];
+                params.push(r[i].section_id, r[i].type, r[i].disc_days, r[i].disc_start_time, r[i].disc_end_time, r[i].disc_location, r[i].disc_id, r[i].disc_name, r[i].disc_seats_avail, r[i].disc_seats_total, r[i].disc_waitlist);
+                paramQs.push("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            }
+            paramString = paramQs.join(', ');
+            sql = sql + paramString + ";";
+            request.service.mssql.query(sql, params, {
+                success: function(results) {
+                    response.json(statusCodes.OK, results);
+                },
+                error: function (results) {
+                    console.error("POST /batch/discussions error: " + results);
+                    response.json(statusCodes.INTERNAL_SERVER_ERROR);
+                }
+            });
+        });
+        
         app.get('/:section_id', function (request, response) {
             var sql = "set nocount on; select course_section_discussions.id from course_section_discussions where course_section_discussions.section_id = ? order by course_section_discussions.disc_name ASC;";
             request.service.mssql.query(sql, request.params.section_id, {
