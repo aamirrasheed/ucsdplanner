@@ -75,8 +75,6 @@ function setup_rivets () {
   rivets.formatters.mark = function (arr, val) {
     if (!arr.length) return arr;
     
-    var s = Date.now();
-    
     var terms = val.toLowerCase().split(" ");
     app.no_results = true;
     
@@ -89,8 +87,6 @@ function setup_rivets () {
       if (!arr[i].hide)
         app.no_results = false;
     }
-    
-    console.log((Date.now() - s) + " ms");
     
     return arr;
   }
@@ -352,8 +348,6 @@ function load_profs (course) {
   xhr.onload = function (e) {
     // async prevent double-run
     if (course.profs) return;
-    
-    console.log(e.target.response)
     
     course.profs = JSON.parse(e.target.response);
     course.profs.sort(prof_sort);
