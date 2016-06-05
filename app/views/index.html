@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.png?v=2" type="image/x-icon" />
   <link rel="stylesheet" href="main.css" type="text/css">
   <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="partials/d3pie.min.js"></script>
@@ -51,13 +52,17 @@
         <span class="num">{app.course.course_id | grab 1}</span>
         <div class="title">{app.course.course_name}</div>
         <div id="course_units" rv-show="app.course.units | def">
-          <span class="dept">{app.course.units}</span><div class="title">units</div>
+          <span class="dept">{app.course.units | na}</span><div class="title">units</div>
         </div>
       </div>
-      <ul id="tabs" class="t1 w3" rv-class-w2="app.show_catalog">
+      <ul id="tabs"
+        rv-class-w1="app.num_tabs | eq 1"
+        rv-class-w2="app.num_tabs | eq 2"
+        rv-class-w3="app.num_tabs | eq 3"
+      class="t1">
         <li><a href="javascript:scroll_to('overview');">Overview</a></li
         ><li rv-hide="app.show_catalog"><a href="javascript:scroll_to('sections');">Sections</a></li
-        ><li><a href="javascript:scroll_to('comparisons');">Comparisons</a></li>
+        ><li rv-show="app.course.details.comparisons | len"><a href="javascript:scroll_to('comparisons');">Comparisons</a></li>
         <hr />
       </ul>
     </div>
@@ -73,15 +78,25 @@
             <p>{app.course.prereqs}</p>
           </div>
           <div class="col m30" rv-hide="app.show_catalog">
-            <h3>Average Grade</h3>
-            <p><span class="big">{app.course.avg_gpa | fixed 2 | na} </span>{app.course.avg_gpa | letter}</p>
-            <h3>Seats Remaining</h3>
-            <p>
-              <span class="big">{app.course | seats | na}</span>
-              <br />across {app.course.num_sections} section<span rv-hide="app.course.num_sections | eq 1">s</span>
-            </p>
-            <h3>Workload</h3>
-            <p><span class="big">{app.course.workload | fixed 2 | na}</span> <span rv-show="app.course.workload | def">hrs/wk</span></p>
+            <div>
+              <h3>Average Grade</h3>
+              <p><span class="big">{app.course.avg_gpa | fixed 2 | na} </span>{app.course.avg_gpa | letter}</p>
+            </div>
+            <div>
+              <h3>Workload</h3>
+              <p><span class="big">{app.course.workload | fixed 2 | na}</span> <span rv-show="app.course.workload | def">hrs/wk</span></p>
+            </div>
+            <div rv-show="app.course | seats">
+              <h3>Seats Remaining</h3>
+              <p>
+                <span class="big">{app.course | seats | na}</span>
+                <br />across {app.course.num_sections} section<span rv-hide="app.course.num_sections | eq 1">s</span>
+              </p>
+            </div>
+            <div rv-show="app.course.waitlist">
+              <h3>Waitlist</h3>
+              <p><span class="big">{app.course.waitlist | na} </span></p>
+            </div>
           </div>
         </div>
       </div>
