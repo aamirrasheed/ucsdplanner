@@ -292,13 +292,13 @@ function capes_transform (capes) {
   
   capes.sort(term_sort);
   
-  // for (var i = 0; i < capes.length - 1; i++) {
-  //   for (var j = i + 1; j < capes.length; j++) {
-  //     if (capes[i].term != capes[j].term) continue;
-  //     capes[i] = cape_average(capes[i], capes[j]);
-  //     capes.splice(j--, 1);
-  //   }
-  // }
+  for (var i = 0; i < capes.length - 1; i++) {
+    for (var j = i + 1; j < capes.length; j++) {
+      if (capes[i].term != capes[j].term) continue;
+      capes[i] = cape_average(capes[i], capes[j]);
+      capes.splice(j--, 1);
+    }
+  }
   
   var avg = JSON.parse(JSON.stringify(capes[0]));
   avg.term = "average";
