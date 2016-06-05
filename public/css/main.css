@@ -46,6 +46,11 @@ body {
   40% { transform: scale(1) }
 }
 
+.tac {
+  text-align: center;
+}
+
+
 .center {
   position: absolute;
   top: calc(50% - 60px);
