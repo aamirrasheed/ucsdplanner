@@ -129,9 +129,32 @@ window.addEventListener("load", function() {
         load_courses();
       }
       app.have_loaded_courses = true;
+      document.getElementById('search').focus();
     },
 
     have_loaded_courses: false,
+
+    remove_course: function (e,rv) {
+      var course = rv.courseprof;
+      var index = app.displayed_course_profs.indexOf(course);
+      course.grade_dist_chart.destroy();
+      //var id = rivets.formatters.grade_dist_chart_id_generator(course);
+      //document.getElementById(id).innerHTML = "";
+      app.displayed_course_profs.splice(index,1);
+      for (var i = index; i < app.displayed_course_profs.length; i++) {
+        console.log("COURSE ID\n");
+        console.log(app.displayed_course_profs[i].course.id);
+
+        console.log("\n\nPROF ID\n");
+        console.log(app.displayed_course_profs[i].prof.id);
+
+        console.log("\n\nCAPE TERM\n");
+        console.log(app.displayed_course_profs[i].current_cape_term);
+        update_grade_distribution(app.displayed_course_profs[i].course.id, 
+                                  app.displayed_course_profs[i].prof.id, 
+                                  app.displayed_course_profs[i].current_cape_term);
+      }
+    },
 
     user_selects_course: function (e, rv) {
       app.profs = [];
@@ -478,43 +501,47 @@ function update_grade_distribution(course_id, prof_id, cape_term){
           "inner": {
             "format":"label",
             "hideWhenLessThanPercentage": 3
-          },
-          "mainLabel": {
-              "fontSize": 11
-          },
-          "percentage": {
-              "color": "#000000",
-              "decimalPlaces": 0
-          },
-          "value": {
-              "color": "#adadad",
-              "fontSize": 11
-          },
-          "lines": {
-              "enabled": true,
-              //"style":"straight"
-          },
-          "truncation": {
-              "enabled": true
-          }
+        },
+        "inner": {
+          "format":"label",
+          "hideWhenLessThanPercentage": 3
+        },
+        "mainLabel": {
+            "fontSize": 11
+        },
+        "percentage": {
+            "color": "#000000",
+            "decimalPlaces": 0
+        },
+        "value": {
+            "color": "#adadad",
+            "fontSize": 11
+        },
+        "lines": {
+            "enabled": true,
+            //"style":"straight"
+        },
+        "truncation": {
+            "enabled": true
+        }
+    },
+    "effects": {
+      "load": {
+  			"effect": "none"
       },
-      "effects": {
-          "pullOutSegmentOnClick": {
-              "effect": "none",
-              "speed": 400,
-              "size": 8
-          }
-      },
-      "misc": {
-          "gradient": {
-              "enabled": false,
-              "percentage": 100
-          }
-      },
-      "callbacks": {}
-    });
-  }
-
+  		"pullOutSegmentOnClick": {
+  			"effect": "none"
+  		},
+    },
+    "misc": {
+        "gradient": {
+            "enabled": false,
+            "percentage": 100
+        }
+    },
+    "callbacks": {}
+});
+}
 }
 
 rivets.formatters.create_id = function(n) {

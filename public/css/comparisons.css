@@ -27,6 +27,7 @@
 	font-size: 20px;
 }
 .course-prof-header {
+  position:relative;
   text-align: center;
   padding-top: 1px;
 }
@@ -156,6 +157,9 @@ select {
 }
 
 #close {
+  position:absolute;
+  top:0;
+  right:0;
   cursor: pointer;
   float:right;
   display:inline-block;
@@ -165,6 +169,10 @@ select {
 #close:hover {
   color: #ff4d4d;
   background:#e6e6e6;
+}
+
+#close:active {
+  background:#d9d9d9;
 }
 
 button {
