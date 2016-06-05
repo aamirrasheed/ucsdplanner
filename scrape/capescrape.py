@@ -6,6 +6,7 @@ import json
 import requests
 import re
 from collections import OrderedDict
+import multiprocessing
 
 BASE_URL="https://cape.ucsd.edu/responses/Results.aspx?Name=&CourseNumber="
 DEPARTMENT_LIST_URL="https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudent.htm"
@@ -19,6 +20,7 @@ COLD_CHILI_PIC = '/assets/chilis/cold-chili.png'    # image name for cold chili 
 # Purpose: Gets soup for a website
 # ======================================== 
 def get_soup(url):
+    print url
     r = requests.get(url, headers={"User-agent":'Mozilla'})
     html = r.text
     soup = BeautifulSoup(html, "html.parser");
@@ -28,18 +30,17 @@ def get_soup(url):
 # Purpose: Gets list of UCSD departments
 # ======================================== 
 def get_departments():
-    return ['AIP', 'ANBI', 'ANAR', 'ANTH', 'ANSC', 'AESE', 'BENG', 'BNFO', 'BIEB', 'BICD', 'BIPN', 'BIBC', 'BGGN', 'BGSE', 'BILD', 'BIMM', 'BISP', 'BIOM', 'CENG', 'CHEM', 'CHIN', 'CLAS', 'CLIN', 'COGS', 'COMM', 'COGR', 'CSE', 'ICAM', 'CONT', 'CGS', 'CAT', 'TDCH', 'TDHD', 'TDMV', 'TDTR', 'DOC', 'ECON', 'EAP', 'EDS', 'ERC', 'ECE', 'ENG', 'ENVR', 'ESYS', 'ETHN', 'EXPR', 'FPMU', 'FILM', 'HITO', 'HIAF', 'HIEA', 'HIEU', 'HILA', 'HISC', 'HINE', 'HIUS', 'HIGR', 'HILD', 'HDP', 'HUM', 'INTL', 'IRCO', 'IRGN', 'IRLA', 'JAPN', 'JUDA', 'LATI', 'LAWS', 'LISL', 'LIAB', 'LIFR', 'LIGN', 'LIGM', 'LIHL', 'LIIT', 'LIPO', 'LISP', 'LTCH', 'LTCO', 'LTCS', 'LTEU', 'LTFR', 'LTGM', 'LTGK', 'LTIT', 'LTKO', 'LTLA', 'LTRU', 'LTSP', 'LTTH', 'LTWR', 'LTEN', 'LTWL', 'LTEA', 'MMW', 'MBC', 'MATS', 'MATH', 'MSED', 'MAE', 'MUIR', 'MCWP', 'MUS', 'NANO', 'PHAR', 'SPPS', 'PHIL', 'PHYS', 'POLI', 'PSYC', 'MGT', 'RELI', 'REV', 'SDCC', 'SIOC', 'SIOG', 'SIOB', 'SIO', 'SXTH', 'SOCG', 'SOCE', 'SOCI', 'SE', 'TDAC', 'TDDE', 'TDDR', 'TDGE', 'TDGR', 'TDHT', 'TDPW', 'TDPR', 'TWS', 'TMC', 'USP', 'VIS', 'WARR', 'WCWP']
+    return ['AIP', 'ANBI', 'ANAR', 'ANTH', 'ANSC', 'AESE', 'BNFO', 'BIEB', 'BICD', 'BIPN', 'BIBC', 'BGGN', 'BGSE', 'BILD', 'BIMM', 'BISP', 'BIOM',  'CHEM', 'CHIN', 'CLAS', 'CLIN', 'COGS', 'COMM', 'COGR', 'ICAM', 'CONT', 'CGS', 'CAT', 'TDCH', 'TDHD', 'TDMV', 'TDTR', 'DOC', 'ECON', 'EAP', 'EDS', 'ERC', 'ECE', 'ENG', 'ENVR', 'ESYS', 'ETHN', 'EXPR', 'FPMU', 'FILM', 'HITO', 'HIAF', 'HIEA', 'HIEU', 'HILA', 'HISC', 'HINE', 'HIUS', 'HIGR', 'HILD', 'HDP', 'HUM', 'INTL', 'IRCO', 'IRGN', 'IRLA', 'JAPN', 'JUDA', 'LATI', 'LAWS', 'LISL', 'LIAB', 'LIFR', 'LIGN', 'LIGM', 'LIHL', 'LIIT', 'LIPO', 'LISP', 'LTCH', 'LTCO', 'LTCS', 'LTEU', 'LTFR', 'LTGM', 'LTGK', 'LTIT', 'LTKO', 'LTLA', 'LTRU', 'LTSP', 'LTTH', 'LTWR', 'LTEN', 'LTWL', 'LTEA', 'MMW', 'MBC', 'MATS', 'MATH', 'MSED', 'MAE', 'MUIR', 'MCWP', 'MUS', 'NANO', 'PHAR', 'SPPS', 'PHIL', 'PHYS', 'POLI', 'PSYC', 'MGT', 'RELI', 'REV', 'SDCC', 'SIO', 'SXTH', 'SOCG', 'SOCE', 'SOCI', 'SE', 'TDAC', 'TDDE', 'TDDR', 'TDGE', 'TDGR', 'TDHT', 'TDPW', 'TDPR', 'TWS', 'TMC', 'USP', 'VIS', 'WARR', 'WCWP']
      
 
 def get_gradedistributions(url):
     expected = None
     received = None
     if url is None:
-        return (expected, received)
+        return expected, received, ""
     site = "https://cape.ucsd.edu/responses/"
     if url.startswith('.'):
-        delim1,url = url.split('.',1)
-        delim2,url = url.split('.',1)
+        url = url[2:]
         site = "https://cape.ucsd.edu" + url
         r = requests.get(site, headers={"User-agent":'Mozilla'})
         soup = BeautifulSoup(r.text, "html.parser");
@@ -70,28 +71,28 @@ def get_gradedistributions(url):
            if rows is not None:
                expectedrow = rows[2]
                cells = expectedrow.findChildren(['td'])
-               A = cells[0].text.encode('utf-8')
-               B = cells[1].text.encode('utf-8')
-               C = cells[2].text.encode('utf-8')
-               D = cells[3].text.encode('utf-8')
-               F = cells[4].text.encode('utf-8')
-               P = cells[5].text.encode('utf-8')
-               NP = cells[6].text.encode('utf-8')
+               A = cells[0].text.encode('utf-8').split("%")[0]
+               B = cells[1].text.encode('utf-8').split("%")[0]
+               C = cells[2].text.encode('utf-8').split("%")[0]
+               D = cells[3].text.encode('utf-8').split("%")[0]
+               F = cells[4].text.encode('utf-8').split("%")[0]
+               P = cells[5].text.encode('utf-8').split("%")[0]
+               NP = cells[6].text.encode('utf-8').split("%")[0]
                expected = {'A': A,'B': B,'C': C,'D': D, 'F': F, 'P': P, 'NP': NP}
         if table_received is not None:
             rows = table_received.findChildren(['tr'])
             if rows is not None:
                 receivedrow = rows[2]
                 cells = receivedrow.findChildren(['td']) 
-                A2 = cells[0].text.encode('utf-8')
-                B2 = cells[1].text.encode('utf-8')
-                C2 = cells[2].text.encode('utf-8')
-                D2 = cells[3].text.encode('utf-8')
-                F2 = cells[4].text.encode('utf-8')
-                P2 = cells[5].text.encode('utf-8')
-                NP2 = cells[6].text.encode('utf-8')
+                A2 = cells[0].text.encode('utf-8').split("%")[0]
+                B2 = cells[1].text.encode('utf-8').split("%")[0]
+                C2 = cells[2].text.encode('utf-8').split("%")[0]
+                D2 = cells[3].text.encode('utf-8').split("%")[0]
+                F2 = cells[4].text.encode('utf-8').split("%")[0]
+                P2 = cells[5].text.encode('utf-8').split("%")[0]
+                NP2 = cells[6].text.encode('utf-8').split("%")[0]
                 received = {'A': A2,'B': B2,'C': C2,'D': D2, 'F': F2, 'P': P2, 'NP': NP2}
-    return (expected,received) 
+    return expected, received, site
     
 
 # ========================================
@@ -99,6 +100,9 @@ def get_gradedistributions(url):
 # 		   specified department
 # ======================================== 
 def get_cape_data_for_dept(dept):
+    prof_cache = {}
+    catalog_cache = {}
+
     # gets soup
     soup = get_soup(BASE_URL+dept)
     row = None
@@ -148,7 +152,7 @@ def get_cape_data_for_dept(dept):
         course = course_info[0][:-1]
 
         # get gradedistributions
-        expected_grade,received_grade = get_gradedistributions(link)
+        expected_grade, received_grade, site = get_gradedistributions(link)
        
 
         # get term
@@ -166,6 +170,7 @@ def get_cape_data_for_dept(dept):
         # get rcmndclass
         working_col = working_col.next_sibling
         rcmndclass = working_col.span.contents[0]
+        rcmndclass = rcmndclass.split("%")[0]
 
         # get rcmndinstr
         working_col = working_col.next_sibling
@@ -179,6 +184,9 @@ def get_cape_data_for_dept(dept):
         # get gradeexp
         working_col = working_col.next_sibling
         gradeexp = working_col.span.contents[0]
+        extract = re.match("[A-F][+-]? \(([0-9]\.[0-9]+)\)", gradeexp)
+        if extract is not None:
+            gradeexp = extract.group(1)
 
         # get graderec
         working_col = working_col.next_sibling
@@ -198,10 +206,19 @@ def get_cape_data_for_dept(dept):
         lname = ln
         fname = names[1].split(" ")[0]
         
+        if instructor is None:
+            continue
+
+        prof_id = None
         r = requests.get(DB_URL + "/professor/" + instructor)
-        print instructor
-        prof_id = make_RMP_prof(fname, lname, instructor) if r.text == "[]" else json.loads(r.text)[0]["id"]
+        prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
         
+        if prof_id is None:
+            continue
+
+        if course is None:
+            continue
+
         r = requests.get(DB_URL + "catalog/" + course)
         courses = json.loads(r.text)
 
@@ -221,22 +238,28 @@ def get_cape_data_for_dept(dept):
             'term': term,
             'enroll': int(enroll),
             'cape_num_evals': int(evals),
-            #'rcmndclass': rcmndclass,
+            'rcmnd_class': format_float(rcmndclass),
             'cape_rec_prof': format_float(rcmndinstr),
             'cape_study_hrs': format_float(hrsperwk),
             #'gradeexp': gradeexp,
             'cape_prof_gpa': format_float(graderec),
-            'cape_expected_grade': expected_grade,
-            'cape_recieved_grade': received_grade
+            #'cape_expected_grade': expected_grade,
+            'a_percentage': format_float(received_grade["A"]) if received_grade is not None else -1,
+            'b_percentage': format_float(received_grade["B"]) if received_grade is not None else -1,
+            'c_percentage': format_float(received_grade["C"]) if received_grade is not None else -1,
+            'd_percentage': format_float(received_grade["D"]) if received_grade is not None else -1,
+            'f_percentage': format_float(received_grade["F"]) if received_grade is not None else -1,
+            'p_percentage': format_float(received_grade["P"]) if received_grade is not None else -1,
+            'np_percentage': format_float(received_grade["NP"]) if received_grade is not None else -1,
+            'cape_url':  site
         }
         
-        r = requests.get(DB_URL + "/cape/" + prof_id + "/" + catalog_id + "/" + term)
-        if r.text == "[]":
-            r = requests.post(DB_URL + "/cape", entry)
         
-        # add entry to list
+        cape_data.append(entry)
         row = row.next_sibling
-    return cape_data
+    r = requests.post(DB_URL + "cape/batch", json={"capes":cape_data})
+    print json.dumps(cape_data)
+    return dept
 
 def format_float(fstring):
     if fstring == "N/A":
@@ -258,7 +281,7 @@ def parse_term(term):
     out["year"] = "20" + split.group(2)
     return out
 
-def make_RMP_prof(fname, lname, cape_name):
+def update_RMP_prof(fname, lname, cape_name):
     professor = {}
     professor['name'] = cape_name
     professor['rmp_overall'] = 0
@@ -294,6 +317,8 @@ def make_RMP_prof(fname, lname, cape_name):
         if header != None:
             overall_rating = soup.find("div", "grade").string
             chili_figure = [grade.figure for grade in soup.findAll("div", "grade")]
+            if chili_file[2] == None:
+                print fname, lname
             chili_figure = chili_figure[2].img.get('src')
 
             ratings = soup.findAll("div", "rating")
@@ -310,7 +335,7 @@ def make_RMP_prof(fname, lname, cape_name):
             professor['rmp_hot'] = 1 if chili_figure != COLD_CHILI_PIC else 0
             professor["rmp_tid"] = tid
 
-        r = requests.post(DB_URL + "professor", professor)
+        r = requests.post(DB_URL + "professor/update", professor)
         return json.loads(r.text)[0]["id"]
 
 if __name__ == "__main__":
@@ -355,7 +380,16 @@ if __name__ == "__main__":
     # get list of departments
     departments = get_departments()
 
+    pool = multiprocessing.Pool(processes=50)
     # get capes for each department
-    for dept in departments:
-            cape_data = get_cape_data_for_dept(dept)
-            capes_by_departments[dept] = cape_data
+    
+    get_cape_data_for_dept("AIP")
+
+    """
+
+    completed = 0
+    num_depts = len(departments)
+    for x in pool.imap_unordered(get_cape_data_for_dept, departments):
+        completed += 1
+        print "{}/{} departments completed".format(completed, num_depts)
+   """ 
