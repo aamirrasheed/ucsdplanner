@@ -206,24 +206,30 @@ def get_cape_data_for_dept(dept):
         lname = ln
         fname = names[1].split(" ")[0]
         
+        if instructor is None:
+            continue
+
         prof_id = None
-        if instructor not in prof_cache:
+        if instructor in prof_cache:
+            prof_id = prof_cache[prof_id]
+        else:
             r = requests.get(DB_URL + "/professor/" + instructor)
             prof_id = json.loads(r.text)[0]["id"] if r.text != "[]" else None #update_RMP_prof(fname, lname, instructor) 
             prof_cache[instructor] = prof_id
-        else:
-            prof_id = prof_cache[prof_id]
         
         if prof_id is None:
             continue
 
+        if course is None:
+            continue
+
         courses = None
-        if course not in catalog_cache:
+        if course in catalog_cache:
+            courses = catalog_cache[course]
+        else:
             r = requests.get(DB_URL + "catalog/" + course)
             courses = json.loads(r.text)
-            catalog_cache[instructor] = courses
-        else:
-            courses = catalog_cache[course]
+            catalog_cache[course] = courses
 
         if len(courses) == 0:
             print "WARNING: Could not find course: " + course
