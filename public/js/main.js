@@ -6,6 +6,7 @@ window.addEventListener("load", function () {
     courses: "https://ucsdplanner-api.azure-mobile.net/api/courses/",
     details: "https://ucsdplanner-api.azure-mobile.net/api/courses/specific/",
     terms: "https://ucsdplanner-api.azure-mobile.net/api/term",
+    rmp: "http://www.ratemyprofessors.com/ShowRatings.jsp?tid="
   }
   
   app = {
@@ -106,7 +107,7 @@ window.addEventListener("load", function () {
 });
 
 function scroll_to (id) {
-  window.scrollTo(0, $("#" + id)[0].offsetTop - 20);
+  window.scrollTo(0, $("#" + id)[0].offsetTop);
 }
 
 function setup_rivets () {
@@ -280,7 +281,7 @@ function capes_transform (capes) {
   var term_sort = function (a, b) {
     a_term = terms[term_regex.exec(a.term)[1]];
     b_term = terms[term_regex.exec(b.term)[1]];
-  	a_yr = ~~term_regex.exec(a.term)[2];
+    a_yr = ~~term_regex.exec(a.term)[2];
     b_yr = ~~term_regex.exec(b.term)[2];
     
     return a_yr > b_yr
@@ -291,13 +292,13 @@ function capes_transform (capes) {
   
   capes.sort(term_sort);
   
-  for (var i = 0; i < capes.length - 1; i++) {
-    for (var j = i + 1; j < capes.length; j++) {
-      if (capes[i].term != capes[j].term) continue;
-      capes[i] = cape_average(capes[i], capes[j]);
-      capes.splice(j--, 1);
-    }
-  }
+  // for (var i = 0; i < capes.length - 1; i++) {
+  //   for (var j = i + 1; j < capes.length; j++) {
+  //     if (capes[i].term != capes[j].term) continue;
+  //     capes[i] = cape_average(capes[i], capes[j]);
+  //     capes.splice(j--, 1);
+  //   }
+  // }
   
   var avg = JSON.parse(JSON.stringify(capes[0]));
   avg.term = "average";
@@ -336,7 +337,6 @@ function update_pie_chart (comp) {
           "label": "A",
           "value": cape.a_percentage,
           "color": "#F38630",
-          // "caption": "hi mom"
           "caption": (100 * cape.a_percentage / t_percentage).toFixed(2) + "%"
         }, {
           "label": "B",
@@ -382,11 +382,11 @@ function update_pie_chart (comp) {
     },
     "effects": {
       "load": {
-  			"effect": "none"
+        "effect": "none"
       },
-  		"pullOutSegmentOnClick": {
-  			"effect": "none"
-  		},
+      "pullOutSegmentOnClick": {
+        "effect": "none"
+      },
     },
     "tooltips": {
       "enabled": true,
@@ -400,6 +400,7 @@ function load_course (course) {
   if (course.details) {
     if (course.details.comparisons.length) 
       app.num_tabs = 3;
+    
     for (var i = 0; i < course.details.comparisons.length; i++)
       update_pie_chart(course.details.comparisons[i]);
     return;
@@ -428,10 +429,17 @@ function load_course (course) {
       
       if (!~uniq_profs.indexOf(s.professor_name)) {
         uniq_profs.push(s.professor_name);
+        
+        var prof = s.professor_name.split(" ");
+        var cape_url = "http://cape.ucsd.edu/responses/Results.aspx?Name="
+          + prof[prof.length - 1].toLowerCase() + "%2C+" + prof[0].toLowerCase()
+          + "&CourseNumber=" + course.course_id.replace(/\s/g, "+");
+        
         var comp = {
           professor_name: s.professor_name,
+          rmp_url: s.rmp_tid ? api.rmp + s.rmp_tid : false,
+          cape_url: cape_url,
           rmp: {
-            tid: s.rmp_tid,
             overall: s.rmp_overall,
             easiness: s.rmp_easiness,
             helpful: s.rmp_helpful,

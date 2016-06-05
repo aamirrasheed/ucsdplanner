@@ -9,7 +9,7 @@
   <script src="partials/d3pie.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.8.1/rivets.bundled.min.js" type="text/javascript"></script>
   <script src="main.js" type="text/javascript"></script>
-  <title>PlanIt Triton</title>
+  <title>planit triton</title>
 </head>
 <body>
   <div id="app">
@@ -68,7 +68,7 @@
     </div>
     <div id="content_placeholder" rv-hide="app.course | def">select a course to view details</div>
     <div id="content" rv-show="app.course | def">
-      <div id="overview">
+      <div id="overview" class="section">
         <h2 class="line"><span>Overview</span></h2>
         <div class="colgroup">
           <div rv-class-m100="app.show_catalog" class="col m70">
@@ -105,7 +105,7 @@
         <div class="circle"></div>
         <div class="circle"></div>
       </span></h2>
-      <div id="sections" rv-hide="app.show_catalog | or app.details_loading">
+      <div id="sections" class="section" rv-hide="app.show_catalog | or app.details_loading">
         <h2 class="line"><span>Sections</span></h2>
         <table id="sections_table">
           <thead>
@@ -169,13 +169,13 @@
           </tbody>
         </table>
       </div>
-      <div id="comparisons" rv-hide="app.details_loading" rv-if="app.course.details.comparisons">
+      <div id="comparisons" class="section" rv-hide="app.details_loading" rv-if="app.course.details.comparisons">
         <h2 class="line"><span>Comparisons</span></h2>
         <div class="comps">
           <div class="comp" rv-each-comp="app.course.details.comparisons">
             <div class="prof_name">{comp.professor_name}</div>
             <div rv-show="comp.capes | len">
-              <h4>CAPEs</h4>
+              <h4>CAPEs <a rv-show="comp.cape_url" rv-href="comp.cape_url" target="_blank"><i class="material-icons">link</i></a></h4>
               <select class="cape_term" rv-value="comp.cape_term" rv-on-change="app.select_cape">
                 <option rv-value="cape.term" rv-each-cape="comp.capes">{cape.term}</option>
               </select>
@@ -213,7 +213,7 @@
               </div>
               
               <br />
-              <h4>Rate My Professor</h4>
+              <h4>Rate My Professor <a rv-show="comp.rmp_url" rv-href="comp.rmp_url" target="_blank"><i class="material-icons">link</i></a></h4>
               <div class="data-cell">
                 <div class="data-info">
                   <span class="big">{comp.rmp.overall | rmp}</span>

@@ -404,7 +404,7 @@ ul {
 /*   height: 1000px; */
   z-index: 0;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem 2rem;
 }
 
 #content_placeholder {
@@ -415,6 +415,10 @@ ul {
   font-size: 2rem;
   top: 0;
   bottom: 0;
+}
+
+.section {
+  padding-top: 2rem;
 }
 
 #sections {
@@ -486,11 +490,11 @@ ul {
   text-overflow: ellipsis;
   width: 220px;
   display: inline-block;
-  margin: 0.25em;
+  margin: 0.5em;
   vertical-align: top;
-  background-color: #176c96;
-  color: #fff;
-/*  border: 3px solid #176c96;*/
+  padding-bottom: 1em;
+/*  background-color: #176c96;*/
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .comp:first-child {
@@ -499,16 +503,26 @@ ul {
 
 .comp .prof_name {
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background-color: #176c96;
   color: #fff;
   padding: 0.5em 0.25em;
   font-weight: 400;
-  border-bottom: 2px solid #fbbb18;
+/*  border-bottom: 2px solid #fbbb18;*/
   margin-bottom: 0.75em;
 }
 
+.comp a i {
+  font-size: 1em;
+}
+
+.comp a { color: #ccc; }
+.comp a:hover { color: #aaa; }
+.comp a:active { color: #555; }
+
 .data-cell {
-    margin: 0.5em 0 1em;
+  margin: 0.5em 0 1em;
 }
 
 .data-title {
@@ -527,7 +541,7 @@ ul {
 
 .grade-dist-chart::after {
   content: "no grade distribution";
-  color: #fff;
+  color: #000;
   position: absolute;
   top: 50%;
   left: 50%;
