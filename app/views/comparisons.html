@@ -44,7 +44,7 @@
         <option rv-each-cape="courseprof.data.capes" rv-value="cape.term">{cape.term}</option> 
       </select>
       <br>
-      <span class="grade">{courseprof.current_cape.cape_prof_gpa | fixed 2} / {courseprof.current_cape.cape_prof_gpa | letter}</span>
+      <span rv-show="courseprof.current_cape.cape_prof_gpa | gradeshow"class="grade">{courseprof.current_cape.cape_prof_gpa | fixed 2} / {courseprof.current_cape.cape_prof_gpa | letter}</span>
       <br>
 
       <div rv-id="courseprof | grade_dist_chart_id_generator" class="grade-dist-chart"></div>

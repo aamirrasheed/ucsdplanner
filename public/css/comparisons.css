@@ -203,10 +203,18 @@ ul {
   position: relative;
   z-index: 1;
 }
+.grade-dist-chart {
+  position: relative;
+}
+
+.grade-dist-chart svg {
+  position: relative;
+  z-index: 1;
+}
 
 .grade-dist-chart::after {
-  content: "no grade distribution";
-  color: #fff;
+  content: "no grade information";
+  color: #000000;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -214,4 +222,3 @@ ul {
   z-index: 0;
   transform: translate(-50%, -50%);
 }
-
