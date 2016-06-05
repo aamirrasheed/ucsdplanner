@@ -27,7 +27,7 @@
 
   <div rv-each-courseprof="app.displayed_course_profs" class="course-prof" rv-show="courseprof.show">
     <div class="course-prof-header">
-      <span id="close">&#10006;</span>
+      <span id="close" rv-on-click="app.remove_course">&#10006;</span>
       <div class="course-name">
         <span class="course-dept"><b>{courseprof.course.dept}</b></span>
         <span class="course-code"><b>{courseprof.course.code}</b></span>
@@ -119,7 +119,7 @@
 
       <select rv-value="app.current_course_prof.prof.id" rv-on-change="app.user_selects_prof">
         <option value="" disabled selected>Professor</option>
-        <option rv-each-prof="app.profs" rv-value="prof.id">{prof.name}</option> 
+        <option rv-each-prof="app.profs" rv-disabled="prof | disable_professor" rv-value="prof.id">{prof.name}</option> 
       </select>
     </div>
   </div>
