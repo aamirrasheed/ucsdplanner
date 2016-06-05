@@ -13,7 +13,6 @@ window.addEventListener("load", function () {
     search: "",
     course: null,
     courses: [],
-    comparisons: [],
     term: {id:"catalog", name:"catalog"},
     terms: [{
       term_id: "catalog",
@@ -496,6 +495,7 @@ function load_courses (id) {
     
     courses[id] = JSON.parse(e.target.response);
     courses[id].sort(course_sort);
+    
     setTimeout(function () {
       app.courses = courses[id];
       app.sidebar_loading = false;

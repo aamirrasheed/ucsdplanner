@@ -46,10 +46,6 @@ body {
   40% { transform: scale(1) }
 }
 
-.hide {
-  visibility: hidden;
-}
-
 .center {
   position: absolute;
   top: calc(50% - 60px);
@@ -271,10 +267,7 @@ ul {
 #term_list li {
   cursor: default;
   padding: 0.8em;
-}
-
-#term_list li:nth-child(2n+1) {
-  background-color: rgba(0, 0, 0, 0.1)
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #term_list li:hover {
@@ -478,7 +471,7 @@ ul {
   line-height: 1.2em;
 }
 
-.comps {
+#comps {
   width: 100%;
   overflow-x: scroll;
   text-align: center;
@@ -566,19 +559,26 @@ ul {
   color: #fff;
 }
 
-/*
-#comp_link:hover {
-  background: rgba(0,0,0,0.1);
-}
-
-#comp_link:active {
-  background: rgba(0,0,0,0.2);
-}*/
-
 #comp_link i {
   font-size: 1em;
 }
 
+.hide {
+  position: absolute;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 ::-webkit-scrollbar {
-  display: none;
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+ 
+::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.5);
 }

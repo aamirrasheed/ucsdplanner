@@ -39,7 +39,7 @@
         <div class="center" rv-show="app.no_results">
           NO RESULTS FOUND
         </div>
-        <li rv-each-course="app.courses | mark app.search" rv-hide="course.hide" rv-class-selected="course.selected" rv-on-click="app.select_course">
+        <li rv-each-course="app.courses | mark app.search" rv-class-hide="course.hide" rv-class-selected="course.selected" rv-on-click="app.select_course">
           <span class="dept">{course.course_id | grab 0}</span>
           <span class="num">{course.course_id | grab 1}</span>
           <div class="title">{course.course_name | case 1}</div>
@@ -86,7 +86,7 @@
               <h3>Workload</h3>
               <p><span class="big">{app.course.workload | fixed 2 | na}</span> <span rv-show="app.course.workload | def">hrs/wk</span></p>
             </div>
-            <div rv-show="app.course | seats">
+            <div>
               <h3>Seats Remaining</h3>
               <p>
                 <span class="big">{app.course | seats | na}</span>
@@ -95,7 +95,10 @@
             </div>
             <div rv-show="app.course.waitlist">
               <h3>Waitlist</h3>
-              <p><span class="big">{app.course.waitlist | na} </span></p>
+              <p>
+                <span class="big">{app.course.waitlist | na}</span>
+                <br />across {app.course.num_sections} section<span rv-hide="app.course.num_sections | eq 1">s</span>
+              </p>
             </div>
           </div>
         </div>
@@ -150,7 +153,7 @@
               <td>{disc | time}</td>
               <td>{disc.disc_location}</td>
               <td>{disc | seats}</td>
-              <td>{disc.disc_waitlist | blank -1}</td>
+              <td>{disc.disc_waitlist | blank 0}</td>
               <td></td>
             </tr>
             <tr rv-show="section.expanded"><td></td></tr>
@@ -171,7 +174,7 @@
       </div>
       <div id="comparisons" class="section" rv-hide="app.details_loading" rv-if="app.course.details.comparisons">
         <h2 class="line"><span>Comparisons</span></h2>
-        <div class="comps">
+        <div id="comps">
           <div class="comp" rv-each-comp="app.course.details.comparisons">
             <div class="prof_name">{comp.professor_name}</div>
             <div rv-show="comp.capes | len">
