@@ -16,8 +16,10 @@ function seats_free_update() {
                     var secLoc = sectionId.indexOf(d.section_id);
                     // if not present, insert
                     if (secLoc < 0) {
-                        seatsInSec.push(d.disc_seats_avail);
-                        sectionId.push(d.section_id);
+                        if (d.disc_seats_total > 0) {
+                            seatsInSec.push(d.disc_seats_avail);
+                            sectionId.push(d.section_id);
+                        }
                     }
                     else {
                         if (d.disc_seats_avail > 0)

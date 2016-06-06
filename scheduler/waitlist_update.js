@@ -16,7 +16,7 @@ function waitlist_update() {
                     var secLoc = sectionId.indexOf(d.section_id);
                     // if not present, insert
                     if (secLoc < 0) {
-                        if (d.disc_waitlist >= 0) {
+                        if (d.disc_waitlist > 0) {
                             seatsInSec.push(d.disc_waitlist);
                             sectionId.push(d.section_id);
                         }

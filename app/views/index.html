@@ -110,7 +110,8 @@
       </span></h2>
       <div id="sections" class="section" rv-hide="app.show_catalog | or app.details_loading">
         <h2 class="line"><span>Sections</span></h2>
-        <table id="sections_table">
+        <div class="tac" rv-hide="app.course.details.course_sections">no sections available for this course.</div>
+        <table id="sections_table" rv-show="app.course.details.course_sections">
           <thead>
             <tr>
               <th></th>

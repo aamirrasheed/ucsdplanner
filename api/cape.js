@@ -16,6 +16,34 @@ exports.post = function(request, response) {
 exports.register =
     function(app)
     {
+        app.post('/batch', function(request, response) {
+            var sql = "set nocount on; insert into prof_cape_info (cape_study_hrs, cape_prof_gpa, cape_num_evals, cape_rec_prof, term, professor_id, course_id, a_percentage, b_percentage, c_percentage, d_percentage, f_percentage, p_percentage, np_percentage, cape_url, rcmnd_class) values ";
+            var params = [];
+            var paramQ= [];
+            var paramString = "";
+            for (var i = 0; i < request.body.capes.length; i++) {
+                var r = request.body.capes[i];
+                paramQ.push( "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                params.push(r.cape_study_hrs, r.cape_prof_gpa, r.cape_num_evals, r.cape_rec_prof, r.term, r.professor_id, r.course_id, r.a_percentage, r.b_percentage, r.c_percentage, r.d_percentage, r.f_percentage, r.p_percentage, r.np_percentage, r.cape_url, r.rcmnd_class);
+            }
+            paramString = paramQ.join(', ');
+            if (!request.body.capes.length)
+                sql = "set nocount on;";
+            
+            request.service.mssql.query(sql + paramString + ";", params, {
+                success: function (results) {
+                    console.log("BATCH SUCCESS");
+                    response.json(statusCodes.OK, results);
+                },
+                error: function(results) {
+                    console.log("POST /cape/batch error: " + results);
+                    response.json(statusCodes.INTERNAL_SERVER_ERROR, results);
+                }
+            });
+        });
+        
+        
+        
         // INSERT CAPE IF ENTRY DOES NOT ALREADY EXIST, UPDATE OTHERWISE
         app.post('/update', function(request, response) {
           var sql = "set nocount on; select prof_cape_info.id from prof_cape_info where prof_cape_info.professor_id = ? and prof_cape_info.course_id = ? and prof_cape_info.term = ?;";
@@ -115,6 +143,9 @@ exports.register =
             var params = [request.params.professor_id, request.params.catalog_course_id];
             request.service.mssql.query(sql, params, {
                 success: function(results) {
+                    if (!results.length)
+                        return response.json(statusCodes.OK, {msg:"No CAPE info available."});
+                        
                     var responseObj = {
                         name:results[0].name,
                         rmp_tid:results[0].rmp_tid,

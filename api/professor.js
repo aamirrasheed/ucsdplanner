@@ -107,11 +107,11 @@ exports.register =
             var sql = "set nocount on; select professor.id, professor.name from professor full outer join prof_cape_info on prof_cape_info.professor_id = professor.id full outer join catalog_courses on catalog_courses.id = prof_cape_info.course_id where catalog_courses.id = ?;";
             request.service.mssql.query(sql, request.params.catalog_course_id, {
                 success: function(results) {
-                    //console.log(results);
+//                    console.log(results);
                     var profs = [];
                     var responseObj = [];
                     for (var i = 0; i < results.length; i++) {
-                        if (profs.indexOf(results[i].id) < 0) {
+                        if (profs.indexOf(results[i].id) < 0 && results[i].id !== null) {
                             profs.push(results[i].id);
                             responseObj.push({name: results[i].name, id: results[i].id});
                         }

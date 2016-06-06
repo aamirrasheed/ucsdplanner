@@ -410,7 +410,13 @@ function load_course (course) {
     // async prevent double-run
     if (course.details) return;
     
+    // select first course
+    app.details_loading = false;
+    
     course.details = JSON.parse(e.target.response);
+    
+    if (!course.details.course_sections[0].professor_name)
+      return course.details.course_sections = false;
     
     var uniq_profs = ["Staff"];
     course.details.comparisons = [];
@@ -457,9 +463,6 @@ function load_course (course) {
     
     if (!course.details.comparisons.length)
       course.details.comparisons = false;
-    
-    // select first course
-    app.details_loading = false;
   }
   xhr.open("GET", url);
   xhr.send();
