@@ -2,6 +2,7 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 * {
+  font-family: inherit;
   box-sizing: border-box;
 }
 
